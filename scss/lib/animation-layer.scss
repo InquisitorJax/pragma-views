@@ -51,3 +51,21 @@
   transition: transform calc(var(--duration) * 1ms) ease-out;
   transform: translateY(calc(var(--top) * 1px));
 }
+
+.highlight {
+  --left: 0;
+  --top: 0;
+  --width: 0;
+  --bottom: 0;
+
+  display: block;
+  position: absolute;
+  width: calc(var(--width) * 1px);
+  height: calc(var(--height) * 1px);
+
+  background: hotpink;
+  opacity: 0.2;
+  will-change: transform;
+  transform: translate(calc(var(--left) * 1px), calc(var(--top) * 1px));
+  transition: transform 0.05s linear;
+}
