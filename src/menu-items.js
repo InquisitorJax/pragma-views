@@ -12,20 +12,8 @@ export const menuItems = [
         screen: "master-view"
     },
     {
-        text: "Group Tests",
-        screen: "group-test"
-    },
-    {
-        text: "Grid Tests",
-        screen: "grid-test"
-    },
-    {
         text: "Sortable",
         screen: "sortable"
-    },
-    {
-        text: "Layout",
-        screen: "layout"
     }
 ];
 
