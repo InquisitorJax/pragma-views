@@ -14,6 +14,10 @@ export const menuItems = [
     {
         text: "Sortable",
         screen: "sortable"
+    },
+    {
+        text: "Long List",
+        screen: "longlist"
     }
 ];
 

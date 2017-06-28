@@ -24,10 +24,10 @@ export function configure(aurelia) {
                 'components/sortable-list/sortable-list',
                 'components/pragma-list/pragma-list',
                 'components/pragma-form/pragma-form'
-            )
-            .plugin(
-                "aurelia-dialog"
             );
+
+        aurelia.use.plugin('aurelia-dialog');
+        aurelia.use.plugin('aurelia-ui-virtualization');
 
         aurelia.start().then(() => {
             aurelia.setRoot();
