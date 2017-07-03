@@ -73,7 +73,29 @@ export class PragmaForm {
     }
 
     export() {
-        alert("export");
+        let fileName = prompt("Export file name", "schema.json");
+
+        if (!fileName) {
+            return;
+        }
+
+        if (fileName.indexOf(".json") == -1) {
+            fileName = `${fileName}.json`;
+        }
+
+        const json = JSON.stringify('{"property": "value"}');
+        const blob = new Blob([json], {type: "octet/stream"});
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+
+        document.body.removeChild(a);
     }
 
     clear() {
