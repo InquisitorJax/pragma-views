@@ -2,7 +2,6 @@ import {bindable, customElement, inject} from 'aurelia-framework';
 import {DynamicViewLoader} from './../../lib/dynamic-view-loader';
 import {TemplateParser} from './../../lib/template-parser';
 
-
 @customElement('pragma-form')
 @inject(Element, DynamicViewLoader)
 export class PragmaForm {
@@ -29,6 +28,15 @@ export class PragmaForm {
     detached() {
         this.templateParser.dispose();
         this.templateParser = null;
+        this.disposeFileInput();
+    }
+
+    disposeFileInput() {
+        if (this.fileInput) {
+            this.fileInput.removeEventListener("change", this.changeHandler);
+            this.fileInput = null;
+            this.changeHandler = null;
+        }
     }
 
     schemaChanged(newValue) {
@@ -39,11 +47,33 @@ export class PragmaForm {
     }
 
     import() {
+        if (!this.fileInput) {
+            this.fileInput = document.createElement('input');
+            this.fileInput.type = 'file';
+            this.fileInput.accept = '.json';
 
+            this.changeHandler = this.loadContentFromFile.bind(this);
+            this.fileInput.addEventListener("change", this.changeHandler);
+        }
+
+        this.fileInput.click();
+    }
+
+    loadContentFromFile(event) {
+        const file = event.target.files[0];
+
+        const fr = new FileReader();
+
+        fr.onload = _ => {
+            this.schema = JSON.parse(fr.result);
+            this.disposeFileInput();
+        };
+
+        fr.readAsText(file);
     }
 
     export() {
-
+        alert("export");
     }
 
     clear() {
