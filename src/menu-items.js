@@ -18,6 +18,10 @@ export const menuItems = [
     {
         text: "Long List",
         screen: "longlist"
+    },
+    {
+        text: "Dynamic Form Test",
+        screen: "formtest"
     }
 ];
 

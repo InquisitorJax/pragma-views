@@ -1,20 +1,52 @@
-import {customElement, inject} from 'aurelia-framework';
+import {bindable, customElement, inject} from 'aurelia-framework';
+import {DynamicViewLoader} from './../../lib/dynamic-view-loader';
+import {TemplateParser} from './../../lib/template-parser';
+
 
 @customElement('pragma-form')
-@inject(Element)
+@inject(Element, DynamicViewLoader)
 export class PragmaForm {
-    constructor(element) {
-        this.element = element;
+    dynamicViewLoader;
+    templateParser;
+    detailsElement;
 
-        // define handlers
-        // this.actionHandler = this.action.bind(this);
+    @bindable schema;
+    @bindable model;
+
+    constructor(element, dynamicViewLoader) {
+        this.element = element;
+        this.dynamicViewLoader = dynamicViewLoader;
+        this.loaded = false;
     }
 
     attached() {
-        // initialize
+        if (this.schema && !this.loaded) {
+            this.templateParser = new TemplateParser("model");
+            this.schemaChanged(this.schema);
+        }
     }
 
     detached() {
-        // dispose
+        this.templateParser.dispose();
+        this.templateParser = null;
+    }
+
+    schemaChanged(newValue) {
+        if (this.detailsElement && newValue) {
+            this.templateParser.parse(newValue).then(html => this.dynamicViewLoader.load(html, this.detailsElement, this));
+            this.loaded = true;
+        }
+    }
+
+    import() {
+
+    }
+
+    export() {
+
+    }
+
+    clear() {
+        this.dynamicViewLoader.unload(this.detailsElement);
     }
 }
