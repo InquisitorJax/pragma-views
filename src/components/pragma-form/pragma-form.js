@@ -1,9 +1,10 @@
 import {bindable, customElement, inject} from 'aurelia-framework';
 import {DynamicViewLoader} from './../../lib/dynamic-view-loader';
 import {TemplateParser} from './../../lib/template-parser';
+import {TemplateConstructor} from './../../lib/template-constructor';
 
 @customElement('pragma-form')
-@inject(Element, DynamicViewLoader)
+@inject(Element, DynamicViewLoader, TemplateConstructor)
 export class PragmaForm {
     dynamicViewLoader;
     templateParser;
@@ -12,9 +13,10 @@ export class PragmaForm {
     @bindable schema;
     @bindable model;
 
-    constructor(element, dynamicViewLoader) {
+    constructor(element, dynamicViewLoader, templateConstructor) {
         this.element = element;
         this.dynamicViewLoader = dynamicViewLoader;
+        this.templateConstructor = templateConstructor;
         this.loaded = false;
     }
 
@@ -83,8 +85,11 @@ export class PragmaForm {
             fileName = `${fileName}.json`;
         }
 
-        const json = JSON.stringify('{"property": "value"}');
-        const blob = new Blob([json], {type: "octet/stream"});
+        const json = this.templateConstructor.domToJson(this.detailsElement);
+
+return;
+
+        const blob = new Blob([JSON.stringify(json, null, 4)], {type : 'application/json'});
         const url = window.URL.createObjectURL(blob);
 
         const a = document.createElement("a");

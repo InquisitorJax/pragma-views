@@ -5,6 +5,7 @@ export function configure(aurelia) {
             .developmentLogging()
             .globalResources(
                 'pragma-menu/pragma-menu',
+                'pragma-tabsheet/pragma-tabsheet',
                 'components/menu/menu',
                 'components/input-composite/input-composite',
                 'components/master-detail/master-detail',

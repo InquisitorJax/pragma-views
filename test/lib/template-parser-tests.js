@@ -210,7 +210,7 @@ describe('TemplateParser Tests', function() {
             }
         ];
 
-        const parseElementSpy = sinon.spy(templateParser, "parseElement");
+        const parseElementSpy = sinon.spy(templateParser, "parseNodes");
 
         // Act
         templateParser.parseElements(elements);
