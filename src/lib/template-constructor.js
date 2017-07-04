@@ -4,12 +4,14 @@ export class TemplateConstructor {
         this.parseElementHandler = this.parseElement.bind(this);
         this.parseInputCompositeHandler = this.parseInputComposite.bind(this);
         this.parseGroupHandler = this.parseGroup.bind(this);
+        this.parseCheckboxHandler = this.parseCheckbox.bind(this);
 
         this.parseMap = new Map();
         this.parseMap.set("PRAGMA-TABSHEET", this.parseTabSheetHandler);
         this.parseMap.set("ELEMENT", this.parseElementHandler);
         this.parseMap.set("INPUT-COMPOSITE", this.parseInputCompositeHandler);
         this.parseMap.set("GROUP", this.parseGroupHandler);
+        this.parseMap.set("CHECKBOX-COMPOSITE", this.parseCheckboxHandler);
     }
 
     domToJson(element) {
@@ -33,6 +35,18 @@ export class TemplateConstructor {
         return this.jsonObj;
     }
 
+    hasParseableStyle(element) {
+        const styles = ["checkbox-composite"];
+
+        for(let style of styles) {
+            if (element.classList.contains(style)) {
+                return style;
+            }
+        }
+
+        return false;
+    }
+
     parseNodes(element, obj) {
         const tagName = element.tagName;
 
@@ -41,7 +55,14 @@ export class TemplateConstructor {
                 this.parseMap.get(tagName).call(this, element, obj)
             }
             else {
-                this.parseElement(element, obj);
+                const style = this.hasParseableStyle(element);
+
+                if (style) {
+                    this.parseMap.get(style.toUpperCase()).call(this, element, obj);
+                }
+                else {
+                    this.parseElement(element, obj);
+                }
             }
         }
     }
@@ -65,7 +86,7 @@ export class TemplateConstructor {
 
         obj.push(el);
 
-        const children = Array.from(element.children);
+        const children = element.children;
 
         if (children.length > 0) {
             for(let child of children) {
@@ -105,7 +126,8 @@ export class TemplateConstructor {
 
         if (details.type) {
             const attr = {};
-            attr["type"] = details.type
+            attr["type"] = details.type;
+            composite.attributes = attr;
         };
 
         const keys = Object.keys(details);
@@ -140,6 +162,19 @@ export class TemplateConstructor {
         }
     }
 
+    parseCheckbox(element, obj) {
+        const input = element.querySelector("input");
+        const label = element.querySelector("label");
+
+        const result = {
+            element: "checkbox",
+            field: input.getAttribute("checked.bind").replace("model.", ""),
+            title: label.innerText
+        };
+
+        obj.push(result);
+    }
+
     getFieldDetails(element) {
         const details = {
         };
@@ -160,12 +195,20 @@ export class TemplateConstructor {
     setInputFieldDetails(details, input) {
         details.type = input.getAttribute("type");
         details.field = input.getAttribute("value.bind").replace("model.", "");
+        this.setCommonDetails(details, input);
     }
 
     setSelectDetails(details, select) {
         details.field = select.getAttribute("value.bind").replace("model.", "");
         details.datasource = select.dataset.datasource;
         details.optionField = select.dataset.options;
+        this.setCommonDetails(details, select);
+    }
+
+    setCommonDetails(details, element) {
+        if (element.hasAttribute("required")) {
+            details.required = element.getAttribute("required");
+        }
     }
 
     getClassesFromAttributes(element) {
@@ -173,7 +216,14 @@ export class TemplateConstructor {
         const classAttribute = attributes.find(item => item.nodeName.toLowerCase() == "class");
 
         if (classAttribute) {
-            return classAttribute.value.split(" ");
+            const result = classAttribute.value.split(" ");
+            const index = result.indexOf("au-target");
+
+            if (index > -1) {
+                result.splice(index, 1);
+            }
+
+            return result;
         }
 
         return null;
