@@ -2,27 +2,32 @@ import {expect, assert} from 'chai';
 import {SearchFilter} from './../../src/lib/search-filter.js';
 
 describe('SearchFilter Tests', function() {
-    let instance;
+    it('search', function() {
+        const collection = [
+            {
+                id: 1,
+                code: "a"
+            },
+            {
+                id: 2,
+                code: "b"
+            },
+            {
+                id: 3,
+                code: "c"
+            },
+            {
+                id: 4,
+                code: "d"
+            }
+        ];
 
-    beforeEach(function() {
-        instance = new SearchFilter();
-    });
+        const promise = SearchFilter("a", collection, "code");
 
-    it('constructor', function() {
-        // Assert
-        expect(instance).to.not.be.null;
-    });
-
-    it('not constructor', function() {
-        // Assert
-        expect(() => SearchFilter()).to.throw("Cannot call a class as a function");
-    });
-
-    it('dispose', function() {
-        // Act
-        instance.dispose();
-
-        // Assert
-        // .. put your code here
+        promise.then(result => {
+            expect(result.length == 1);
+            expect(result[0].code == "a");
+            expect(result[0].id == 1)
+        }).catch(error => {throw new Error(error)});
     });
 });
