@@ -20,9 +20,14 @@ export class TemplateConstructor {
         };
 
         const children = element.children;
+        let target = this.jsonObj.body;
+
+        if (children.length > 1) {
+            target = this.jsonObj.body.elements = [];
+        }
 
         for (let child of children) {
-            this.parseNodes(child, this.jsonObj.body);
+            this.parseNodes(child, target);
         }
 
         return this.jsonObj;
