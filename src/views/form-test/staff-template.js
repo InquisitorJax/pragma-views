@@ -174,7 +174,8 @@ export const staffTemplate =
                         "attributes": {
                             "type": "text"
                         },
-                        "descriptor": "type some stuff man"
+                        "descriptor": "type some stuff man",
+                        "required": true
                     },
                     {
                         "title": "Description",
@@ -183,7 +184,8 @@ export const staffTemplate =
                         "attributes": {
                             "type": "text"
                         },
-                        "description": "description"
+                        "description": "description",
+                        "required": true
                     },
                     {
                         "element": "select",

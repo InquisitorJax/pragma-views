@@ -44,6 +44,12 @@ export class InputComposite {
         this.labelControl = null;
     }
 
+    bind() {
+        if (this.input) {
+            this.checkValidity();
+        }
+    }
+
     focus() {
         this.labelControl.setAttribute("hasFocus", "true");
     }
