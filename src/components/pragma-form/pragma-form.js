@@ -86,9 +86,6 @@ export class PragmaForm {
         }
 
         const json = this.templateConstructor.domToJson(this.detailsElement);
-
-return;
-
         const blob = new Blob([JSON.stringify(json, null, 4)], {type : 'application/json'});
         const url = window.URL.createObjectURL(blob);
 

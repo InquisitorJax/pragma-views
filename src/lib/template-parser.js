@@ -210,6 +210,8 @@ export class TemplateParser {
             "__description__": description,
             "__required__": required,
             "__datasource__": datasource,
+            "__datasource-raw__": select.datasource,
+            "__optionfield__": optionField,
             "__content__": "${option." + optionField + "}",
         });
 

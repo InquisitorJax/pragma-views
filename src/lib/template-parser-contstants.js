@@ -31,7 +31,7 @@ export const textareaHtml = `
 
 export const selectHtml = `
 <input-composite id="__field__" label="__title__" descriptor="__description__" required="__required__">
-    <select value.bind="__prefix__.__field__">
+    <select value.bind="__prefix__.__field__" data-datasource="__datasource-raw__" data-options="__optionfield__">
         <option repeat.for="option of __datasource__" model.bind="option.id">__content__</option>
     </select>
 </input-composite>
