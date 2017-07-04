@@ -173,7 +173,8 @@ export const staffTemplate =
                         "element": "input",
                         "attributes": {
                             "type": "text"
-                        }
+                        },
+                        "descriptor": "type some stuff man"
                     },
                     {
                         "title": "Description",
@@ -181,7 +182,8 @@ export const staffTemplate =
                         "element": "input",
                         "attributes": {
                             "type": "text"
-                        }
+                        },
+                        "description": "description"
                     },
                     {
                         "element": "select",
@@ -326,7 +328,7 @@ export const staffTemplate =
                     {
                         "title": "Section",
                         "field": "sectionCode",
-                        "description": "${sectionDescription}",
+                        "description": "sectionDescription",
                         "element": "input",
                         "attributes": {
                             "type": "text"
@@ -335,7 +337,7 @@ export const staffTemplate =
                     {
                         "title": "Trade",
                         "field": "tradeCode",
-                        "description": "${tradeDescription}",
+                        "description": "tradeDescription",
                         "element": "input",
                         "attributes": {
                             "type": "text"
@@ -344,7 +346,7 @@ export const staffTemplate =
                     {
                         "title": "Cost element",
                         "field": "costElementCode",
-                        "description": "${costElementDescription}",
+                        "description": "costElementDescription",
                         "element": "input",
                         "attributes": {
                             "type": "text"
@@ -353,7 +355,7 @@ export const staffTemplate =
                     {
                         "title": "Calendar",
                         "field": "calendarCode",
-                        "description": "${calendarDescription}",
+                        "description": "calendarDescription",
                         "element": "input",
                         "attributes": {
                             "type": "text"
@@ -369,7 +371,7 @@ export const staffTemplate =
                     {
                         "title": "Site currency",
                         "field": "currencyCode",
-                        "description": "${currencyDescription}",
+                        "description": "currencyDescription",
                         "element": "input",
                         "attributes": {
                             "type": "text"

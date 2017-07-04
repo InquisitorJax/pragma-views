@@ -202,12 +202,22 @@ export class TemplateParser {
         const required = select.required || false;
         const optionField = select.optionField;
         const datasource = this.getPrefix(select.datasource) + this.cleanRelative(select.datasource);
+        const prefix = this.getPrefix(field);
+
+        let descriptor = select.descriptor || "";
+
+        if (description.length > 0) {
+            descriptor = `descriptor.bind="${prefix}.${description}"`
+        }
+        else {
+            descriptor = `descriptor="${descriptor}"`
+        }
 
         const result = populateTemplate(selectHtml, {
             "__prefix__": this.propertyPrefix,
             "__field__": field,
             "__title__": title,
-            "__description__": description,
+            "__description__": descriptor,
             "__required__": required,
             "__datasource__": datasource,
             "__datasource-raw__": select.datasource,
@@ -413,12 +423,22 @@ export class TemplateParser {
         const required = input.required | false;
         const classes = this.processClasses(input);
         const attributes = this.processAttributes(input);
+        const prefix = this.getPrefix(field);
+
+        let descriptor = input.descriptor || "";
+
+        if (description.length > 0) {
+            descriptor = `descriptor.bind="${prefix}.${description}"`
+        }
+        else {
+            descriptor = `descriptor="${descriptor}"`
+        }
 
         return populateTemplate(inputHtml, {
-            "__prefix__": this.getPrefix(field),
+            "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
-            "__description__": description,
+            "__description__": descriptor,
             "__classes__": classes,
             "__attributes__": attributes,
             "__required__": required
@@ -445,12 +465,22 @@ export class TemplateParser {
         const required = memo.required | false;
         const classes = this.processClasses(memo);
         const attributes = this.processAttributes(memo);
+        const prefix = this.getPrefix(field);
+
+        let descriptor = memo.descriptor || "";
+
+        if (description.length > 0) {
+            descriptor = `descriptor.bind="${prefix}.${description}"`
+        }
+        else {
+            descriptor = `descriptor="${descriptor}"`
+        }
 
         return populateTemplate(textareaHtml, {
-            "__prefix__": this.getPrefix(field),
+            "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
-            "__description__": description,
+            "__description__": descriptor,
             "__classes__": classes,
             "__attributes__": attributes,
             "__required__": required

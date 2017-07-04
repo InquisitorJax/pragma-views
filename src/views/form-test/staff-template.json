@@ -32,7 +32,8 @@
                                 "element": "input",
                                 "attributes": {
                                     "type": "text"
-                                }
+                                },
+                                "description": "description"
                             },
                             {
                                 "element": "select",

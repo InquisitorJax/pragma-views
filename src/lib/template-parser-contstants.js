@@ -11,7 +11,7 @@ export const tabHtml = `
 export const groupHtml = `<group title="__title__">__content__</group>`;
 
 export const inputHtml = `
-<input-composite id="__field__" label="__title__" descriptor="__description__" required.bind="__required__">
+<input-composite id="__field__" label="__title__" required.bind="__required__" __description__>
     <input value.bind="__prefix__.__field__" __classes__ __attributes__></input>
 </input-composite>
 `;
@@ -24,13 +24,13 @@ export const checkboxHtml = `
 `;
 
 export const textareaHtml = `
-<input-composite id="__field__" label="__title__" descriptor="__description__">
+<input-composite id="__field__" label="__title__" __description__>
     <textarea value.bind="__prefix__.__field__" __classes__ __attributes__></textarea>
 </input-composite>
 `;
 
 export const selectHtml = `
-<input-composite id="__field__" label="__title__" descriptor="__description__" required="__required__">
+<input-composite id="__field__" label="__title__" required="__required__" __description__>
     <select value.bind="__prefix__.__field__" data-datasource="__datasource-raw__" data-options="__optionfield__">
         <option repeat.for="option of __datasource__" model.bind="option.id">__content__</option>
     </select>
