@@ -120,8 +120,6 @@ export class MasterListContainer {
             "__aggregate__": "${aggregate.aggregate}",
             "__value__": "${aggregate.value}"
         });
-
-        console.log(this.groupTemplate);
     }
 
     attached() {
