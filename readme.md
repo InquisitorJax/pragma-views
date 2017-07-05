@@ -1,0 +1,54 @@
+#Pragma-Views
+This is a Aurelia plugin that is currently in development for RAD (rapid application development).
+
+This plugin contains:
+
+1. controls
+1. custom attributes
+1. libraries
+1. styles
+
+This provide basic application building blocks and some advanced building blocks.
+
+## Install
+`jspm install npm:pragma-views`
+
+edit main.js and add the plugin
+```js
+aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .globalResources()
+    .plugin("pragma-views", builder => builder.useGroup());
+```
+
+You can also choose to only use parts of pragma-views;
+```js
+    .plugin("pragma-views", builder => {
+       builder
+            .useAssistant()
+            .useGroup()
+            .useIcons()
+            .useInput()
+            .useMasterList()
+            .useDynamicScreens()
+            .useMenu()
+            .useMasterDetail()
+            .useCollections()
+            .useToolItems()
+            .useNotifications()
+    });
+```
+
+See index.js in the src folder for details on what will be installed per configuration.
+
+## Documentation
+
+[Assistant](./developer-notes/assistant.md)  
+[Dynamic Schema](./developer-notes/dynamic-schema.md)  
+[Dynamic Views](./developer-notes/dynamic-views.md)  
+[Master View Notes](./developer-notes/master-view-notes.md)  
+[Pragma Form](./developer-notes/pragma-form.md)  
+[Pragma Template](./developer-notes/pragma-template.md)  
+[Template Parser](./developer-notes/template-parser.md)  
+[View Factory](./developer-notes/view-factory.md)  
