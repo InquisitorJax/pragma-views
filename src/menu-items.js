@@ -22,6 +22,10 @@ export const menuItems = [
     {
         text: "Dynamic Form Test",
         screen: "formtest"
+    },
+    {
+        text: "Theme",
+        screen: "theme"
     }
 ];
 
