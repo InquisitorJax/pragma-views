@@ -42,7 +42,7 @@ export class PragmaForm {
     }
 
     schemaChanged(newValue) {
-        if (this.detailsElement && newValue) {
+        if (this.templateParser && this.detailsElement && newValue) {
             this.templateParser.parse(newValue).then(html => this.dynamicViewLoader.load(html, this.detailsElement, this));
             this.loaded = true;
         }
