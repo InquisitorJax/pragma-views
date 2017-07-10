@@ -16,5 +16,15 @@
 .card[aria-selected="true"] {
   @include box-shadow(0, 0.5rem, 1rem, 0, 0, 0, 0, 0.2);
   border-color: $card-selected-highlight;
-  z-index: 0;
+  z-index: 1;
+}
+
+.card[aria-selected="true"]:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.25rem;
+  background: $primary-highlight;
 }
