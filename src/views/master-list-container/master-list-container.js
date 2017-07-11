@@ -1,0 +1,173 @@
+import {bindable, inject} from 'aurelia-framework';
+import {GroupWorker} from './../../lib/group-worker';
+import {listTemplate1, populateTemplate} from './../../lib/template-parser-contstants';
+import {ColumnsManager, Column} from './../../components/master-list-container/columns-template';
+
+@inject(Element, GroupWorker)
+export class MasterListContainerView {
+    groupingItems;
+    cacheId;
+    listTemplate;
+    columnsManager;
+
+    constructor(element, groupWorker) {
+        this.element = element;
+        this.groupWorker = groupWorker;
+
+        this.cacheId = "test-cache";
+        this.listTemplate = populateTemplate(listTemplate1, {
+            "__field1__": "${code}",
+            "__field2__": "${site}",
+            "__field3__": "${name}",
+            "__field4__": "${surname}",
+            "__field5__": "${section}"
+        });
+
+        const columnItems = [
+            new Column("Code", "code", 100, 0),
+            new Column("Site", "site", 100, 1),
+            new Column("Name", "name", 100, 2),
+            new Column("Surname", "surname", 100, 3),
+            new Column("Section", "section", 100, 4)];
+
+        this.columnsManager = new ColumnsManager(columnItems);
+        this.groupingItems = orderGroupItems;
+    }
+
+    attached() {
+        this.groupWorker.createCache(this.cacheId, viewListItems);
+    }
+
+    detached() {
+        this.groupWorker.disposeCache(this.cacheId);
+    }
+}
+
+const orderGroupItems = [
+    {
+        id: 1,
+        title: "IS ACTIVE",
+        value: "isActive",
+        isOn: false
+    },
+    {
+        id: 2,
+        title: "SITE",
+        value: "site",
+        isOn: false
+    },
+    {
+        id: 3,
+        title: "SECTION",
+        value: "section",
+        isOn: false
+    },
+    {
+        id: 4,
+        title: "LOCATION",
+        value: "location",
+        isOn: false
+    }
+];
+
+const viewListItems = [
+    {
+        code: "ZSMC",
+        name: "Mildred",
+        surname: "Bennett",
+        site: "A21",
+        section: "ENG",
+        location: "capetown",
+        isActive: true,
+        id: 1,
+        cost: 10
+    },
+    {
+        code: "PROD",
+        name: "Owen",
+        surname: "Jacobs",
+        site: "A31",
+        section: "ELEC",
+        location: "capetown",
+        isActive: false,
+        id: 2,
+        cost: 11
+    },
+    {
+        code: "MEWS",
+        name: "Phillip",
+        surname: "McDonald",
+        site: "A21",
+        section: "OPER",
+        location: "capetown",
+        isActive: true,
+        id: 3,
+        cost: 12
+    },
+    {
+        code: "ELWS",
+        name: "Adrian",
+        surname: "Cruz",
+        site: "A21",
+        section: "ELEC",
+        location: "capetown",
+        isActive: true,
+        id: 4,
+        cost: 13
+    },
+    {
+        code: "MEWS",
+        name: "Connor",
+        surname: "Francis",
+        site: "A12",
+        section: "HAND",
+        location: "johannesburg",
+        isActive: true,
+        id: 5,
+        cost: 14
+    },
+    {
+        code: "HPPF",
+        name: "Beulah",
+        surname: "Arnold",
+        site: "A11",
+        section: "ENG",
+        location: "capetown",
+        isActive: true,
+        id: 6,
+        cost: 15
+    },
+    {
+        code: "PROD",
+        name: "Seth",
+        surname: "Howard",
+        site: "A21",
+        section: "ELEC",
+        location: "capetown",
+        isActive: false,
+        id: 7,
+        cost: 16
+    },
+    {
+        code: "ELWS",
+        name: "Francis",
+        surname: "Miller",
+        site: "A31",
+        section: "ELEC",
+        location: "capetown",
+        isActive: false,
+        id: 8,
+        cost: 17
+    },
+    {
+        code: "PROD",
+        name: "Kevin",
+        surname: "Cunningham",
+        site: "A21",
+        section: "ELEC",
+        location: "johannesburg",
+        isActive: true,
+        id: 9,
+        cost: 18
+    }
+];

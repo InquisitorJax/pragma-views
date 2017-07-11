@@ -5,3 +5,13 @@ ul {
 
   @include ignore-device-rendering();
 }
+
+ul[selectable]{
+  li {
+    background: $li-selectable-background;
+  }
+
+  li:hover {
+    background: $li-hover-color;
+  }
+}

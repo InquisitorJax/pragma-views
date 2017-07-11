@@ -30,6 +30,10 @@ export const menuItems = [
     {
         text: "Tabsheet",
         screen: "tabsheet-test"
+    },
+    {
+        text: "Master List Container",
+        screen: "master-list-container"
     }];
 
 export const quickItems = [

@@ -16,6 +16,8 @@
   --error-foreground: #E35050;
   --common-border: #E7E9EA;
   --placeholder-border: rgba(0, 0, 0, 0.3);
+  --list-selection-background: white;
+  --li-selectable-background: whitesmoke;
 
   // icons
   --icons-light-foreground: #FFF;
@@ -78,7 +80,7 @@ $focus-color: $primary-focus-highlight;
  */
 
 $list-background: #E7E9EA;
-$list-border: #CED1D4;
+$list-border: $primary-highlight;
 $list-selected: $selected-color;
 $sortable-background: white;
 
@@ -172,3 +174,6 @@ $order-group-active: #F2F2F2;
 $order-group-inactive: #E6E8E9;
 
 $placholder-border: var(--placeholder-border);
+
+$li-hover-color: var(--list-selection-background);
+$li-selectable-background: var(--li-selectable-background);
