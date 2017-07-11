@@ -7,6 +7,8 @@ ul {
 }
 
 ul[selectable]{
+  @include overflow-scroll(scroll, touch);
+
   li {
     background: $li-selectable-background;
   }

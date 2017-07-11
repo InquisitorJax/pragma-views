@@ -10,7 +10,6 @@
   --primary-focus-highlight: #35C184;
   --common-background: #e6e8e9;
   --secondary-background: #848C94;
-  --selected-color: #1788EA;
   --primary-dark: #0A1929;
   --app-background: #F1F4F4;
   --error-foreground: #E35050;
@@ -34,7 +33,6 @@ $primary-highlight: var(--primary-highlight);
 $primary-focus-highlight: var(--primary-focus-highlight);
 $common-background: var(--common-background);
 $secondary-background: var(--secondary-background);
-$selected-color: var(--selected-color);
 
 // this is used as darker toolbars and surfaces on the primary color, see On Key Assist design
 $primary-dark: var(--primary-dark);
@@ -81,7 +79,6 @@ $focus-color: $primary-focus-highlight;
 
 $list-background: #E7E9EA;
 $list-border: $primary-highlight;
-$list-selected: $selected-color;
 $sortable-background: white;
 
 /*
@@ -154,8 +151,8 @@ $grid-header-color: #FFFFFF;
   PERCENTAGE CHART
  */
 
-$pc-background: #0A1929;
-$pc-color: $primary-highlight;
+$pc-background: $primary-dark;
+$pc-color: $common-background;
 
 /*
   DROPDOWN MENU

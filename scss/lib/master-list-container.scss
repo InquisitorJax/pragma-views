@@ -5,17 +5,19 @@ master-list-container {
     height: 100%;
 
     > div {
-        display: block;
+        @include flex();
+        @include flex-column();
+
         width: 100%;
         height: 100%;
         position: relative;
     }
 
-    percentage-chart {
-        margin-top: $half-padding;
-    }
-
     #master-list {
+        @include stretch();
+        @include ignore-device-rendering();
+        @include overflow-scroll(scroll, touch);
+
         li {
             margin: 3px;
             padding: 10px;

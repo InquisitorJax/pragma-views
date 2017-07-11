@@ -71,6 +71,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 @mixin absolute-fullscreen {
