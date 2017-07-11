@@ -107,9 +107,15 @@ form-search {
 }
 
 pragma-dropdown-menu, .toolbar-no-padding {
-  icon, .icon {
+  icon {
+    width: $default-padding + $half-padding;
+    height: $default-padding + $half-padding;
+  }
+
+  .icon {
     width: $default-padding;
     height: $default-padding;
+    margin-top: 0.2rem;
   }
 }
 
