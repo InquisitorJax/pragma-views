@@ -131,7 +131,6 @@ export class PragmaTabSheet {
     }
 
     addTab(event) {
-        console.log(this.element.id);
         if (event.id != this.element.id) {
             return;
         }
