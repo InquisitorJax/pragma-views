@@ -4,10 +4,13 @@ import {bindable, inject, customAttribute, DOM} from 'aurelia-framework';
 @inject(DOM.Element)
 export class Selectable {
     @bindable selectedId;
+    @bindable multi;
+
     oldSelectedItem;
 
     constructor(element) {
         this.element = element;
+        this.multi = false;
     }
 
     attached() {
@@ -25,7 +28,32 @@ export class Selectable {
             return false;
         }
 
-        this.selectedId = this.getId(event.target);
+        const selectedId = this.getId(event.target);
+
+        if (String(this.multi).toLowerCase() === "true") {
+            if (!this.selectedIdCollection) {
+                this.selectedIdCollection = new Set();
+            }
+
+            if (this.selectedIdCollection.has(selectedId)) {
+                this.selectedIdCollection.delete(selectedId);
+                this.setSelectedElement(selectedId, false);
+            }
+            else {
+                this.selectedIdCollection.add(selectedId);
+                this.setSelectedElement(selectedId, true);
+            }
+
+            this.selectedId = Array.from(this.selectedIdCollection);
+        }
+        else {
+            if (this.oldSelectedItem) {
+                this.oldSelectedItem.setAttribute("aria-selected", false);
+            }
+
+            this.selectedId = selectedId;
+            this.setSelectedElement(selectedId, true);
+        }
     }
 
     getId(target) {
@@ -43,19 +71,9 @@ export class Selectable {
         }
     }
 
-    selectedIdChanged()
-    {
-        var newSelectedElement = this.element.querySelectorAll('[data-id="' + this.selectedId + '"]')[0];
-        var hold = this.element.querySelectorAll('[data-id="' + this.selectedId + '"]');
-
-        if (this.oldSelectedItem) {
-            this.oldSelectedItem.setAttribute("aria-selected", false);
-        }
-
-        if(newSelectedElement)
-        {
-            this.oldSelectedItem = newSelectedElement;
-            newSelectedElement.setAttribute("aria-selected", true);
-        }
+    setSelectedElement(selectedId, isSelected) {
+        const newSelectedElement = this.element.querySelectorAll('[data-id="' + selectedId + '"]')[0];
+        newSelectedElement.setAttribute("aria-selected", isSelected);
+        this.oldSelectedItem = newSelectedElement;
     }
 }

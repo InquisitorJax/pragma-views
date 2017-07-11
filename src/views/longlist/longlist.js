@@ -3,6 +3,7 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 
 @inject(EventAggregator)
 export class Longlist {
+    @bindable selectedId;
     @bindable items;
 
     constructor(eventAggregator) {
@@ -14,6 +15,7 @@ export class Longlist {
         const items = [];
         for(let i = 0; i < 1000; i++) {
             items.push({
+                id: i,
                 title: `Item ${i}`
             })
         }
@@ -23,5 +25,9 @@ export class Longlist {
 
     detached() {
         // dispose
+    }
+
+    selectedIdChanged(newValue) {
+        console.log(newValue);
     }
 }
