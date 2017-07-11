@@ -26,8 +26,11 @@ export const menuItems = [
     {
         text: "Theme",
         screen: "theme"
-    }
-];
+    },
+    {
+        text: "Tabsheet",
+        screen: "tabsheet-test"
+    }];
 
 export const quickItems = [
     {

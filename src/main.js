@@ -5,7 +5,6 @@ export function configure(aurelia) {
             .developmentLogging()
             .globalResources(
                 'pragma-menu/pragma-menu',
-                'pragma-tabsheet/pragma-tabsheet',
                 'components/menu/menu',
                 'components/input-composite/input-composite',
                 'components/master-detail/master-detail',
@@ -24,7 +23,8 @@ export function configure(aurelia) {
                 'components/group/group',
                 'components/sortable-list/sortable-list',
                 'components/pragma-list/pragma-list',
-                'components/pragma-form/pragma-form'
+                'components/pragma-form/pragma-form',
+                'components/pragma-tabsheet/pragma-tabsheet'
             );
 
         aurelia.use.plugin('aurelia-dialog');

@@ -18,7 +18,8 @@ export class App {
             {route: ['sortable'], name: 'sortable', moduleId: 'views/sortable/sortable', nav: true, title: 'Sortable'},
             {route: ['longlist'], name: 'longlist', moduleId: 'views/longlist/longlist', nav: true, title: 'Long List'},
             {route: ['formtest'], name: 'formtest', moduleId: 'views/form-test/form-test', nav: true, title: 'Form Test'},
-            {route: ['theme'], name: 'theme', moduleId: 'views/theme/theme', nav: true, title: 'Theme'}
+            {route: ['theme'], name: 'theme', moduleId: 'views/theme/theme', nav: true, title: 'Theme'},
+            {route: ['tabsheet-test'], name: 'tabsheet-test', moduleId: 'views/tabsheet-test/tabsheet-test', nav: true, title: 'Tabsheet Test'}
         ]);
 
         this.router = router;
