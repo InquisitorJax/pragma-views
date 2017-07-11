@@ -43,12 +43,20 @@ You can also choose to only use parts of pragma-views;
 See index.js in the src folder for details on what will be installed per configuration.
 
 ## Documentation
+Please note that this package and documentation is under continues construction. Not everyting is documented and some parts are still experimental.
 
-[Assistant](./developer-notes/assistant.md)  
+### Library
 [Dynamic Schema](./developer-notes/dynamic-schema.md)  
 [Dynamic Views](./developer-notes/dynamic-views.md)  
 [Master View Notes](./developer-notes/master-view-notes.md)  
-[Pragma Form](./developer-notes/pragma-form.md)  
-[Pragma Template](./developer-notes/pragma-template.md)  
+
 [Template Parser](./developer-notes/template-parser.md)  
 [View Factory](./developer-notes/view-factory.md)  
+
+## Custom Elements
+[Pragma Form](./developer-notes/pragma-form.md)  
+[Pragma Template](./developer-notes/pragma-template.md) 
+
+### Custom Attributes
+[Assistant](./developer-notes/assistant.md)
+[Selectable](./developer-notes/selectable-custom-attribute.md)  

@@ -1,5 +1,5 @@
 <template>
     <ul style="width: 100%; height: 100%; overflow: auto" selectable="selected-id.two-way: selectedId; multi: true">
-        <li virtual-repeat.for="item of items" class="card default-padding" data-id="${item.id}">${item.title}</li>
+        <li virtual-repeat.for="item of items" class="card default-padding" data-id="${item.id}"><div>${item.title}</div></li>
     </ul>
 </template>
