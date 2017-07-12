@@ -48,14 +48,15 @@ Please note that this package and documentation is under continues construction.
 ### Library
 [Dynamic Schema](./developer-notes/dynamic-schema.md)  
 [Dynamic Views](./developer-notes/dynamic-views.md)  
-[Master View Notes](./developer-notes/master-view-notes.md)  
+[Master View Notes](./developer-notes/master-view-notes.md)    
 
 [Template Parser](./developer-notes/template-parser.md)  
 [View Factory](./developer-notes/view-factory.md)  
 
 ## Custom Elements
 [Pragma Form](./developer-notes/pragma-form.md)  
-[Pragma Template](./developer-notes/pragma-template.md) 
+[Pragma Template](./developer-notes/pragma-template.md)   
+[Pragma Tabsheet](./developer-notes/pragma-tabsheet.md)   
 
 ### Custom Attributes
 [Assistant](./developer-notes/assistant.md)

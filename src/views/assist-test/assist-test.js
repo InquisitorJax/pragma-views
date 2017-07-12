@@ -24,7 +24,7 @@ export class AssistTest {
     }
 
     showHtml() {
-        const html = '<div class="assist-container"><button click.delegate="clearHtml()">Clear</button></div>';
+        const html = `<div class="group assist-container"><h2>Actions</h2><button click.delegate="clearHtml()">Clear</button><button>Action 2</button><button class="primary-action">Action 3</button></div>`;
         this.eventAggregator.publish("assistant", {
             view: html,
             viewModel: this

@@ -12,6 +12,22 @@ assistant {
     @include ignore-device-rendering();
     background: transparent;
     border-width: 0;
+    text-align: left;
+  }
+
+  button.primary-action {
+    color: $primary-highlight;
+  }
+
+  .group {
+    background: $assistant-background;
+    border-width: 0;
+
+    h2 {
+      font-size: 1.2rem;
+      opacity: 0.5;
+      margin-bottom: $default-padding;
+    }
   }
 }
 
