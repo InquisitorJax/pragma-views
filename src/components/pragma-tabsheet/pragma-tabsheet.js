@@ -26,6 +26,7 @@ export class PragmaTabSheet {
     attached() {
         this.addTabHandler = this.addTab.bind(this);
         this.removeTabHandler = this.removeTab.bind(this);
+        this.moveTabHandler = this.moveTab.bind(this);
         this.performKeyUpHandler = this.performKeyUp.bind(this);
         this.performClickHandler = this.performClick.bind(this);
 
@@ -50,6 +51,7 @@ export class PragmaTabSheet {
 
         this.addEvent = this.eventAggregator.subscribe("addTab", this.addTabHandler);
         this.removeEvent = this.eventAggregator.subscribe("removeTab", this.removeTabHandler);
+        this.moveEvent = this.eventAggregator.subscribe("moveTab", this.moveTabHandler);
     }
 
     detached() {
@@ -60,6 +62,7 @@ export class PragmaTabSheet {
 
         this.addTabHandler = null;
         this.removeTabHandler = null;
+        this.moveTabHandler = null;
         this.performKeyUpHandler = null;
         this.performClickHandler = null;
 
@@ -69,13 +72,9 @@ export class PragmaTabSheet {
         this.tabsHandler = null;
         this.loadFromProfileHandler = null;
 
-        if (this.addEvent) {
-            this.addEvent.dispose();
-        }
-
-        if (this.removeEvent) {
-            this.removeEvent.dispose();
-        }
+        this.addEvent.dispose();
+        this.removeEvent.dispose();
+        this.moveEvent.dispose();
     }
 
     performKeyUp(event) {
@@ -144,5 +143,9 @@ export class PragmaTabSheet {
         }
 
         this.tabs.remove(event.tabId);
+    }
+
+    moveTab(event) {
+        this.tabs.move(event.fromIndex, event.toIndex);
     }
 }

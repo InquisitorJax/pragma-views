@@ -23,4 +23,18 @@ export class TabsheetTest {
             tabId: "tab4"
         })
     }
+
+    moveTab() {
+        this.eventAggregator.publish('moveTab', {
+            fromIndex: 2,
+            toIndex: 1,
+        })
+    }
+
+    moveTabBack() {
+        this.eventAggregator.publish('moveTab', {
+            fromIndex: 1,
+            toIndex: 2,
+        })
+    }
 }

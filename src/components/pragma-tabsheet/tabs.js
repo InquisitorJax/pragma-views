@@ -266,4 +266,24 @@ export class Tabs {
             this.updateVisibleTabsBuffer();
         }
     }
+
+    move(fromIndex, toIndex) {
+        const elementToMove = this.tabsheetBar.children[fromIndex];
+        const elementTarget = this.tabsheetBar.children[toIndex];
+
+        if (fromIndex > toIndex) {
+            this.tabsheetBar.removeChild(elementToMove);
+            this.tabsheetBar.insertBefore(elementToMove, elementTarget)
+        }
+        else {
+            this.tabsheetBar.removeChild(elementTarget);
+            this.tabsheetBar.insertBefore(elementTarget, elementToMove)
+        }
+
+        const backup = this.items[fromIndex];
+        this.items.splice(fromIndex, 1);
+        this.items.splice(toIndex, 0, backup);
+
+        this.updateVisibleTabsBuffer();
+    }
  }
