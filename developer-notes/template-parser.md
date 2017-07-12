@@ -156,6 +156,9 @@ The input schema is a 1:1 match for the html element "input". Input items are re
   }
 }
 ```
+To define different input types, the right way to do that is to use the html5 type attribute.
+You can read more about the different types at: https://www.w3schools.com/html/html_form_input_types.asp
+
 
 ## Checkbox
 The checkbox schea creates a input of type checkbox. It uses a particular composite layout as defined by the pragma standard layout.
