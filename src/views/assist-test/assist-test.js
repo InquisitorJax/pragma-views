@@ -29,7 +29,6 @@ export class AssistTest {
             view: html,
             viewModel: this
         })
-
     }
 
     clearHtml() {
