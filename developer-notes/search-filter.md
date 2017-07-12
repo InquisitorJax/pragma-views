@@ -16,6 +16,8 @@ Returns:
 import {SearchFilter} from 'pragma-views';
 ...
 
-const result = SearchFilter("a", collection, "code");
+SearchFilter(newValue, this.itemsBackup, 'title').then(result => {
+    this.items = result;
+});
 
 ```
