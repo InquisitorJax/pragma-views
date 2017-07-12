@@ -6,7 +6,7 @@ import {isMobile} from './device-helper';
  * @param selectQuery
  * @returns {*}
  */
-export function getEventTarget(event, selectQuery) {
+    export function getEventTarget(event, selectQuery) {
     let x = 0;
     let y = 0;
 
@@ -60,10 +60,10 @@ export function getValidLi(event, selectQuery) {
  * Create a highlight rect that is the same size as the given element
  * @param element
  */
-export function createHighlightFor(element, dimentions, containerDimentions) {
+export function createHighlightFor(dimentions) {
     const highlight = document.createElement("DIV");
     highlight.classList.add('highlight');
-    setStyleDimentions(highlight, dimentions, containerDimentions);
+    setStyleDimentions(highlight, dimentions);
 
     return highlight;
 }
@@ -73,7 +73,7 @@ export function createHighlightFor(element, dimentions, containerDimentions) {
  * @param element
  * @param dimentions
  */
-export function setStyleDimentions(element, dimentions, containerDimentions) {
+export function setStyleDimentions(element, dimentions) {
     element.style.setProperty("--left", dimentions.left);
     element.style.setProperty("--top", dimentions.top);
     element.style.setProperty("--width", dimentions.width);

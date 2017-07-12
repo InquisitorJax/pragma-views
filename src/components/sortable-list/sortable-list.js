@@ -150,7 +150,7 @@ export class SortableList {
     }
 
     createHighlight() {
-        this.highlight = createHighlightFor(this.elementBeingMoved, this.itemDimentions, this.containerDimentions);
+        this.highlight = createHighlightFor(this.itemDimentions);
         this.animationLayer.appendChild(this.highlight);
     }
 
@@ -211,7 +211,7 @@ export class SortableList {
 
         requestAnimationFrame(_ => {
             const dimentions = topLi ? topLi.getBoundingClientRect() : topElement.getBoundingClientRect();
-            setStyleDimentions(this.highlight, dimentions, this.containerDimentions);
+            setStyleDimentions(this.highlight, dimentions);
         })
     }
 
