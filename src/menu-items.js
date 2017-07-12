@@ -34,7 +34,12 @@ export const menuItems = [
     {
         text: "Master List Container",
         screen: "master-list-container"
-    }];
+    },
+    {
+        text: "Assistant",
+        screen: "assist-test"
+    }
+];
 
 export const quickItems = [
     {

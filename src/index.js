@@ -41,6 +41,7 @@ class ConfigBuilder {
             .useCollections()
             .useToolItems()
             .useNotifications()
+            .useTabsheet()
     }
 
     useAssistant() {
@@ -102,6 +103,11 @@ class ConfigBuilder {
 
     useNotifications() {
         this.globalResources.push(PLATFORM.moduleName('./components/pragma-messages/pragma-messages'));
+        return this;
+    }
+
+    useTabsheet() {
+        this.globalResources.push(PLATFORM.moduleName('./components/pragma-tabsheet/pragma-tabsheet'));
         return this;
     }
 }
