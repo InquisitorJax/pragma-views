@@ -53,6 +53,7 @@ Please note that this package and documentation is under continues construction.
 [Input Listener](./developer-notes/input-listener.md)  
 [Dom Helpers](./developer-notes/dom-helper.md)  
 [Array Helpers](./developer-notes/array-helpers.md)  
+[Device Helpers]('./developer-notes/device-helper.md)  
 
 [Template Parser](./developer-notes/template-parser.md)  
 [View Factory](./developer-notes/view-factory.md)  
