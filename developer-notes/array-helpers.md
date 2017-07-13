@@ -1,6 +1,6 @@
 # Array Helpers
 
-##arraysAreTheSame
+## arraysAreTheSame
 This function checks if the content of two arrays are the same.
 
 Parameters:
