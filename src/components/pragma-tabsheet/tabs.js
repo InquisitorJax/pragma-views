@@ -39,6 +39,7 @@ export class Tab {
         this.tabElement = document.createElement("div");
         this.tabElement.classList.add("tabsheet-bar-item");
         this.tabElement.setAttribute("role", "tab");
+        this.tabElement.setAttribute("for", this.id);
         this.tabElement.innerText = this.title;
         return this.tabElement;
     }
