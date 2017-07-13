@@ -1,4 +1,4 @@
-#Device Helpers
+# Device Helpers
 
 ## isMobile
 This function returns true if the current device is a mobile device and false if it is not
