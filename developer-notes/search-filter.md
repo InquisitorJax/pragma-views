@@ -1,4 +1,4 @@
-#Search Filter
+# Search Filter
 This function allows you to filter an array of objects.
 
 Parameters:
