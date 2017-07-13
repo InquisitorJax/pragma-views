@@ -15,6 +15,10 @@ assistant {
     text-align: left;
   }
 
+  button[disabled] {
+    opacity: 0.5;
+  }
+
   button.primary-action {
     color: $primary-highlight;
   }
