@@ -1,4 +1,4 @@
-#Dom Helper Functions
+# Dom Helper Functions
 
 ## getEventTarget
 Find a element where dragging is started and ensure that it matches the given query.
