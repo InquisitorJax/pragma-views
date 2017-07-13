@@ -1,7 +1,7 @@
-#Assistant component
+# Assistant component
 The assistant is a container that allows you to inject contextual content.
 
-##How to use
+## How to use
 The first thing you need to do is add the assistant to your main.js file as globalResources using:
 
 ```js
@@ -26,7 +26,7 @@ The normal use for this component is that it is globally available and is used i
 </template>
 ```
 
-##Open and close the assistant
+## Open and close the assistant
 Event aggregation is used to send close and open messages to the assistant component.
 
 ```js
@@ -54,7 +54,7 @@ The object literal being passed contains two properties:
 The view is the raw html you want to display and contains all the bindings you may need.  
 viewModel defines the object that the binding is done on.
 
-##Clear
+## Clear
 ```js
 this.eventAggregator.publish("clear-assistant")
 ```
