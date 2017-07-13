@@ -1,10 +1,10 @@
-#View Factory
+# View Factory
 
-##Introduction
+## Introduction
 The view factory is a common way to store templated html for the purpose getting bound instances when you need it.  
 This is a good way to manually manage collections and multiple views. Under the hood it uses aurelia view compilers but provides a easy and clean way to compile instances.
 
-##Usage
+## Usage
 
 1. Register html with the factory with a access key   
 `this.dynamicViewFactory.addFactory(true, groupTemplateHTML);`  
