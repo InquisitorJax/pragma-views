@@ -241,7 +241,6 @@ export class Tabs {
         const newElement = document.createElement("DIV");
         newElement.id = `tab${length + 1}`;
         newElement.setAttribute("data-tab", "New Tab");
-        newElement.innerHTML = "<div>Hello World</div>";
         this.element.appendChild(newElement);
 
         const tab = new Tab(newElement, this.visibilityChanged.bind(this));
