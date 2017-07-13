@@ -1,7 +1,7 @@
-#Pragma Tabsheet
+# Pragma Tabsheet
 This control allows you to have tabs over content as a standard tabsheet.
 
-##Usage
+## Usage
 ```html
 <pragma-tabsheet id="tabsheet">
     <div id="tab0" data-tab="Tab 1">Hello World</div>
@@ -15,9 +15,9 @@ This control allows you to have tabs over content as a standard tabsheet.
 1. Provide each tab with an id
 1. You can put any content you wish to show in the tab in the content section of the tab. This would be where "Hello World" is in the above example.
 
-##Programatically
+## Programatically
 
-###Add
+### Add
 ```js
 this.eventAggregator.publish('addTab', {
     id: this.tabsheet.id
@@ -26,7 +26,7 @@ this.eventAggregator.publish('addTab', {
 
 1. id: the id of the tabsheet
 
-###Remove 
+### Remove 
 ```js
 this.eventAggregator.publish('removeTab', {
     id: this.tabsheet.id,
@@ -37,7 +37,7 @@ this.eventAggregator.publish('removeTab', {
 1. id: the id of the tabsheet
 1. tabId: the id of the tab to be removed
 
-###Move
+### Move
 ```js
 this.eventAggregator.publish('moveTab', {
     fromIndex: 2,
