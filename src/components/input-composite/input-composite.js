@@ -32,6 +32,7 @@ export class InputComposite {
         this.input.addEventListener("blur", this.blurHandler);
         this.input.addEventListener("keyup", this.keyUpHandler);
 
+        this.descriptorChanged();
         this.checkValidity();
     }
 
