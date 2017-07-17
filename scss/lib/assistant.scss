@@ -8,6 +8,18 @@ assistant {
   transition: all 0.2s;
   z-index: 900;
 
+  label {
+    opacity: 0.5;
+  }
+
+  select {
+    color: $assistant-foreground;
+  }
+
+  select[disabled] {
+    opacity: 0.5;
+  }
+
   button {
     @include ignore-device-rendering();
     background: transparent;
