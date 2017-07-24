@@ -1,4 +1,4 @@
-import {populateTemplate, tabsheetHtml, tabHtml, groupHtml, inputHtml, textareaHtml, containerHtml, buttonHtml, dynamicHtml, checkboxHtml, selectHtml} from "./template-parser-contstants";
+import {populateTemplate, tabsheetHtml, tabHtml, groupHtml, inputHtml, textareaHtml, containerHtml, buttonHtml, dynamicHtml, checkboxHtml, selectHtml, detailsHtmlTemplate} from "./template-parser-contstants";
 
 export class TemplateParser {
     fieldMap;
@@ -22,6 +22,7 @@ export class TemplateParser {
         this.parseElementsHandler = this.parseElements.bind(this);
         this.parseCheckboxHandler = this.parseCheckbox.bind(this);
         this.parseSelectHandler = this.parseSelect.bind(this);
+        this.detailsHandler = this.details.bind(this);
 
         this.parseMap = new Map();
         this.parseMap.set("tabsheet", this.parseTabSheetHandler);
@@ -33,6 +34,7 @@ export class TemplateParser {
         this.parseMap.set("elements", this.parseElementsHandler);
         this.parseMap.set("checkbox", this.parseCheckboxHandler);
         this.parseMap.set("select", this.parseSelectHandler);
+        this.parseMap.set("details", this.detailsHandler);
     }
 
     /**
@@ -226,6 +228,13 @@ export class TemplateParser {
         });
 
         return result;
+    }
+
+    details(details) {
+        const datasource = this.getPrefix(select.datasource) + this.cleanRelative(select.datasource);
+        const prefix = this.getPrefix(field);
+
+        const result = populateTemplate()
     }
 
     /**

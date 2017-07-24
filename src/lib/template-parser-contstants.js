@@ -93,6 +93,12 @@ export const gridGroupTemplate = `
 </template>
 `;
 
+export const detailsHtmlTemplate = `
+    <pragma-details items.bind="__prefix__.__datasource__" instance-prototype.bind="itemPrototype">
+        <template>__content__</template>
+    </pragma-details>
+`;
+
 export function populateTemplate(template, map) {
     let result = template;
     const keys = Object.keys(map);

@@ -61,8 +61,8 @@
                         ]
                     },
                     {
-                        "element": "detail",
-                        "datasource": "mydetail",
+                        "element": "details",
+                        "datasource": "contacts",
                         "actions": ["insert", "delete"],
                         "elements": [
                             {
