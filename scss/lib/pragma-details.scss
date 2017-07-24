@@ -1,0 +1,24 @@
+pragma-details {
+  display: block;
+
+  ul {
+    overflow-y: hidden;
+    overflow: hidden;
+    padding-bottom: $default-padding;
+
+    li {
+      padding: $default-padding;
+      margin-bottom: $half-padding;
+    }
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  input {
+    width: 100%;
+  }
+}

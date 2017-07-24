@@ -4,9 +4,9 @@ import {customElement, inject, bindable, ViewCompiler, ViewSlot, Container, View
 @inject(Element, ViewCompiler, Container, ViewResources, TemplatingEngine)
 export class PragmaDetails {
     @bindable items;
-    @bindable html;
     @bindable itemStyle;
     @bindable instancePrototype;
+    @bindable selectedId;
 
     constructor(element, viewCompiler, container, viewResources, templatingEngine) {
         this.element = element;
@@ -26,10 +26,12 @@ export class PragmaDetails {
     }
 
     setupViews() {
-        let template = `<template><li class="${this.itemStyle}">${this.html}</li></template>`;
+        const html = this.templateSlot.innerHTML.replace("<template>", "").replace("</template>", "").replace("<!--slot-->", "");
+        let template = `<template><li class="${this.itemStyle} card" data-id.bind="id">${html}</li></template>`;
         this.viewFactory = this.viewCompiler.compile(template, this.viewResources);
-
         this.viewSlot = new ViewSlot(this.listElement, true);
+
+        this.element.removeChild(this.templateSlot);
     }
 
     detached() {
@@ -61,13 +63,26 @@ export class PragmaDetails {
         this.viewSlot.add(view);
     }
 
+    removeItem(item) {
+        const index = this.items.indexOf(item);
+        this.items.slice(index, 1);
+        this.viewSlot.removeAt(index, false);
+    }
+
 
     delete() {
-        console.log("delete")
+        if (this.selectedId) {
+            const item = this.items.find(i => i.id == this.selectedId);
+
+            if (item != undefined) {
+                this.removeItem(item);
+            }
+        }
     }
 
     add()  {
         const instance = Object.create(this.instancePrototype);
+        instance["id"] = this.items.length + 1;
         this.items.push(instance);
         this.addItem(instance);
     }

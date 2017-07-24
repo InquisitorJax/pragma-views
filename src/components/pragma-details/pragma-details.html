@@ -1,5 +1,9 @@
 <template>
-    <ul ref="listElement"></ul>
+    <div ref="templateSlot">
+        <slot></slot>
+    </div>
+
+    <ul ref="listElement" selectable="selected-id.two-way: selectedId; multi: false"></ul>
 
     <div>
         <div class="toolbar">

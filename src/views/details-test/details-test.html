@@ -1,3 +1,17 @@
 <template>
-    <pragma-details html.bind="detailsItemHtml" items.bind="items" instance-prototype.bind="itemPrototype"></pragma-details>
+    <pragma-details items.bind="items" instance-prototype.bind="itemPrototype">
+        <template>
+            <input-composite label="Phone">
+                <input type="text" value.bind="phone"/>
+            </input-composite>
+
+            <input-composite label="Email">
+                <input type="text" value.bind="email"/>
+            </input-composite>
+
+            <input-composite label="Fax">
+                <input type="text" value.bind="fax"/>
+            </input-composite>
+        </template>
+    </pragma-details>
 </template>
