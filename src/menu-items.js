@@ -24,6 +24,10 @@ export const menuItems = [
         screen: "formtest"
     },
     {
+        text: "Details Test",
+        screen: "details"
+    },
+    {
         text: "Theme",
         screen: "theme"
     },

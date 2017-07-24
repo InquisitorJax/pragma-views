@@ -24,7 +24,8 @@ export function configure(aurelia) {
                 'components/sortable-list/sortable-list',
                 'components/pragma-list/pragma-list',
                 'components/pragma-form/pragma-form',
-                'components/pragma-tabsheet/pragma-tabsheet'
+                'components/pragma-tabsheet/pragma-tabsheet',
+                'components/pragma-details/pragma-details'
             );
 
         aurelia.use.plugin('aurelia-dialog');

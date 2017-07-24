@@ -21,16 +21,5 @@
 
     <script src="./jspm_packages/system.js" defer></script>
     <script src="./config.js" defer onload="jspmLoaded()"></script>
-
-    <script async>
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./service-worker.js', {scope: '/'})
-                    .then(function(reg) {
-                        console.log('Registration succeeded. Scope is ' + reg.scope);
-                    }).catch(function(error) {
-                console.log('Registration failed with ' + error);
-            });
-        }
-    </script>
 </body>
 </html>

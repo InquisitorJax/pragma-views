@@ -2,6 +2,18 @@
     "type": "view",
     "fields": [
     ],
+    "datasources": [
+        {
+            "datasource": "mydetail",
+            "location": "../mydatasource",
+            "fields": [
+                {
+                    "field": "A1",
+                    "map": "A1"
+                }
+            ]
+        }
+    ],
     "body": {
         "tabsheet": [
             {
@@ -45,6 +57,18 @@
                                 "attributes": {
                                     "type": "text"
                                 }
+                            }
+                        ]
+                    },
+                    {
+                        "element": "detail",
+                        "datasource": "mydetail",
+                        "actions": ["insert", "delete"],
+                        "elements": [
+                            {
+                                "element": "input",
+                                "title": "code",
+                                "field": "A1"
                             }
                         ]
                     }

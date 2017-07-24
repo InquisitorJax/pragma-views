@@ -104,3 +104,7 @@ export function populateTemplate(template, map) {
 
     return result;
 }
+
+export function removePrefixExpectations(template) {
+    return template.split("__prefix__.").join("");
+}

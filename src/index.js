@@ -76,6 +76,7 @@ class ConfigBuilder {
     useDynamicScreens() {
         this.globalResources.push(PLATFORM.moduleName('./components/pragma-template/pragma-template'));
         this.globalResources.push(PLATFORM.moduleName('./components/pragma-form/pragma-form'));
+        this.globalResources.push(PLATFORM.moduleName('./components/pragma-details/pragma-details'));
         return this;
     }
 

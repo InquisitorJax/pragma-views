@@ -18,6 +18,7 @@ export class App {
             {route: ['sortable'], name: 'sortable', moduleId: 'views/sortable/sortable', nav: true, title: 'Sortable'},
             {route: ['longlist'], name: 'longlist', moduleId: 'views/longlist/longlist', nav: true, title: 'Long List'},
             {route: ['formtest'], name: 'formtest', moduleId: 'views/form-test/form-test', nav: true, title: 'Form Test'},
+            {route: ['details'], name: 'details', moduleId: 'views/details-test/details-test', nav: true, title: 'Details'},
             {route: ['theme'], name: 'theme', moduleId: 'views/theme/theme', nav: true, title: 'Theme'},
             {route: ['tabsheet-test'], name: 'tabsheet-test', moduleId: 'views/tabsheet-test/tabsheet-test', nav: true, title: 'Tabsheet Test'},
             {route: ['master-list'], name: 'master-list-container', moduleId: 'views/master-list-container/master-list-container', nav: true, title: 'Master List Container'},
