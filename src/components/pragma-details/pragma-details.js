@@ -7,6 +7,7 @@ export class PragmaDetails {
     @bindable itemStyle;
     @bindable instancePrototype;
     @bindable selectedId;
+    @bindable createInstance;
 
     constructor(element, viewCompiler, container, viewResources, templatingEngine) {
         this.element = element;
@@ -81,7 +82,14 @@ export class PragmaDetails {
     }
 
     add()  {
-        const instance = Object.create(this.instancePrototype);
+        let instance;
+        if (this.createInstance) {
+            instance = this.createInstance.call(this);
+        }
+        else if(this.instancePrototype) {
+            instance = Object.create(this.instancePrototype);
+        }
+
         instance["id"] = this.items.length + 1;
         this.items.push(instance);
         this.addItem(instance);

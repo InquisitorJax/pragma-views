@@ -434,6 +434,26 @@ export const staffTemplate =
                         "field": "smsForCriticalAsset"
                     }
                 ]
+            },
+            {
+                "element": "group",
+                "id": "contactsGroup",
+                "title": "Contacts",
+                "elements": [
+                    {
+                        "element": "details",
+                        "datasource": "contacts",
+                        "createInstance": "createContact",
+                        "elements": [
+                            {
+                                "element": "input",
+                                "title": "Phone",
+                                "field": "phone",
+                                "descriptor": "Phone Number"
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }

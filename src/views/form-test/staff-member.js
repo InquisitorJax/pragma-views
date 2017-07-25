@@ -19,5 +19,14 @@ export const staffMember =
     "emailOnApprovedWO": true,
     "smsOnApprovedWO": true,
     "smsForCriticalAsset": true,
-    "notes": "some note or the other"
+    "notes": "some note or the other",
+    "contacts": [],
+
+    createContact: function() {
+        console.log("create new contact model");
+
+        return Object.create({
+            "phone": ""
+        });
+    }
 };

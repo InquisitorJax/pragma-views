@@ -19,5 +19,16 @@ export class DetailsTest {
             fax: "fax1"
         }];
     }
+
+    createInstance() {
+        console.log("create instance");
+
+        return Object.create({
+            id: "",
+            phone: "",
+            email: "",
+            fax: ""
+        });
+    }
 }
 

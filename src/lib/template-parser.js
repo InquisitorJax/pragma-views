@@ -22,7 +22,7 @@ export class TemplateParser {
         this.parseElementsHandler = this.parseElements.bind(this);
         this.parseCheckboxHandler = this.parseCheckbox.bind(this);
         this.parseSelectHandler = this.parseSelect.bind(this);
-        this.detailsHandler = this.details.bind(this);
+        this.parseDetailsHandler = this.parseDetails.bind(this);
 
         this.parseMap = new Map();
         this.parseMap.set("tabsheet", this.parseTabSheetHandler);
@@ -34,7 +34,7 @@ export class TemplateParser {
         this.parseMap.set("elements", this.parseElementsHandler);
         this.parseMap.set("checkbox", this.parseCheckboxHandler);
         this.parseMap.set("select", this.parseSelectHandler);
-        this.parseMap.set("details", this.detailsHandler);
+        this.parseMap.set("details", this.parseDetailsHandler);
     }
 
     /**
@@ -230,11 +230,20 @@ export class TemplateParser {
         return result;
     }
 
-    details(details) {
-        const datasource = this.getPrefix(select.datasource) + this.cleanRelative(select.datasource);
-        const prefix = this.getPrefix(field);
+    parseDetails(details) {
+        const datasource = `${this.getPrefix(details.datasource)}.${this.cleanRelative(details.datasource)}`;
+        const prefix = this.propertyPrefix;
+        const fieldsHtml = this.parseElements(details.elements);
+        const createInstance = details.createInstance;
 
-        const result = populateTemplate()
+        const result = populateTemplate(detailsHtmlTemplate, {
+            "__prefix__": prefix,
+            "__datasource__": datasource,
+            "__content__": fieldsHtml,
+            "__create-instance__": createInstance
+        });
+
+        return result;
     }
 
     /**

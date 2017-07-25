@@ -12,6 +12,11 @@ pragma-details {
     }
   }
 
+  ul[selectable] {
+    overflow: hidden;
+    overflow-y: hidden;
+  }
+
   .toolbar {
     display: flex;
     justify-content: flex-end;

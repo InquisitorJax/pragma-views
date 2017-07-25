@@ -63,6 +63,7 @@
                     {
                         "element": "details",
                         "datasource": "contacts",
+                        "createInstance": "createContact",
                         "actions": ["insert", "delete"],
                         "elements": [
                             {

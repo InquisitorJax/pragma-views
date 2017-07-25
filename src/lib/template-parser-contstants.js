@@ -94,7 +94,7 @@ export const gridGroupTemplate = `
 `;
 
 export const detailsHtmlTemplate = `
-    <pragma-details items.bind="__prefix__.__datasource__" instance-prototype.bind="itemPrototype">
+    <pragma-details items.bind="__datasource__" create-instance.bind="__prefix__.__create-instance__">
         <template>__content__</template>
     </pragma-details>
 `;

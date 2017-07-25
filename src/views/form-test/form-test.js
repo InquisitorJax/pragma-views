@@ -36,4 +36,12 @@ export class FormTest {
     clear() {
         this.form.au["pragma-form"].viewModel.clear();
     }
+
+    createContact() {
+        console.log("create new contact model");
+
+        return new {
+            "phone": ""
+        };
+    }
 }
