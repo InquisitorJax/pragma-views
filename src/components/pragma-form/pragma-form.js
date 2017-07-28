@@ -25,6 +25,8 @@ export class PragmaForm {
             this.templateParser = new TemplateParser("model");
             this.schemaChanged(this.schema);
         }
+
+        this.detailsElement = this.element.querySelector(".form-container");
     }
 
     detached() {
