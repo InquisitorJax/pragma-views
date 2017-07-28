@@ -17,16 +17,15 @@ export class PragmaForm {
         this.element = element;
         this.dynamicViewLoader = dynamicViewLoader;
         this.templateConstructor = templateConstructor;
-        this.loaded = false;
     }
 
     attached() {
-        if (this.schema && !this.loaded) {
-            this.templateParser = new TemplateParser("model");
+        this.templateParser = new TemplateParser("model");
+        this.detailsElement = this.element.querySelector(".form-container");
+
+        if (this.schema) {
             this.schemaChanged(this.schema);
         }
-
-        this.detailsElement = this.element.querySelector(".form-container");
     }
 
     detached() {
@@ -44,9 +43,8 @@ export class PragmaForm {
     }
 
     schemaChanged(newValue) {
-        if (this.templateParser && this.detailsElement && newValue) {
+        if (this.templateParser && newValue != null) {
             this.templateParser.parse(newValue).then(html => this.dynamicViewLoader.load(html, this.detailsElement, this));
-            this.loaded = true;
         }
     }
 
