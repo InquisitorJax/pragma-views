@@ -17,6 +17,8 @@ export class FormTest {
     attached() {
         const html = '<button click.delegate="import()">import</button><button click.delegate="export()">export</button><button click.delegate="clear()">cleaer</button>';
 
+        this.eventAggregator.subscribe("form-updated", _ => console.log("form updated"));
+
         this.eventAggregator.publish("assistant", {
             view: html,
             viewModel: this

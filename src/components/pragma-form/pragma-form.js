@@ -2,9 +2,10 @@ import {bindable, customElement, inject} from 'aurelia-framework';
 import {DynamicViewLoader} from './../../lib/dynamic-view-loader';
 import {TemplateParser} from './../../lib/template-parser';
 import {TemplateConstructor} from './../../lib/template-constructor';
+import {EventAggregator} from 'aurelia-event-aggregator';
 
 @customElement('pragma-form')
-@inject(Element, DynamicViewLoader, TemplateConstructor)
+@inject(Element, DynamicViewLoader, TemplateConstructor, EventAggregator)
 export class PragmaForm {
     dynamicViewLoader;
     templateParser;
@@ -13,10 +14,11 @@ export class PragmaForm {
     @bindable schema;
     @bindable model;
 
-    constructor(element, dynamicViewLoader, templateConstructor) {
+    constructor(element, dynamicViewLoader, templateConstructor, eventAggregator) {
         this.element = element;
         this.dynamicViewLoader = dynamicViewLoader;
         this.templateConstructor = templateConstructor;
+        this.eventAggregator = eventAggregator;
     }
 
     attached() {
@@ -44,7 +46,12 @@ export class PragmaForm {
 
     schemaChanged(newValue) {
         if (this.templateParser && newValue != null) {
-            this.templateParser.parse(newValue).then(html => this.dynamicViewLoader.load(html, this.detailsElement, this));
+            this.templateParser.parse(newValue).then (
+                html => {
+                    this.dynamicViewLoader.load(html, this.detailsElement, this);
+                    this.eventAggregator.publish("form-updated");
+                }
+            );
         }
     }
 
@@ -102,5 +109,6 @@ export class PragmaForm {
 
     clear() {
         this.dynamicViewLoader.unload(this.detailsElement);
+        this.detailsElement.innerHTML = "";
     }
 }
