@@ -4,7 +4,7 @@
     ],
     "datasources": [
         {
-            "datasource": "mydetail",
+            "id": "contacts",
             "location": "../mydatasource",
             "fields": [
                 {
@@ -65,6 +65,7 @@
                         "datasource": "contacts",
                         "createInstance": "createContact",
                         "actions": ["insert", "delete"],
+                        "id": "contacts",
                         "elements": [
                             {
                                 "element": "input",
