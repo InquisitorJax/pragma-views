@@ -24,7 +24,7 @@ export class TemplateConstructor {
         const children = element.children;
         let target = this.jsonObj.body;
 
-        if (children.length > 1) {
+        if (children.length > 0 && children[0].tagName.toLowerCase() != "pragma-tabsheet") {
             target = this.jsonObj.body.elements = [];
         }
 
@@ -208,7 +208,7 @@ export class TemplateConstructor {
                 details.field = input.getAttribute("value.bind");
         }
 
-        details.field = details.field .replace("model.", "");
+        details.field = details.field.replace("model.", "");
 
         this.setCommonDetails(details, input);
     }
@@ -256,17 +256,18 @@ export class TemplateConstructor {
 
     parseTab(element, tabsheetItems)  {
         const value = element.innerText;
-        const id = `tab${value.split(" ").join("")}`;
+        const id = element.getAttribute("for");
 
         const tab = {
             id: id,
             title: value,
+            role: "tab",
             elements: []
         };
 
         tabsheetItems.push(tab);
 
-        const tabContainer = document.querySelector(`[data-tab="${value}"]`);
+        const tabContainer = document.querySelector(`#${id}`);
         const children = tabContainer.children;
 
         for (let child of children) {
