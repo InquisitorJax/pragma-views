@@ -15,6 +15,7 @@ System.config({
     "aurelia-framework": "npm:aurelia-framework@1.1.2",
     "aurelia-pal-browser": "npm:aurelia-pal-browser@1.2.1",
     "aurelia-polyfills": "npm:aurelia-polyfills@1.2.2",
+    "aurelia-router": "npm:aurelia-router@1.3.0",
     "aurelia-ui-virtualization": "npm:aurelia-ui-virtualization@1.0.0-beta.3.1.0",
     "pragma-menu": "npm:pragma-menu@1.0.17",
     "systemjs/plugin-text": "github:systemjs/plugin-text@0.0.9",

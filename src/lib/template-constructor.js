@@ -114,10 +114,12 @@ export class TemplateConstructor {
     }
 
     parseInputComposite(element, obj) {
-        const id = element.getAttribute("id");
-        const title = element.getAttribute("label");
-        const descriptor = element.getAttribute("descriptor");
+        const id = element.getAttribute("data-binding-field") || element.getAttribute("id");
+        const title = element.getAttribute("data-binding-label") || element.getAttribute("label");
+        const descriptor = element.getAttribute("data-binding-descriptor") || element.getAttribute("descriptor");
         const details = this.getFieldDetails(element);
+        const required = element.getAttribute("data-binding-required") || element.getAttribute("required") || false;
+        const readonly = element.getAttribute("data-binding-readonly") || element.getAttribute("readonly") || false;
 
         const composite = {
             "title": title,
@@ -157,7 +159,9 @@ export class TemplateConstructor {
 
         obj.push(group);
 
-        for (let child of element.children[0].children[1].children) {
+        const children = element.querySelector(".group-body").children;
+
+        for (let child of children) {
             this.parseNodes(child, group.elements);
         }
     }
@@ -194,7 +198,18 @@ export class TemplateConstructor {
 
     setInputFieldDetails(details, input) {
         details.type = input.getAttribute("type");
-        details.field = input.getAttribute("value.bind").replace("model.", "");
+        details.field = "";
+
+        switch(details.type) {
+            case "checkbox":
+                details.field = input.getAttribute("checked.bind");
+                break;
+            default :
+                details.field = input.getAttribute("value.bind");
+        }
+
+        details.field = details.field .replace("model.", "");
+
         this.setCommonDetails(details, input);
     }
 
