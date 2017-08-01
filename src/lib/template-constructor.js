@@ -208,9 +208,23 @@ export class TemplateConstructor {
                 details.field = input.getAttribute("value.bind");
         }
 
+        if (details.field == null || details.field == undefined) {
+            details.field = this.getParentInputCompositeField(input);
+        }
+
         details.field = details.field.replace("model.", "");
 
         this.setCommonDetails(details, input);
+    }
+
+    getParentInputCompositeField(element) {
+        const parent = element.parentElement;
+
+        if (parent.nodeName.toLowerCase() == "input-composite") {
+            return parent.getAtribute("data-binding-field");
+        }
+
+        return this.getParentInputCompositeField(parent);
     }
 
     setSelectDetails(details, select) {
