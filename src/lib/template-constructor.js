@@ -142,10 +142,14 @@ export class TemplateConstructor {
 
         obj.push(composite);
 
-        this.jsonObj.fields.push({
-            "field": details.field,
-            "map": details.field
-        });
+        const existingField = this.jsonObj.fields.find(item => item.field == details.field);
+
+        if (existingField == null) {
+            this.jsonObj.fields.push({
+                "field": details.field,
+                "map": details.field
+            });
+        }
     }
 
     parseGroup(element, obj) {
@@ -221,7 +225,7 @@ export class TemplateConstructor {
         const parent = element.parentElement;
 
         if (parent.nodeName.toLowerCase() == "input-composite") {
-            return parent.getAtribute("data-binding-field");
+            return parent.getAttribute("data-binding-field");
         }
 
         return this.getParentInputCompositeField(parent);
@@ -275,7 +279,6 @@ export class TemplateConstructor {
         const tab = {
             id: id,
             title: value,
-            role: "tab",
             elements: []
         };
 
