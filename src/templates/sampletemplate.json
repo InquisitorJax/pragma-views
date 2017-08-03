@@ -1,0 +1,123 @@
+{
+  "fields": [
+    {
+      "field": "code",
+      "map": "workorder.code"
+    }
+  ],
+  "details": [
+    {
+      "id": 1,
+      "resource": "staffMembers",
+      "remote": false
+    },
+    {
+      "id": 2,
+      "resource": "/api/workordertasks",
+      "remote": true
+    },
+    {
+      "id": 3,
+      "field": "optionspropertyname",
+      "resource": "options",
+      "items": [
+        {
+          "id": 0,
+          "option": "Option 1"
+        },
+        {
+          "id": 1,
+          "option": "Option 2"
+        },
+        {
+          "id": 2,
+          "option": "Option 3"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "resource": "/api/worktaskspares",
+      "remote": true
+    }
+  ],
+  "body": {
+    "tabsheet": [
+      {
+        "id": "tabHeader",
+        "title": "Header",
+        "groups": [
+          {
+            "id": "group1",
+            "title": "Group 1",
+            "elements": [
+              {
+                "element": "input",
+                "field": "code",
+                "title": "Code",
+                "styles": ["class1", "class2"],
+                "attributes": {
+                  "type": "text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "tabTasks",
+        "title": "Tasks",
+        "detail": 2
+      },
+      {
+        "id": "tabSpares",
+        "title": "Spares",
+        "elements": [
+          {
+            "element": "detail",
+            "detail": 4,
+            "template": 1
+          },
+          {
+            "element": "visulization",
+            "detail": 4,
+            "template": 2
+          }
+        ]
+      }
+    ]
+  },
+  "templates": [
+    {
+      "id": 1,
+      "body": {
+        "elements": [
+          {
+            "element": "div",
+            "content": "${code}"
+          },
+          {
+            "element": "div",
+            "content": "${description}"
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "body": {
+        "elements": [
+          {
+            "element": "barchart",
+            "group-by": ["code", "isActive"],
+            "sort-by": ["code"]
+          },
+          {
+            "element": "barchart",
+            "gropu-by": ["staffCode"]
+          }
+        ]
+      }
+    }
+  ]
+}
