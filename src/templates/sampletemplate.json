@@ -8,19 +8,17 @@
   "details": [
     {
       "id": 1,
-      "resource": "staffMembers",
-      "remote": false
+      "field": "staffMembers"
     },
     {
       "id": 2,
+      "field": "workordertasks",
       "resource": "/api/workordertasks",
-      "remote": true
     },
     {
       "id": 3,
       "field": "optionspropertyname",
-      "resource": "options",
-      "items": [
+      "resource": [
         {
           "id": 0,
           "option": "Option 1"
@@ -37,8 +35,8 @@
     },
     {
       "id": 4,
-      "resource": "/api/worktaskspares",
-      "remote": true
+      "field": "spares",
+      "resource": "/api/worktaskspares"
     }
   ],
   "body": {
@@ -68,6 +66,11 @@
         "id": "tabTasks",
         "title": "Tasks",
         "detail": 2
+      },
+      {
+        "element": "select",
+        "field": "bindingfield",
+        "detail": 3
       },
       {
         "id": "tabSpares",

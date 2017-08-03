@@ -22,7 +22,8 @@ export class App {
             {route: ['theme'], name: 'theme', moduleId: 'views/theme/theme', nav: true, title: 'Theme'},
             {route: ['tabsheet-test'], name: 'tabsheet-test', moduleId: 'views/tabsheet-test/tabsheet-test', nav: true, title: 'Tabsheet Test'},
             {route: ['master-list'], name: 'master-list-container', moduleId: 'views/master-list-container/master-list-container', nav: true, title: 'Master List Container'},
-            {route: ['assistant'], name: 'assist-test', moduleId: 'views/assist-test/assist-test', nav: true, title: 'Assistant'}
+            {route: ['assistant'], name: 'assist-test', moduleId: 'views/assist-test/assist-test', nav: true, title: 'Assistant'},
+            {route: ['schema-details'], name: 'schema-details', moduleId: 'views/schema-details/schema-details', nav: true, title: 'Schema Details'}
         ]);
 
         this.router = router;
