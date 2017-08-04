@@ -11,8 +11,20 @@ export class PragmaForm {
     templateParser;
     detailsElement;
 
+    /**
+     * What schema must be displayed
+     */
     @bindable schema;
+
+    /**
+     * What is the model we are using for binding
+     */
     @bindable model;
+
+    /**
+     * External context used for possible action bindings e.g. view's viewmodel
+     */
+    @bindable context;
 
     constructor(element, dynamicViewLoader, templateConstructor, eventAggregator) {
         this.element = element;
