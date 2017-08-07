@@ -40,6 +40,8 @@ Recognised shorthands for screen generation are:
 1. element
 1. card
 1. select
+1. radio
+1. template
 
 ## General structure
 
@@ -362,3 +364,53 @@ Context is the object that is defined as context on the pragma-views control and
 The model structure expected here is the same id / title pair as above.
 
 Id is processed as a string so you can use strings in the id field if you so want.
+
+## Template
+As can be seen in the general structure the schema allows for templates. Templates are normal UI parts as you would have defined in the body.
+Templates are defined by having a id and elements tag.
+
+### Defining a template
+```json
+{
+  "id": 0,
+  "elements": [
+      {
+          "element": "group",
+          "title": "Other Options",
+          "elements": [
+              {
+                  "element": "input",
+                  "title": "value",
+                  "field": "description",
+                  "attributes": {
+                      "type": "text"
+                  }
+              }
+          ]
+      }
+  ]
+}
+```
+
+### Using the template
+```json
+{
+    "element": "template",
+    "template": 0
+}
+```
+
+The template id used here must match the id of a template defined the templates section of the schema.  
+You can also define a template being conditional using the condition property.
+
+```json
+{
+    "element": "template",
+    "template": 0,
+    "condition": "model.option == 1"
+}
+```
+
+If you define a condition it will map to the Aurelia if.bind attribute and any Aurelia condition can be used here.
+Note that in the case of condition you will need to define the full path.  
+If you want to check values on the model then you need to provide that in the binding and if you want to do checks on the context then you need to define that path as `context.property == true`;

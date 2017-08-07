@@ -107,8 +107,17 @@ export const template =
                             "field": "option"
                         }
                     ]
-                }
+                },
             ]
+        },
+        {
+            "element": "template",
+            "template": 0
+        },
+        {
+            "element": "template",
+            "template": 0,
+            "condition": "model.option == 1"
         },
         {
             "element": "group",
@@ -122,5 +131,27 @@ export const template =
             ]
         }
     ]
-  }
+  },
+
+  "templates": [
+      {
+          "id": 0,
+          "elements": [
+              {
+                  "element": "group",
+                  "title": "Other Options",
+                  "elements": [
+                      {
+                          "element": "input",
+                          "title": "value",
+                          "field": "description",
+                          "attributes": {
+                              "type": "text"
+                          }
+                      }
+                  ]
+              }
+          ]
+      }
+  ]
 };

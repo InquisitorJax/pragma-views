@@ -42,6 +42,7 @@ export class TemplateParser {
         this.parseDetailsHandler = this.parseDetails.bind(this);
         this.parseCardHandler = this.parseCard.bind(this);
         this.parseRadioHandler = this.parseRadio.bind(this);
+        this.parseTemplateHandler = this.parseTemplate.bind(this);
 
         this.parseMap = new Map();
         this.parseMap.set("tabsheet", this.parseTabSheetHandler);
@@ -56,6 +57,7 @@ export class TemplateParser {
         this.parseMap.set("details", this.parseDetailsHandler);
         this.parseMap.set("card", this.parseCardHandler);
         this.parseMap.set("radio", this.parseRadioHandler);
+        this.parseMap.set("template", this.parseTemplateHandler);
     }
 
     /**
@@ -84,6 +86,7 @@ export class TemplateParser {
         this.parseDetailsHandler = null;
         this.parseCardHandler = null;
         this.parseRadioHandler = null;
+        this.parseTemplateHandler = null;
     }
 
     /**
@@ -95,6 +98,7 @@ export class TemplateParser {
         return new Promise(resolve => {
             this.setFieldMap(json.fields);
             this.datasources = json.datasources;
+            this.templates = json.templates;
             const result = this.parseObject(json.body);;
 
             resolve(result);
@@ -107,6 +111,10 @@ export class TemplateParser {
      */
     setFieldMap(fields) {
         this.fieldMap = new Map();
+
+        if (fields == null || fields == undefined) {
+            return;
+        }
 
         for(let field of fields) {
             this.fieldMap.set(field.field, field.map);
@@ -137,6 +145,19 @@ export class TemplateParser {
         }
 
         return this.datasources.find(ds => ds.id.toString() == id.toString());
+    }
+
+    /**
+     * Get a particular template by id
+     * @param id
+     * @returns {*}
+     */
+    getTemplate(id) {
+        if (this.templates == undefined) {
+            return null;
+        }
+
+        return this.templates.find(template => template.id.toString() == id.toString());
     }
 
 
@@ -608,6 +629,11 @@ export class TemplateParser {
         })
     }
 
+    /**
+     * Parse card schema
+     * @param card
+     * @returns {*}
+     */
     parseCard(card) {
         const content = this.parseElements(card.elements);
         return populateTemplate(cardHtmlTemplate, {
@@ -615,6 +641,11 @@ export class TemplateParser {
         })
     }
 
+    /**
+     * Parse radio schema and datasource options
+     * @param radio
+     * @returns {string}
+     */
     parseRadio(radio) {
         const datasource = radio.datasource;
         const field = radio.field;
@@ -658,5 +689,33 @@ export class TemplateParser {
         }
 
         return content;
+    }
+
+    /**
+     * Parse template
+     * @param tmpl
+     * @returns {*}
+     */
+    parseTemplate(tmpl) {
+        const id = tmpl.template;
+        const condition = tmpl.condition || "";
+        const template = this.getTemplate(id);
+
+        if (template == null) {
+            console.error(`template with id ${id} was not found`);
+            return ""
+        }
+
+        const content = this.parseElements(template.elements);
+
+        if (condition.length == 0) {
+            return content;
+        }
+        else {
+            const startTag = `<div if.bind="${condition}">`;
+            const endTag = "</div>";
+
+            return `${startTag}${content}${endTag}`;
+        }
     }
 }
