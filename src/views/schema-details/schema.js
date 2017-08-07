@@ -138,7 +138,6 @@ export const template =
         }
     ]
   },
-
   "templates": [
       {
           "id": 0,
