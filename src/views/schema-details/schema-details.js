@@ -10,10 +10,12 @@ export class SchemaDetails {
     @bindable detailToolbarSelectedId;
     @bindable schema;
     @bindable model;
+    @bindable context;
 
     constructor(eventAggregator) {
         this.eventAggregator = eventAggregator;
         this.schema = template;
+        this.context = this;
     }
 
     attached() {
@@ -39,6 +41,11 @@ export class SchemaDetails {
             this.model.id = id;
             this.model.code = `Code ${id}`;
             this.model.description = `Description ${id}`;
+            this.model.status = 2;
         })
+    }
+
+    printModel() {
+        console.log(this.model);
     }
 }

@@ -29,12 +29,28 @@ export const textareaHtml = `
 </input-composite>
 `;
 
-export const selectHtml = `
+export const selectHtmlForProperty = `
 <input-composite id="__field__" label="__title__" required="__required__" __description__>
-    <select value.bind="__prefix__.__field__" data-datasource="__datasource-raw__" data-options="__optionfield__">
+    <select value.bind="__prefix__.__field__">
         <option repeat.for="option of __datasource__" model.bind="option.id">__content__</option>
     </select>
 </input-composite>
+`;
+
+export const selectHtmlForDefinedOptions = `
+<input-composite id="__field__" label="__title__" required="__required__" __description__>
+    <select value.bind="__prefix__.__field__" __classes__ __attributes__>
+        __content__
+    </select>
+</input-composite>
+`;
+
+export const selectOption = `
+<option model.bind="__option-id__">__content__</option>
+`;
+
+export const selectRepeatOption = `
+<option repeat.for="option of __datasource__" model.bind="option.id">__content__</option>
 `;
 
 export const readOnlyHtml = `

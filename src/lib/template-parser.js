@@ -1,7 +1,22 @@
-import {populateTemplate, tabsheetHtml, tabHtml, groupHtml, inputHtml, textareaHtml, containerHtml, buttonHtml, dynamicHtml, checkboxHtml, selectHtml, detailsHtmlTemplate} from "./template-parser-contstants";
+import {
+    populateTemplate,
+    tabsheetHtml,
+    tabHtml,
+    groupHtml,
+    inputHtml,
+    textareaHtml,
+    containerHtml,
+    buttonHtml,
+    dynamicHtml,
+    checkboxHtml,
+    selectHtmlForDefinedOptions,
+    detailsHtmlTemplate,
+    selectRepeatOption,
+    selectOption} from "./template-parser-contstants";
 
 export class TemplateParser {
     fieldMap;
+    datasources;
 
     /**
      * The model that you bind to may by hidden by some object layers.
@@ -46,6 +61,8 @@ export class TemplateParser {
             this.fieldMap = null;
         }
 
+        this.datasources = null;
+
         this.parseMap.clear();
         this.parseMap = null;
 
@@ -66,6 +83,7 @@ export class TemplateParser {
     parse(json) {
         return new Promise(resolve => {
             this.setFieldMap(json.fields);
+            this.datasources = json.datasources;
             const result = this.parseObject(json.body);;
 
             resolve(result);
@@ -84,6 +102,11 @@ export class TemplateParser {
         }
     }
 
+    /**
+     * search fieldmap for a comparison key as defined by field
+     * @param field
+     * @returns {*}
+     */
     getField(field){
         if(this.fieldMap.has(field)){
             return this.fieldMap.get(field);
@@ -91,6 +114,20 @@ export class TemplateParser {
 
         return field;
     }
+
+    /**
+     * Get the datasource witht he following id
+     * @param id
+     * @returns {null}
+     */
+    getDatasource(id) {
+        if (this.datasources == undefined) {
+            return null;
+        }
+
+        return this.datasources.find(ds => ds.id.toString() == id.toString());
+    }
+
 
     /**
      * Parse unknown object for particulars and navigate from here to more appropriate generators
@@ -185,49 +222,6 @@ export class TemplateParser {
         }
 
         return result.join("");
-    }
-
-    /**
-     * Parse object as a select element
-     * Required fields are:
-     * 1. field: what field is bound to the select
-     * 2. title: what title should be shown int the label
-     * 3. datasource: what is the property name on the prefix path that contains the items to show
-     * 4. optionField: what is the field in the datasource object to display as the option text.
-     * NOTE: the option must have a "id" property
-     * @param select
-     */
-    parseSelect(select) {
-        const field = this.getField(select.field);
-        const title = select.title;
-        const description = select.description || "";
-        const required = select.required || false;
-        const optionField = select.optionField;
-        const datasource = this.getPrefix(select.datasource) + this.cleanRelative(select.datasource);
-        const prefix = this.getPrefix(field);
-
-        let descriptor = select.descriptor || "";
-
-        if (description.length > 0) {
-            descriptor = `descriptor.bind="${prefix}.${description}"`
-        }
-        else {
-            descriptor = `descriptor="${descriptor}"`
-        }
-
-        const result = populateTemplate(selectHtml, {
-            "__prefix__": this.propertyPrefix,
-            "__field__": field,
-            "__title__": title,
-            "__description__": descriptor,
-            "__required__": required,
-            "__datasource__": datasource,
-            "__datasource-raw__": select.datasource,
-            "__optionfield__": optionField,
-            "__content__": "${option." + optionField + "}",
-        });
-
-        return result;
     }
 
     parseDetails(details) {
@@ -437,20 +431,11 @@ export class TemplateParser {
     parseInput(input) {
         const title = input.title;
         const field = this.getField(input.field);
-        const description = input.description || "";
-        const required = input.required | false;
+        const required = input.required || false;
         const classes = this.processClasses(input);
         const attributes = this.processAttributes(input);
         const prefix = this.getPrefix(field);
-
-        let descriptor = input.descriptor || "";
-
-        if (description.length > 0) {
-            descriptor = `descriptor.bind="${prefix}.${description}"`
-        }
-        else {
-            descriptor = `descriptor="${descriptor}"`
-        }
+        const descriptor = this.getDescriptor(input, prefix);
 
         return populateTemplate(inputHtml, {
             "__prefix__": prefix,
@@ -461,6 +446,30 @@ export class TemplateParser {
             "__attributes__": attributes,
             "__required__": required
         });
+    }
+
+    /**
+     * Parse a given schema element and determine if the descriptor should use binding or string constant values
+     * @param element: element to process
+     * @param prefix: what model prefix should be used in case of a binding
+     * @returns : string value for descriptor
+     */
+    getDescriptor(element, prefix) {
+        const description = element.description || "";
+        let descriptor = element.descriptor || "";
+
+        // Nothing set return descriptor empty context
+        if (description.length == descriptor.length == 0) {
+            return "descriptor=''";
+        }
+
+        // description set so return binding expression
+        if (description.length > 0) {
+            return `descriptor.bind="${prefix}.${description}"`;
+        }
+
+        // descriptor used so send back descriptor text with out binding
+        return `descriptor="${descriptor}"`;
     }
 
     /**
@@ -480,7 +489,7 @@ export class TemplateParser {
         const title = memo.title;
         const field = this.getField(memo.field);
         const description = memo.descriptor || "";
-        const required = memo.required | false;
+        const required = memo.required || false;
         const classes = this.processClasses(memo);
         const attributes = this.processAttributes(memo);
         const prefix = this.getPrefix(field);
@@ -527,4 +536,60 @@ export class TemplateParser {
         });
     }
 
+    /**
+     * Parse select options and fill in as per datasource definitions
+     * @param select
+     */
+    parseSelect(select) {
+        const title = select.title;
+        const datasource = select.datasource;
+        const field = select.field;
+        const prefix = this.getPrefix(field);
+        const classes = this.processClasses(select);
+        const attributes = this.processAttributes(select);
+        const required = select.required || false;
+        const descriptor = this.getDescriptor(input, prefix);
+        let content = "";
+
+        const ds = this.getDatasource(datasource);
+
+        if (ds == null || ds == undefined) {
+            console.error(`select "${title}"'s datasource does not exist in schema`);
+            return "";
+        }
+
+        if (ds.field != undefined) {
+            content = populateTemplate(selectRepeatOption, {
+                "__datasource__": this.getPrefix(ds.field),
+                "__content__": "${option.title}"
+            })
+        }
+        else {
+            if (!Array.isArray(ds.resource)) {
+                console.error(`resouce was expected to be an array for ${title}`);
+                return "";
+            }
+
+            for (let resource of ds.resource) {
+                const id = resource.id;
+                const option = resource.option;
+
+                content = content + populateTemplate(selectOption, {
+                        "__option-id__": id,
+                        "__content__": option
+                    })
+            }
+        }
+
+        return populateTemplate(selectHtmlForDefinedOptions, {
+            "__prefix__": prefix,
+            "__field__": field,
+            "__title__": title,
+            "__classes__": classes,
+            "__attributes__": attributes,
+            "__required__": required == true ? required : "",
+            "__description__": descriptor,
+            "__content__": content
+        })
+    }
 }
