@@ -87,6 +87,7 @@ export class TemplateParser {
         this.parseCardHandler = null;
         this.parseRadioHandler = null;
         this.parseTemplateHandler = null;
+        this.parseDetailsHandler = null;
     }
 
     /**
@@ -257,15 +258,17 @@ export class TemplateParser {
     }
 
     parseDetails(details) {
-        const datasource = `${this.getPrefix(details.datasource)}.${this.cleanRelative(details.datasource)}`;
-        const prefix = this.propertyPrefix;
-        const fieldsHtml = this.parseElements(details.elements);
-        const createInstance = details.createInstance;
+        const datasourceId = details.datasource;
+        const templateId = details.template;
+        const createInstance = details.action;
+
+        const datasource = this.getDatasource(datasourceId);
+        const template = this.getTemplate(templateId);
+        const content = this.parseElements(template.elements);
 
         const result = populateTemplate(detailsHtmlTemplate, {
-            "__prefix__": prefix,
-            "__datasource__": datasource,
-            "__content__": fieldsHtml,
+            "__datasource__": datasource.field,
+            "__content__": content,
             "__create-instance__": createInstance
         });
 
@@ -466,14 +469,15 @@ export class TemplateParser {
      */
     parseInput(input) {
         const title = input.title;
-        const field = this.getField(input.field);
         const required = input.required || false;
         const classes = this.processClasses(input);
         const attributes = this.processAttributes(input);
+        const field = this.getField(input.field);
         const prefix = this.getPrefix(field);
         const descriptor = this.getDescriptor(input, prefix);
+        const asDetail = input["as-detail"] || false;
 
-        return populateTemplate(inputHtml, {
+        let result = populateTemplate(inputHtml, {
             "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
@@ -482,6 +486,12 @@ export class TemplateParser {
             "__attributes__": attributes,
             "__required__": required
         });
+
+        if (asDetail == true) {
+            result = result.replace("model.", "");
+        }
+
+        return result;
     }
 
     /**

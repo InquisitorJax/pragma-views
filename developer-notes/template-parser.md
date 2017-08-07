@@ -175,6 +175,10 @@ The input schema is a 1:1 match for the html element "input". Input items are re
 To define different input types, the right way to do that is to use the html5 type attribute.
 You can read more about the different types at: https://www.w3schools.com/html/html_form_input_types.asp
 
+There is an additional property to be used: `"as-detail": true`. This is often used in scenarios where the context is the model. 
+An example of this is templates used in details. In those cases you don't want the default "model." prefix in the property.
+
+If you set "as-detail" true then it strips the "model." prefix from the field bindings. When you are defining input types in templates you want to make sure it is set and is set to true.
 
 ## Checkbox
 The checkbox schea creates a input of type checkbox. It uses a particular composite layout as defined by the pragma standard layout.

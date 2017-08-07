@@ -110,7 +110,7 @@ export const gridGroupTemplate = `
 `;
 
 export const detailsHtmlTemplate = `
-    <pragma-details items.bind="__datasource__" create-instance.bind="__prefix__.__create-instance__">
+    <pragma-details items.bind="__datasource__" create-instance.bind="__create-instance__">
         <template>__content__</template>
     </pragma-details>
 `;

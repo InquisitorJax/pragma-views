@@ -65,4 +65,14 @@ export class SchemaDetails {
     printModel() {
         console.log(this.model);
     }
+
+    addOption() {
+        const length = this.items.length;
+        const id = length + 1;
+
+        return Object.create({
+            id: id,
+            title: `Options ${id}`
+        })
+    }
 }

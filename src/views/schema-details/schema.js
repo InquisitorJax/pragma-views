@@ -120,6 +120,12 @@ export const template =
             "condition": "model.option == 1"
         },
         {
+            "element": "details",
+            "datasource": 1,
+            "template": 1,
+            "action": "context.addOption"
+        },
+        {
             "element": "group",
             "title": "Actions",
             "elements": [
@@ -150,6 +156,20 @@ export const template =
                           }
                       }
                   ]
+              }
+          ]
+      },
+      {
+          "id": 1,
+          "elements": [
+              {
+                  "element": "input",
+                  "title": "Title",
+                  "field": "title",
+                  "as-detail": true,
+                  "attributes": {
+                      "type": "text"
+                  }
               }
           ]
       }
