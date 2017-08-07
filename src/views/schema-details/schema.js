@@ -25,21 +25,21 @@ export const template =
           "resource": [
               {
                   "id": 0,
-                  "option": "Option 1"
+                  "title": "Status 1"
               },
               {
                   "id": 1,
-                  "option": "Option 2"
+                  "title": "Status 2"
               },
               {
                   "id": 2,
-                  "option": "Option 3"
+                  "title": "Status 3"
               }
           ]
       },
       {
           "id": 1,
-          "field": "staffMembers"
+          "field": "context.options"
       },
       {
           "id": 2,
@@ -73,6 +73,12 @@ export const template =
                     "datasource": 0,
                     "title": "Status",
                     "field": "status"
+                },
+                {
+                    "element": "select",
+                    "datasource": 1,
+                    "title": "Options",
+                    "field": "option"
                 }
             ]
         },

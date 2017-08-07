@@ -3,6 +3,7 @@ export class Model {
     code;
     description;
     status;
+    option;
 
     constructor() {
         this.id = 0;

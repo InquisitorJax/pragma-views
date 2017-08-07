@@ -255,6 +255,10 @@ export class TemplateParser {
      * @returns {*}
      */
     getPrefix(definition) {
+        if (definition.indexOf("context.") > -1) {
+            return definition
+        }
+
         if (!definition || definition.indexOf("../") == -1) {
             return this.propertyPrefix;
         }
@@ -572,11 +576,11 @@ export class TemplateParser {
 
             for (let resource of ds.resource) {
                 const id = resource.id;
-                const option = resource.option;
+                const title = resource.title;
 
                 content = content + populateTemplate(selectOption, {
                         "__option-id__": id,
-                        "__content__": option
+                        "__content__": title
                     })
             }
         }

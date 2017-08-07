@@ -38,6 +38,19 @@ Recognised shorthands for screen generation are:
 1. button
 1. elements
 1. element
+1. select
+
+## General structure
+
+```js
+{
+    "type": "",         what type of schema is this -- own use
+    "fields": [],       field mappings between schema and model
+    "datasource": [],   datasource definitions
+    "body": {},         body of schema and what needs to be generated
+    "templates": []     templates that are referenced in the body section
+}
+```
 
 ## Fields section
 The fields section in the schema is required and serves as a name map between the field name you use in the schema vs the binding expression used on the actual model.
@@ -230,3 +243,71 @@ The element schema allows us to render any html we want. Any tagname can be used
 ```
 
 It is important to note that all children of this element must be defined in the "elements" array. You can build the dom tree with "element" and "elements" pairs.
+
+## Select
+Select represents a dropdown box in html 5. 
+Select has a field that it binds to. When making a selection that field is updated with the selected item's id.
+
+```json
+{
+    "element": "select",
+    "datasource": 0,
+    "title": "Status",
+    "field": "status"
+}
+```
+
+Note the datasource property. This property defines the id of a datasource defined in the datasource section of the schema.
+See datasource for more details
+
+## Datasource
+Datasources define a collection of values used when binding to collections.  
+Common scenarios for this things like:
+
+1. Select
+1. Radio Groups
+1. Details
+1. Repeatable templates...
+
+### Define items in schema
+This is often used when you are hard coding what items you want in the list and is not defined by a external resource
+
+```json
+{
+  "id": 0,
+  "resource": [
+      {
+          "id": 0,
+          "title": "Status 1"
+      },
+      {
+          "id": 1,
+          "title": "Status 2"
+      },
+      {
+          "id": 2,
+          "title": "Status 3"
+      }
+  ]
+}
+```   
+Things to note in the above example:
+
+1. id is required and should be a unique id in the datasource collection.
+1. resource is an array in this case and defines a set object structure.
+1. The object structure defines a id and option property, id for the value used in binding and option for text displayed.
+
+### Property options to use in binding
+```json
+{
+  "id": 1,
+  "field": "context.options"
+}
+```
+
+The above example binds to a options property on the context.
+Context is the object that is defined as context on the pragma-views control and is often the view model.
+
+The model structure expected here is the same id / title pair as above.
+
+Id is processed as a string so you can use strings in the id field if you so want.

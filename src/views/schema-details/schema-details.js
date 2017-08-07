@@ -11,11 +11,27 @@ export class SchemaDetails {
     @bindable schema;
     @bindable model;
     @bindable context;
+    @bindable options;
 
     constructor(eventAggregator) {
         this.eventAggregator = eventAggregator;
         this.schema = template;
         this.context = this;
+
+        this.options = [
+            {
+                id: 0,
+                title: "Option 1"
+            },
+            {
+                id: 1,
+                title: "Option 2"
+            },
+            {
+                id: 2,
+                title: "Option 3"
+            }
+        ];
     }
 
     attached() {
@@ -42,6 +58,7 @@ export class SchemaDetails {
             this.model.code = `Code ${id}`;
             this.model.description = `Description ${id}`;
             this.model.status = 2;
+            this.model.option = 1;
         })
     }
 
