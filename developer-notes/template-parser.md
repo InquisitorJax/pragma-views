@@ -38,6 +38,7 @@ Recognised shorthands for screen generation are:
 1. button
 1. elements
 1. element
+1. card
 1. select
 
 ## General structure
@@ -242,6 +243,18 @@ The element schema allows us to render any html we want. Any tagname can be used
 }
 ```
 
+## Card
+Card is a shorthand for `<div class="card default-padding"></card>`
+
+```json
+{
+    "element": "card",
+    "elements": [
+      ... place content here
+    ]
+}
+```
+
 It is important to note that all children of this element must be defined in the "elements" array. You can build the dom tree with "element" and "elements" pairs.
 
 ## Select
@@ -259,6 +272,44 @@ Select has a field that it binds to. When making a selection that field is updat
 
 Note the datasource property. This property defines the id of a datasource defined in the datasource section of the schema.
 See datasource for more details
+
+## Radio
+Radio provides a mechanism to show radio groups. 
+Radio is very much the same as select expect that you don't provide a title.
+
+
+```json
+{
+    "element": "radio",
+    "datasource": 1,
+    "field": "option"
+}
+```
+
+1. for more details on datasource see datasource section below.
+1. field is the field the selected value is bound to, same as select.
+
+Because radio groups don't have a title you can build it into your UI as you please, but if you need to have a titled group, the suggested schema layout is as following:
+
+```json
+{
+    "element": "card",
+    "elements": [
+        {
+            "element": "h3",
+            "content": "Option"
+        },
+        {
+            "element": "radio",
+            "datasource": 1,
+            "field": "option"
+        }
+    ]
+}
+```
+
+If you want to use it as a stand along collapseable group you can use group instead of card.  
+See groups for more details.
 
 ## Datasource
 Datasources define a collection of values used when binding to collections.  
