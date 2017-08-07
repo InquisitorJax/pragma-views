@@ -79,6 +79,34 @@ export const template =
                     "datasource": 1,
                     "title": "Options",
                     "field": "option"
+                },
+                {
+                    "element": "card",
+                    "elements": [
+                        {
+                            "element": "h3",
+                            "content": "Status"
+                        },
+                        {
+                            "element": "radio",
+                            "datasource": 0,
+                            "field": "status"
+                        }
+                    ]
+                },
+                {
+                    "element": "card",
+                    "elements": [
+                        {
+                            "element": "h3",
+                            "content": "Option"
+                        },
+                        {
+                            "element": "radio",
+                            "datasource": 1,
+                            "field": "option"
+                        }
+                    ]
                 }
             ]
         },

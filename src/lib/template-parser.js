@@ -5,14 +5,16 @@ import {
     groupHtml,
     inputHtml,
     textareaHtml,
-    containerHtml,
+    cardHtmlTemplate,
     buttonHtml,
     dynamicHtml,
     checkboxHtml,
     selectHtmlForDefinedOptions,
     detailsHtmlTemplate,
     selectRepeatOption,
-    selectOption} from "./template-parser-contstants";
+    selectOption,
+    radioRepeatOptions,
+    radioOption} from "./template-parser-contstants";
 
 export class TemplateParser {
     fieldMap;
@@ -38,6 +40,8 @@ export class TemplateParser {
         this.parseCheckboxHandler = this.parseCheckbox.bind(this);
         this.parseSelectHandler = this.parseSelect.bind(this);
         this.parseDetailsHandler = this.parseDetails.bind(this);
+        this.parseCardHandler = this.parseCard.bind(this);
+        this.parseRadioHandler = this.parseRadio.bind(this);
 
         this.parseMap = new Map();
         this.parseMap.set("tabsheet", this.parseTabSheetHandler);
@@ -50,6 +54,8 @@ export class TemplateParser {
         this.parseMap.set("checkbox", this.parseCheckboxHandler);
         this.parseMap.set("select", this.parseSelectHandler);
         this.parseMap.set("details", this.parseDetailsHandler);
+        this.parseMap.set("card", this.parseCardHandler);
+        this.parseMap.set("radio", this.parseRadioHandler);
     }
 
     /**
@@ -71,8 +77,13 @@ export class TemplateParser {
         this.parseGroupHandler = null;
         this.parseInputHandler = null;
         this.parseTextAreaHandler = null;
-        this.parseDivHandler = null;
         this.parseButtonHandler = null;
+        this.parseElementsHandler = null;
+        this.parseCheckboxHandler = null;
+        this.parseSelectHandler = null;
+        this.parseDetailsHandler = null;
+        this.parseCardHandler = null;
+        this.parseRadioHandler = null;
     }
 
     /**
@@ -565,7 +576,7 @@ export class TemplateParser {
         if (ds.field != undefined) {
             content = populateTemplate(selectRepeatOption, {
                 "__datasource__": this.getPrefix(ds.field),
-                "__content__": "${option.title}"
+                "__content__": "${o.title}"
             })
         }
         else {
@@ -595,5 +606,57 @@ export class TemplateParser {
             "__description__": descriptor,
             "__content__": content
         })
+    }
+
+    parseCard(card) {
+        const content = this.parseElements(card.elements);
+        return populateTemplate(cardHtmlTemplate, {
+            "__content__": content
+        })
+    }
+
+    parseRadio(radio) {
+        const datasource = radio.datasource;
+        const field = radio.field;
+        const prefix = this.getPrefix(field);
+        let content = "";
+
+        const ds = this.getDatasource(datasource);
+
+        if (ds == null || ds == undefined) {
+            console.error(`radio's datasource does not exist in schema`);
+            return "";
+        }
+
+        if (ds.field != undefined) {
+            content = populateTemplate(radioRepeatOptions, {
+                "__datasource__": this.getPrefix(ds.field),
+                "__content__": "${o.title}",
+                "__groupname__": ds.id,
+                "__field__": field,
+                "__prefix__": prefix
+            })
+        }
+        else {
+            if (!Array.isArray(ds.resource)) {
+                console.error(`radio's resouce was expected to be an array`);
+                return "";
+            }
+
+            for (let resource of ds.resource) {
+                const id = resource.id;
+                const title = resource.title;
+
+                content = content + populateTemplate(radioOption, {
+                        "__option-id__": id,
+                        "__content__": title,
+                        "__groupname__": ds.id,
+                        "__field__": field,
+                        "__prefix__": prefix
+                    })
+            }
+        }
+
+        return content;
     }
 }

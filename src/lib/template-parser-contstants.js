@@ -50,7 +50,7 @@ export const selectOption = `
 `;
 
 export const selectRepeatOption = `
-<option repeat.for="option of __datasource__" model.bind="option.id">__content__</option>
+<option repeat.for="o of __datasource__" model.bind="o.id">__content__</option>
 `;
 
 export const readOnlyHtml = `
@@ -113,6 +113,24 @@ export const detailsHtmlTemplate = `
     <pragma-details items.bind="__datasource__" create-instance.bind="__prefix__.__create-instance__">
         <template>__content__</template>
     </pragma-details>
+`;
+
+export const cardHtmlTemplate = `
+    <div class="card default-padding">__content__</div>
+`;
+
+export const radioRepeatOptions = `
+<label repeat.for="o of __datasource__">
+    <input type="radio" name="__groupname__" model.bind="o.id" checked.bind="__prefix__.__field__">
+    <span>__content__</span>
+</label>
+`;
+
+export const radioOption = `
+<label>
+    <input type="radio" name="__groupname__" model.bind="__option-id__" checked.bind="__prefix__.__field__">
+    <span>__content__</span>
+</label>
 `;
 
 export function populateTemplate(template, map) {

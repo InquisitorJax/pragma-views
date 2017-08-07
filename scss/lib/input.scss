@@ -1,4 +1,4 @@
-input:not([type="checkbox"]) {
+input:not([type="checkbox"]):not([type="radio"]) {
   border-width: 0 0 1px 0;
   border-color: $input-border;
   outline: none;
