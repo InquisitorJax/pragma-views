@@ -19,6 +19,7 @@ import {
 export class TemplateParser {
     fieldMap;
     datasources;
+    eventAggregator;
 
     /**
      * The model that you bind to may by hidden by some object layers.
@@ -26,8 +27,9 @@ export class TemplateParser {
      * This allows simple field definition on the template but complex binding paths.
      * @param propertyPrefix
      */
-    constructor(propertyPrefix) {
+    constructor(propertyPrefix, eventAggregator) {
         this.propertyPrefix = propertyPrefix;
+        this.eventAggregator = eventAggregator;
         this.propertyPrefixStack = this.propertyPrefix.split(".");
 
         this.parseTabSheetHandler = this.parseTabSheet.bind(this);

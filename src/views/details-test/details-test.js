@@ -4,6 +4,8 @@ import {removePrefixExpectations, populateTemplate, inputHtml} from './../../lib
 
 @inject(EventAggregator)
 export class DetailsTest {
+    detailTemplate;
+
     constructor(eventAggregator) {
         this.eventAggregator = eventAggregator;
         this.itemPrototype = {
@@ -18,6 +20,20 @@ export class DetailsTest {
             email: "email1",
             fax: "fax1"
         }];
+
+        this.detailTemplate = `
+            <input-composite label="Phone">
+                <input type="text" value.bind="phone"/>
+            </input-composite>
+
+            <input-composite label="Email">
+                <input type="text" value.bind="email"/>
+            </input-composite>
+
+            <input-composite label="Fax">
+                <input type="text" value.bind="fax"/>
+            </input-composite>
+        `
     }
 
     createInstance() {

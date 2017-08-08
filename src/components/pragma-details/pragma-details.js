@@ -8,6 +8,9 @@ export class PragmaDetails {
     @bindable instancePrototype;
     @bindable selectedId;
     @bindable createInstance;
+    @bindable template;
+
+    // required to allow contextual bindings from the schema when you need access to the master "viewodel" and "model"
     @bindable context;
     @bindable model;
 
@@ -29,9 +32,8 @@ export class PragmaDetails {
     }
 
     setupViews() {
-        const html = this.templateSlot.innerHTML.replace("<template>", "").replace("</template>", "").replace("<!--slot-->", "");
-        let template = `<template><li class="${this.itemStyle} card" data-id.bind="id">${html}</li></template>`;
-        this.viewFactory = this.viewCompiler.compile(template, this.viewResources);
+        const tpl = `<template><li class="${this.itemStyle} card" data-id.bind="id">${this.template}</li></template>`;
+        this.viewFactory = this.viewCompiler.compile(tpl, this.viewResources);
         this.viewSlot = new ViewSlot(this.listElement, true);
 
         this.element.removeChild(this.templateSlot);
@@ -62,7 +64,7 @@ export class PragmaDetails {
 
     addItem(item) {
         const view = this.viewFactory.create(this.container);
-        view.bind(this);
+        view.bind(item);
         this.viewSlot.add(view);
     }
 
@@ -71,7 +73,6 @@ export class PragmaDetails {
         this.items.slice(index, 1);
         this.viewSlot.removeAt(index, false);
     }
-
 
     delete() {
         if (this.selectedId) {

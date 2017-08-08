@@ -46,6 +46,10 @@ export const menuItems = [
     {
         text: "Schema Details",
         screen: "schema-details"
+    },
+    {
+        text: "Binding Tests",
+        screen: "binding-test"
     }
 ];
 

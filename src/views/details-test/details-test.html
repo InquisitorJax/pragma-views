@@ -1,17 +1,4 @@
 <template>
-    <pragma-details items.bind="items" create-instance.bind="createInstance">
-        <template>
-            <input-composite label="Phone">
-                <input type="text" value.bind="phone"/>
-            </input-composite>
-
-            <input-composite label="Email">
-                <input type="text" value.bind="email"/>
-            </input-composite>
-
-            <input-composite label="Fax">
-                <input type="text" value.bind="fax"/>
-            </input-composite>
-        </template>
+    <pragma-details items.bind="items" create-instance.bind="createInstance" template.bind="detailTemplate">
     </pragma-details>
 </template>

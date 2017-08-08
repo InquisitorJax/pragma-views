@@ -34,7 +34,7 @@ export class PragmaForm {
     }
 
     attached() {
-        this.templateParser = new TemplateParser("model");
+        this.templateParser = new TemplateParser("model", this.eventAggregator);
         this.detailsElement = this.element.querySelector(".form-container");
 
         if (this.schema) {
