@@ -26,14 +26,24 @@ export class PragmaForm {
      */
     @bindable context;
 
+    /**
+     * When processing the schema if a template is bound to a detail the template, the template needs to be accessable.
+     * This map contains the html version of the template. The key is the template id.
+     */
+    templates;
+
     constructor(element, dynamicViewLoader, templateConstructor, eventAggregator) {
         this.element = element;
         this.dynamicViewLoader = dynamicViewLoader;
         this.templateConstructor = templateConstructor;
         this.eventAggregator = eventAggregator;
+        this.templates = new Map();
     }
 
     attached() {
+        this.registerTemplateHandler = this.registerTemplate.bind(this);
+        this.templateEvent = this.eventAggregator.subscribe("register-detail-template", this.registerTemplateHandler);
+
         this.templateParser = new TemplateParser("model", this.eventAggregator);
         this.detailsElement = this.element.querySelector(".form-container");
 
@@ -43,8 +53,16 @@ export class PragmaForm {
     }
 
     detached() {
+        this.templateEvent.dispose();
+        this.templateEvent = null;
+        this.registerTemplateHandler = null;
+
         this.templateParser.dispose();
         this.templateParser = null;
+
+        this.templates.clear();
+        this.templates = null;
+
         this.disposeFileInput();
     }
 
@@ -122,5 +140,14 @@ export class PragmaForm {
     clear() {
         this.dynamicViewLoader.unload(this.detailsElement);
         this.detailsElement.innerHTML = "";
+    }
+
+    registerTemplate(template) {
+        if (this.templates.has(template.id)) {
+            return;
+        }
+
+        const html = this.templateParser.parseElements(template.elements);
+        this.templates.set(template.id, html);
     }
 }

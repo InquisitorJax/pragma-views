@@ -163,17 +163,19 @@ export const template =
           "elements": [
               {
                   "element": "input",
-                  "title": "Title",
-                  "field": "title",
+                  "title": "Id",
+                  "field": "id",
                   "as-detail": true,
                   "attributes": {
                       "type": "text"
                   }
               },
               {
-                  "element": "radio",
+                  "element": "select",
+                  "title": "Option",
                   "datasource": 1,
-                  "field": "option"
+                  "field": "id",
+                  "as-detail": true
               }
           ]
       }

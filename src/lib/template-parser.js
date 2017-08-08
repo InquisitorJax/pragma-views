@@ -268,10 +268,13 @@ export class TemplateParser {
         const template = this.getTemplate(templateId);
         const content = this.parseElements(template.elements);
 
+        this.eventAggregator.publish("register-detail-template", template);
+
         const result = populateTemplate(detailsHtmlTemplate, {
             "__datasource__": datasource.field,
             "__content__": content,
-            "__create-instance__": createInstance
+            "__create-instance__": createInstance,
+            "__template__": "${templates.get(" + template.id + ")}"
         });
 
         return result;
@@ -629,7 +632,7 @@ export class TemplateParser {
             }
         }
 
-        return populateTemplate(selectHtmlForDefinedOptions, {
+        const result = populateTemplate(selectHtmlForDefinedOptions, {
             "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
@@ -638,7 +641,11 @@ export class TemplateParser {
             "__required__": required == true ? required : "",
             "__description__": descriptor,
             "__content__": content
-        })
+        });
+
+        if (select["as-detail"] == true) {
+            return result.split("model.").join("");
+        }
     }
 
     /**

@@ -12,7 +12,6 @@ export class PragmaDetails {
 
     // required to allow contextual bindings from the schema when you need access to the master "viewodel" and "model"
     @bindable context;
-    @bindable model;
 
     constructor(element, viewCompiler, container, viewResources, templatingEngine) {
         this.element = element;
@@ -63,6 +62,9 @@ export class PragmaDetails {
     }
 
     addItem(item) {
+        item.model = this.model;
+        item.context = this.context;
+
         const view = this.viewFactory.create(this.container);
         view.bind(item);
         this.viewSlot.add(view);
@@ -72,6 +74,9 @@ export class PragmaDetails {
         const index = this.items.indexOf(item);
         this.items.slice(index, 1);
         this.viewSlot.removeAt(index, false);
+
+        delete item.model;
+        delete item.context;
     }
 
     delete() {
