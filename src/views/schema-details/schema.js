@@ -165,10 +165,15 @@ export const template =
                   "element": "input",
                   "title": "Title",
                   "field": "title",
-                  "as-detail": true,
                   "attributes": {
                       "type": "text"
                   }
+              },
+              {
+                  "element": "select",
+                  "field": "id",
+                  "title": "option",
+                  "datasource": 0
               }
           ]
       }

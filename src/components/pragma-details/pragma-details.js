@@ -8,6 +8,8 @@ export class PragmaDetails {
     @bindable instancePrototype;
     @bindable selectedId;
     @bindable createInstance;
+    @bindable context;
+    @bindable model;
 
     constructor(element, viewCompiler, container, viewResources, templatingEngine) {
         this.element = element;
@@ -60,7 +62,7 @@ export class PragmaDetails {
 
     addItem(item) {
         const view = this.viewFactory.create(this.container);
-        view.bind(item);
+        view.bind(this);
         this.viewSlot.add(view);
     }
 

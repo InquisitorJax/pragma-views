@@ -141,7 +141,7 @@ export class TemplateParser {
      * @returns {null}
      */
     getDatasource(id) {
-        if (this.datasources == undefined) {
+        if (this.datasources == undefined || id == undefined) {
             return null;
         }
 
