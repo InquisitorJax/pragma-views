@@ -632,7 +632,7 @@ export class TemplateParser {
             }
         }
 
-        const result = populateTemplate(selectHtmlForDefinedOptions, {
+        let result = populateTemplate(selectHtmlForDefinedOptions, {
             "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
@@ -644,8 +644,10 @@ export class TemplateParser {
         });
 
         if (select["as-detail"] == true) {
-            return result.split("model.").join("");
+            result = result.split("model.").join("");
         }
+
+        return result;
     }
 
     /**
