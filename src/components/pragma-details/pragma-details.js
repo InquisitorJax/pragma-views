@@ -31,7 +31,9 @@ export class PragmaDetails {
     }
 
     setupViews() {
-        const tpl = `<template><li class="${this.itemStyle} card" data-id.bind="id">${this.template}</li></template>`;
+        let dataIdHtml = `data-id.bind="id"`;
+
+        const tpl = `<template><li class="${this.itemStyle} card" ${dataIdHtml}>${this.template}</li></template>`;
         this.viewFactory = this.viewCompiler.compile(tpl, this.viewResources);
         this.viewSlot = new ViewSlot(this.listElement, true);
 

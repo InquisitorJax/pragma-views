@@ -174,7 +174,6 @@ export const template =
                   "element": "select",
                   "title": "Option",
                   "datasource": 1,
-                  "field": "id",
                   "as-detail": true
               }
           ]
