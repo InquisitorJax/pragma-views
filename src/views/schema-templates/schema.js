@@ -18,8 +18,8 @@ export const template =
     "body": {
         "elements": [
             {
-                "element": "template",
-                "template": 1
+                "element": "h3",
+                "content": "Body Part"
             }
         ]
     },

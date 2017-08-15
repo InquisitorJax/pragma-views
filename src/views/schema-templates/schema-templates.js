@@ -43,6 +43,10 @@ export class SchemaTemplates {
     }
 
     show(template) {
-        document.querySelector("pragma-form").au["pragma-form"].viewModel.showTemplate(template);
+        document.querySelector("pragma-form").au["pragma-form"].viewModel.showSchemaTemplate(template);
+    }
+
+    showBody() {
+        document.querySelector("pragma-form").au["pragma-form"].viewModel.showSchemaBody();
     }
 }

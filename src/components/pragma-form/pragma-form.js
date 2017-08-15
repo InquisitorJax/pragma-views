@@ -152,11 +152,15 @@ export class PragmaForm {
         }
     }
 
-    showTemplate(templateId) {
+    showSchemaTemplate(templateId) {
         if (this.templates.has(templateId)) {
             const html = this.templates.get(templateId);
             this.clear();
             this.loadHtml(html);
         }
+    }
+
+    showSchemaBody() {
+        this.schemaChanged(this.schema);
     }
 }
