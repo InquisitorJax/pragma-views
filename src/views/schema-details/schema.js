@@ -169,12 +169,6 @@ export const template =
                   "attributes": {
                       "type": "text"
                   }
-              },
-              {
-                  "element": "select",
-                  "title": "Option",
-                  "datasource": 1,
-                  "as-detail": true
               }
           ]
       }

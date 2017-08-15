@@ -130,7 +130,7 @@ export class TemplateParser {
      * @returns {*}
      */
     getField(field){
-        if(this.fieldMap.has(field)){
+        if(this.fieldMap != undefined && this.fieldMap.has(field)){
             return this.fieldMap.get(field);
         }
 
@@ -268,13 +268,11 @@ export class TemplateParser {
         const template = this.getTemplate(templateId);
         const content = this.parseElements(template.elements);
 
-        this.eventAggregator.publish("register-detail-template", template);
-
         const result = populateTemplate(detailsHtmlTemplate, {
             "__datasource__": datasource.field,
             "__content__": content,
             "__create-instance__": createInstance,
-            "__template__": "${templates.get(" + template.id + ")}"
+            "__template__": '${templates.get(' + template.id + ')}'
         });
 
         return result;

@@ -24,6 +24,7 @@ export class App {
             {route: ['master-list'], name: 'master-list-container', moduleId: 'views/master-list-container/master-list-container', nav: true, title: 'Master List Container'},
             {route: ['assistant'], name: 'assist-test', moduleId: 'views/assist-test/assist-test', nav: true, title: 'Assistant'},
             {route: ['schema-details'], name: 'schema-details', moduleId: 'views/schema-details/schema-details', nav: true, title: 'Schema Details'},
+            {route: ['schema-templates'], name: 'schema-templates', moduleId: 'views/schema-templates/schema-templates', nav: true, title: 'Schema Templates'},
             {route: ['binding-test'], name: 'binding-test', moduleId: 'views/binding-test/binding-test', nav: true, title: 'Binding Tests'}
 
         ]);

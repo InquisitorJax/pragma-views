@@ -41,9 +41,6 @@ export class PragmaForm {
     }
 
     attached() {
-        this.registerTemplateHandler = this.registerTemplate.bind(this);
-        this.templateEvent = this.eventAggregator.subscribe("register-detail-template", this.registerTemplateHandler);
-
         this.templateParser = new TemplateParser("model", this.eventAggregator);
         this.detailsElement = this.element.querySelector(".form-container");
 
@@ -53,10 +50,6 @@ export class PragmaForm {
     }
 
     detached() {
-        this.templateEvent.dispose();
-        this.templateEvent = null;
-        this.registerTemplateHandler = null;
-
         this.templateParser.dispose();
         this.templateParser = null;
 
@@ -76,13 +69,19 @@ export class PragmaForm {
 
     schemaChanged(newValue) {
         if (this.templateParser && newValue != null) {
+            this.loadTemplates();
+
             this.templateParser.parse(newValue).then (
                 html => {
-                    this.dynamicViewLoader.load(html, this.detailsElement, this);
-                    this.eventAggregator.publish("form-updated");
+                    this.loadHtml(html);
                 }
             );
         }
+    }
+
+    loadHtml(html) {
+        this.dynamicViewLoader.load(html, this.detailsElement, this);
+        this.eventAggregator.publish("form-updated");
     }
 
     import() {
@@ -142,12 +141,22 @@ export class PragmaForm {
         this.detailsElement.innerHTML = "";
     }
 
-    registerTemplate(template) {
-        if (this.templates.has(template.id)) {
-            return;
-        }
+    loadTemplates() {
+        this.templates.clear();
 
-        const html = this.templateParser.parseElements(template.elements);
-        this.templates.set(template.id, html);
+        if (this.schema.templates != undefined) {
+            for (let template of this.schema.templates) {
+                const html = this.templateParser.parseElements(template.elements);
+                this.templates.set(template.id, html);
+            }
+        }
+    }
+
+    showTemplate(templateId) {
+        if (this.templates.has(templateId)) {
+            const html = this.templates.get(templateId);
+            this.clear();
+            this.loadHtml(html);
+        }
     }
 }

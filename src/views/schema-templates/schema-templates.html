@@ -1,0 +1,10 @@
+<template>
+    <pragma-options-toolbar dropdown-items.bind="toolbarItems" selected-id.two-way="detailToolbarSelectedId">
+        <div slot="items" class="default-padding-left">
+            <button click.delegate="show(1)">Template 1</button>
+            <button click.delegate="show(2)">Template 2</button>
+        </div>
+    </pragma-options-toolbar>
+
+    <pragma-form schema.bind="schema" model.two-way="model"></pragma-form>
+</template>
