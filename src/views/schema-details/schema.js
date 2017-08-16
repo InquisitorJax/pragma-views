@@ -141,7 +141,7 @@ export const template =
   "templates": [
       {
           "id": 0,
-          "elements": [
+              "elements": [
               {
                   "element": "group",
                   "title": "Other Options",

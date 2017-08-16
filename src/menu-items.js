@@ -54,6 +54,10 @@ export const menuItems = [
     {
         text: "Binding Tests",
         screen: "binding-test"
+    },
+    {
+        text: "Runtime Schema",
+        screen: "runtime-schema"
     }
 ];
 
