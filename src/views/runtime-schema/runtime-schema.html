@@ -1,7 +1,9 @@
 <template>
     <pragma-options-toolbar dropdown-items.bind="toolbarItems" selected-id.two-way="detailToolbarSelectedId">
         <div slot="items" class="default-padding-left">
-            <button>Action</button>
+            <button click.delegate="saveToTemplate()">Save New Template</button>
+            <button click.delegate="previous()">Previous</button>
+            <button click.delegate="next()">Next</button>
         </div>
     </pragma-options-toolbar>
 

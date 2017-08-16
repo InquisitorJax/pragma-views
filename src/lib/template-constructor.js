@@ -1,4 +1,6 @@
 export class TemplateConstructor {
+    jsonObj;
+
     constructor() {
         this.parseTabSheetHandler = this.parseTabSheet.bind(this);
         this.parseElementHandler = this.parseElement.bind(this);
@@ -44,6 +46,15 @@ export class TemplateConstructor {
         }
 
         return this.jsonObj;
+    }
+
+    domToTemplate(element, template) {
+        const children = element.children;
+        let target = template.elements;
+
+        for (let child of children) {
+            this.parseNodes(child, target);
+        }
     }
 
     hasParseableStyle(element) {

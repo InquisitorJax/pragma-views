@@ -3,16 +3,21 @@ import {EventAggregator} from 'aurelia-event-aggregator';
 import {Model} from './model';
 import {toolbarItems} from './toolbar-items';
 import {Schema, SchemaElementFactory} from './../../lib/schema';
+import {TemplateConstructor} from './../../lib/template-constructor';
 
-@inject(EventAggregator)
+@inject(EventAggregator, TemplateConstructor, Element)
 export class RuntimeSchema {
     @bindable toolbarItems;
     @bindable detailToolbarSelectedId;
     @bindable schema;
     @bindable model;
 
-    constructor(eventAggregator) {
+    templateId;
+
+    constructor(eventAggregator, templateConstructor, element) {
         this.eventAggregator = eventAggregator;
+        this.templateConstructor = templateConstructor;
+        this.element = element;
     }
 
     attached() {
@@ -47,6 +52,9 @@ export class RuntimeSchema {
         ];
 
         this.schema = schema;
+        this.templateConstructor.jsonObj = schema;
+
+        this.templateId = template.id;
     }
 
     detached() {
@@ -67,5 +75,47 @@ export class RuntimeSchema {
             this.model.code = `Code ${id}`;
             this.model.description = `Description ${id}`;
         })
+    }
+
+    saveToTemplate() {
+        const element = this.element.querySelector(".form-container");
+        const template = this.schema.templates.add();
+        this.templateConstructor.domToTemplate(element, template);
+
+        template.elements.push({
+            "element": "h3",
+            "content": `Template ${template.id}`
+        });
+
+        const form = this.element.querySelector("pragma-form").au["pragma-form"].viewModel;
+        form.loadTemplates();
+
+        this.templateId = template.id;
+        this.showTemplate();
+    }
+
+    previous() {
+        this.templateId = this.templateId -1;
+        if (this.templateId < 1) {
+            this.templateId = 1;
+        }
+
+        this.showTemplate();
+        console.log("navigated back");
+    }
+
+    next() {
+        this.templateId = this.templateId + 1;
+        if (this.templateId > this.schema.templates.length) {
+            this.templateId = this.schema.templates.length;
+        }
+
+        this.showTemplate();
+        console.log("navigated forward");
+    }
+
+    showTemplate() {
+        const form = this.element.querySelector("pragma-form").au["pragma-form"].viewModel;
+        form.showSchemaTemplate(this.templateId);
     }
 }
