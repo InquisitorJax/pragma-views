@@ -132,3 +132,38 @@ export class Schema {
         this.body = {};
     }
 }
+
+export class SchemaElementFactory {
+    static group(title) {
+        return {
+            "element": "group",
+            "title": title,
+            "elements": []
+        }
+    }
+
+    static input(title, field, type, attributes, styles) {
+        let result = {
+            "element": "input",
+            "title": title,
+            "field": field
+        };
+
+        if (attributes != undefined) {
+            result.attributes = attributes;
+        }
+        else {
+            result.attributes = [];
+        }
+
+        if (styles != undefined) {
+            result.styles = styles;
+        }
+
+        result.attributes.push({
+            "type": type
+        });
+
+        return result;
+    }
+}

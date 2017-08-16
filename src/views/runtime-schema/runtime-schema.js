@@ -2,7 +2,7 @@ import {bindable, inject} from "aurelia-framework";
 import {EventAggregator} from 'aurelia-event-aggregator';
 import {Model} from './model';
 import {toolbarItems} from './toolbar-items';
-import {Schema} from './../../lib/schema';
+import {Schema, SchemaElementFactory} from './../../lib/schema';
 
 @inject(EventAggregator)
 export class RuntimeSchema {
@@ -31,36 +31,13 @@ export class RuntimeSchema {
         }
 
         const template = schema.templates.add();
-        template.elements.push({
-            "element": "group",
-            "title": "Other Options",
-            "elements": [
-                {
-                    "element": "input",
-                    "title": "Id",
-                    "field": "id",
-                    "attributes": {
-                        "type": "text"
-                    }
-                },
-                {
-                    "element": "input",
-                    "title": "Code",
-                    "field": "code",
-                    "attributes": {
-                        "type": "text"
-                    }
-                },
-                {
-                    "element": "input",
-                    "title": "Description",
-                    "field": "description",
-                    "attributes": {
-                        "type": "text"
-                    }
-                }
-            ]
-        });
+        const group = SchemaElementFactory.group("Other Options");
+
+        for(let item of [["id", "Id"], ["code", "Code"], ["description", "Description"]]) {
+            group.elements.push(SchemaElementFactory.input(item[1], item[0], "text"));
+        }
+
+        template.elements.push(group);
 
         schema.body.elements = [
             {
