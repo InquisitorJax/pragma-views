@@ -1,15 +1,15 @@
 import {expect, assert} from 'chai';
 import 'aurelia-polyfills';
 import {ElementMockup} from './../../mockups/element-mockup';
-import {PragmaTabsheet} from './../../../src/components/pragma-tabsheet/pragma-tabsheet';
+import {PragmaTabSheet} from './../../../src/components/pragma-tabsheet/pragma-tabsheet';
 
-describe('PragmaTabsheet Tests', function() {
+describe('PragmaTabSheet Tests', function() {
     let instance;
     let element;
 
     beforeEach(function() {
         element = new ElementMockup();
-        instance = new PragmaTabsheet(element);
+        instance = new PragmaTabSheet(element);
     });
 
     it('constructor', function() {
@@ -17,6 +17,6 @@ describe('PragmaTabsheet Tests', function() {
     });
 
     it('not constructor', function() {
-        expect(() => PragmaTabsheet()).to.throw("Cannot call a class as a function");
+        expect(() => PragmaTabSheet()).to.throw("Cannot call a class as a function");
     });
 });

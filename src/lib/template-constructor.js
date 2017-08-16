@@ -14,6 +14,17 @@ export class TemplateConstructor {
         this.parseMap.set("CHECKBOX-COMPOSITE", this.parseCheckboxHandler);
     }
 
+    dispose() {
+        this.parseMap.clear();
+        this.parseMap = null;
+
+        this.parseTabSheetHandler = null;
+        this.parseElementHandler = null;
+        this.parseInputCompositeHandler = null;
+        this.parseGroupHandler = null;
+        this.parseCheckboxHandler = null;
+    }
+
     domToJson(element) {
         this.jsonObj = {
             fields: [],
