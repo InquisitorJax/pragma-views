@@ -90,6 +90,10 @@ export class TemplateConstructor {
     }
 
     parseElement(element, obj) {
+        if (element.dataset.template != undefined) {
+            return this.parseTemplate(element, obj);
+        }
+
         const styles = this.getClassesFromAttributes(element);
         const attrToUse = this.getAttributesToUse(element);
 
@@ -119,6 +123,15 @@ export class TemplateConstructor {
             const content = element.innerText;
             el.content = content;
         }
+    }
+
+    parseTemplate(element, obj) {
+        const template = {
+            "element": "template",
+            "template": element.dataset.template
+        };
+
+        obj.push(template);
     }
 
     getAttributesToUse(element) {

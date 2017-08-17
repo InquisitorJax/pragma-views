@@ -731,14 +731,16 @@ export class TemplateParser {
 
         const content = this.parseElements(template.elements);
 
+        let startTag = `<div if.bind="__condition__" data-template="${id}">`;
+        const endTag = "</div>";
+
         if (condition.length == 0) {
-            return content;
+            startTag = startTag.replace('if.bind="__condition__"', "");
         }
         else {
-            const startTag = `<div if.bind="${condition}">`;
-            const endTag = "</div>";
-
-            return `${startTag}${content}${endTag}`;
+            startTag = startTag.replace('__condition__', condition);
         }
+
+        return `${startTag}${content}${endTag}`;
     }
 }
