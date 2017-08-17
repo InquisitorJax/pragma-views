@@ -145,6 +145,8 @@ export class PragmaForm {
         this.templates.clear();
 
         if (this.schema.templates != undefined) {
+            this.templateParser.initializeResources(this.schema);
+
             for (let template of this.schema.templates) {
                 const html = this.templateParser.parseElements(template.elements);
                 this.templates.set(template.id, html);

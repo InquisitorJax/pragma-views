@@ -143,27 +143,68 @@ export class SchemaElementFactory {
     }
 
     static input(title, field, type, attributes, styles) {
-        let result = {
+        const result = {
             "element": "input",
             "title": title,
             "field": field
         };
 
-        if (attributes != undefined) {
-            result.attributes = attributes;
-        }
-        else {
-            result.attributes = [];
-        }
-
-        if (styles != undefined) {
-            result.styles = styles;
-        }
+        SchemaElementFactory.addAttributes(result, attributes);
+        SchemaElementFactory.addStyles(result, styles);
 
         result.attributes.push({
             "type": type
         });
 
         return result;
+    }
+
+    static select(title, field, dataSourceId, attributes, styles) {
+        const result = {
+            "element": "select",
+            "title": title,
+            "field": field,
+            "datasource": dataSourceId,
+        };
+
+        SchemaElementFactory.addAttributes(result, attributes);
+        SchemaElementFactory.addStyles(result, styles);
+
+        return result;
+    }
+
+    static memo(title, field, attributes, styles) {
+        const result = {
+            "element": "memo",
+            "title": title,
+            "field": field
+        };
+
+        SchemaElementFactory.addAttributes(result, attributes);
+        SchemaElementFactory.addStyles(result, styles);
+
+        return result;
+    }
+
+    static template(templateId) {
+        return {
+            "element": "template",
+            "template": templateId
+        }
+    }
+
+    static addAttributes(obj, attributes) {
+        if (attributes != undefined) {
+            obj.attributes = attributes;
+        }
+        else {
+            obj.attributes = [];
+        }
+    }
+
+    static addStyles(obj, styles) {
+        if (styles != undefined) {
+            result.styles = styles;
+        }
     }
 }

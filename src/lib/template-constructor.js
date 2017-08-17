@@ -162,6 +162,15 @@ export class TemplateConstructor {
             }
         }
 
+        const firstChildType = element.querySelector("#inputSlot").children[0].nodeName.toLowerCase();
+
+        if (firstChildType == "textarea") {
+            composite.element = "memo";
+        }
+        else if (firstChildType == "select") {
+            composite.element = "select";
+        }
+
         obj.push(composite);
 
         const existingField = this.jsonObj.fields.find(item => item.field == details.field);
@@ -220,6 +229,12 @@ export class TemplateConstructor {
             this.setSelectDetails(details, select);
             return details;
         }
+
+        const textarea = element.querySelector("textarea");
+        if (textarea) {
+            this.setTextAreaDetails(details, textarea);
+            return details;
+        }
     }
 
     setInputFieldDetails(details, input) {
@@ -258,6 +273,11 @@ export class TemplateConstructor {
         details.datasource = select.dataset.datasource;
         details.optionField = select.dataset.options;
         this.setCommonDetails(details, select);
+    }
+
+    setTextAreaDetails(details, textarea) {
+        details.field = textarea.getAttribute("value.bind").replace("model.", "");
+        this.setCommonDetails(details, textarea);
     }
 
     setCommonDetails(details, element) {

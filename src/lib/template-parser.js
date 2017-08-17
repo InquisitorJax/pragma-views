@@ -99,13 +99,16 @@ export class TemplateParser {
      */
     parse(json) {
         return new Promise(resolve => {
-            this.setFieldMap(json.fields);
-            this.datasources = json.datasources;
-            this.templates = json.templates;
+            this.initializeResources(json);
             const result = this.parseObject(json.body);;
-
             resolve(result);
         });
+    }
+
+    initializeResources(json) {
+        this.setFieldMap(json.fields);
+        this.datasources = json.datasources;
+        this.templates = json.templates;
     }
 
     /**

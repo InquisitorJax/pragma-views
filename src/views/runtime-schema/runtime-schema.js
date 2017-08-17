@@ -42,6 +42,9 @@ export class RuntimeSchema {
             group.elements.push(SchemaElementFactory.input(item[1], item[0], "text"));
         }
 
+        group.elements.push(SchemaElementFactory.memo("Notes", "description"));
+        group.elements.push(SchemaElementFactory.select("Options", "option", 1));
+
         template.elements.push(group);
 
         schema.body.elements = [
@@ -50,6 +53,14 @@ export class RuntimeSchema {
                 "template": "1"
             }
         ];
+
+        const rds = schema.datasources.addResource();
+        for(let item of ["Option 1", "Option 2", "Option 3"]) {
+           const option = rds.add();
+           option.title = item;
+        }
+
+        console.log(JSON.stringify(schema, null, 4));
 
         this.schema = schema;
         this.templateConstructor.jsonObj = schema;
