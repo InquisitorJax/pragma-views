@@ -14,6 +14,7 @@ export * from './lib/group-worker';
 export * from './lib/input-listener';
 export * from './lib/template-parser';
 export * from './lib/template-parser-contstants';
+export * from './lib/schema';
 
 export function configure(aurelia, configCallback) {
     const builder = aurelia.container.get(ConfigBuilder);
