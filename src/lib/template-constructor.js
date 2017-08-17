@@ -50,7 +50,7 @@ export class TemplateConstructor {
 
     domToTemplate(element, template) {
         const children = element.children;
-        let target = template.elements;
+        let target = template.elements = [];
 
         for (let child of children) {
             this.parseNodes(child, target);
