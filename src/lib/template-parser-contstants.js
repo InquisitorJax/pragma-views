@@ -39,7 +39,7 @@ export const selectHtmlForProperty = `
 
 export const selectHtmlForDefinedOptions = `
 <input-composite id="__field__" label="__title__" required="__required__" __description__>
-    <select value.bind="__prefix__.__field__" __classes__ __attributes__>
+    <select value.bind="__prefix__.__field__" __classes__ __attributes__ data-datasource="__datasource__">
         __content__
     </select>
 </input-composite>

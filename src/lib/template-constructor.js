@@ -271,7 +271,6 @@ export class TemplateConstructor {
     setSelectDetails(details, select) {
         details.field = select.getAttribute("value.bind").replace("model.", "");
         details.datasource = select.dataset.datasource;
-        details.optionField = select.dataset.options;
         this.setCommonDetails(details, select);
     }
 

@@ -60,8 +60,6 @@ export class RuntimeSchema {
            option.title = item;
         }
 
-        console.log(JSON.stringify(schema, null, 4));
-
         this.schema = schema;
         this.templateConstructor.jsonObj = schema;
 
@@ -112,7 +110,6 @@ export class RuntimeSchema {
         }
 
         this.showTemplate();
-        console.log("navigated back");
     }
 
     next() {
@@ -122,7 +119,6 @@ export class RuntimeSchema {
         }
 
         this.showTemplate();
-        console.log("navigated forward");
     }
 
     showTemplate() {

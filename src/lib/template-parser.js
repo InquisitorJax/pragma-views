@@ -641,7 +641,8 @@ export class TemplateParser {
             "__attributes__": attributes,
             "__required__": required == true ? required : "",
             "__description__": descriptor,
-            "__content__": content
+            "__content__": content,
+            "__datasource__": datasource
         });
 
         if (select["as-detail"] == true) {
