@@ -121,8 +121,7 @@ export class PragmaForm {
             fileName = `${fileName}.json`;
         }
 
-        const json = this.templateConstructor.domToJson(this.detailsElement);
-        const blob = new Blob([JSON.stringify(json, null, 4)], {type : 'application/json'});
+        const blob = new Blob([JSON.stringify(this.schema, null, 4)], {type : 'application/json'});
         const url = window.URL.createObjectURL(blob);
 
         const a = document.createElement("a");
