@@ -26,7 +26,8 @@ export class App {
             {route: ['schema-details'], name: 'schema-details', moduleId: 'views/schema-details/schema-details', nav: true, title: 'Schema Details'},
             {route: ['schema-templates'], name: 'schema-templates', moduleId: 'views/schema-templates/schema-templates', nav: true, title: 'Schema Templates'},
             {route: ['binding-test'], name: 'binding-test', moduleId: 'views/binding-test/binding-test', nav: true, title: 'Binding Tests'},
-            {route: ['runtime-schema'], name: 'runtime-schema', moduleId: 'views/runtime-schema/runtime-schema', nav: true, title: 'Runtime Schema'}
+            {route: ['runtime-schema'], name: 'runtime-schema', moduleId: 'views/runtime-schema/runtime-schema', nav: true, title: 'Runtime Schema'},
+            {route: ['schema-master-detail'], name: 'schema-master-detail', moduleId: 'views/schema-master-detail/schema-master-detail', nav: true, title: 'Schema Master Detail'}
         ]);
 
         this.router = router;

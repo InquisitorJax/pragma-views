@@ -11,6 +11,8 @@ import {
     checkboxHtml,
     selectHtmlForDefinedOptions,
     detailsHtmlTemplate,
+    listTemplate,
+    masterDetailHtml,
     selectRepeatOption,
     selectOption,
     radioRepeatOptions,
@@ -45,6 +47,8 @@ export class TemplateParser {
         this.parseCardHandler = this.parseCard.bind(this);
         this.parseRadioHandler = this.parseRadio.bind(this);
         this.parseTemplateHandler = this.parseTemplate.bind(this);
+        this.parseMasterDetailHandler = this.parseMasterDetail.bind(this);
+        this.parseListHandler = this.parseList.bind(this);
 
         this.parseMap = new Map();
         this.parseMap.set("tabsheet", this.parseTabSheetHandler);
@@ -60,6 +64,8 @@ export class TemplateParser {
         this.parseMap.set("card", this.parseCardHandler);
         this.parseMap.set("radio", this.parseRadioHandler);
         this.parseMap.set("template", this.parseTemplateHandler);
+        this.parseMap.set("master-detail", this.parseMasterDetailHandler);
+        this.parseMap.set("list", this.parseListHandler);
     }
 
     /**
@@ -742,5 +748,41 @@ export class TemplateParser {
         }
 
         return `${startTag}${content}${endTag}`;
+    }
+
+    parseMasterDetail(md) {
+        const master = md.master;
+        const detail = md.detail;
+
+        const masterContent = this.parseElements(master);
+        const detailContent = this.parseElements(detail);
+
+        const result = populateTemplate(masterDetailHtml, {
+            "__master__": masterContent,
+            "__detail__": detailContent
+        });
+
+        return result;
+    }
+
+    parseList(list) {
+        const datasourceId = list.datasource;
+        const templateId = list.template;
+        const selectedId = list["selection-field"] || "selectedId";
+
+        const datasource = this.getDatasource(datasourceId);
+        const template = this.getTemplate(templateId);
+        const content = this.parseElements(template.elements);
+
+        const result = populateTemplate(listTemplate, {
+            "__datasource__": datasource.field,
+            "__selectedId__": selectedId,
+            "__template__": content,
+            "__id-binding__": "${item.id}"
+        });
+
+        console.log(result);
+
+        return result;
     }
 }

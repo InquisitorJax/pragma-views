@@ -58,6 +58,10 @@ export const menuItems = [
     {
         text: "Runtime Schema",
         screen: "runtime-schema"
+    },
+    {
+        text: "Schema Master Detail",
+        screen: "schema-master-detail"
     }
 ];
 
