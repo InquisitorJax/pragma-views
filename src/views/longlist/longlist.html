@@ -1,5 +1,5 @@
 <template>
-    <ul style="width: 100%; height: 100%; overflow: auto" selectable="selected-id.two-way: selectedId; multi: true">
+    <ul style="width: 100%; height: 100%; overflow: auto" selectable="selected-id.two-way: selectedId; multi: true" model-selector="datasource.bind: items; model.two-way: model; selected-id.bind: selectedId;">
         <li virtual-repeat.for="item of items" class="card default-padding" data-id="${item.id}"><div>${item.title}</div></li>
     </ul>
 </template>

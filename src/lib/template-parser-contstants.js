@@ -141,7 +141,7 @@ export const radioOption = `
 `;
 
 export const listTemplate = `
-<ul selectable="selected-id.two-way: __selectedId__">
+<ul selectable="selected-id.two-way: __selectedId__" model-selector="datasource.bind: __datasource__; model.two-way: model; selected-id.bind: __selectedId__;">
     <li class="card default-padding" repeat.for="item of __datasource__" data-id.bind="item.id">
         __template__    
     </li>

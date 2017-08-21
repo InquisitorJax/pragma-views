@@ -2,7 +2,7 @@ import {bindable, inject, customAttribute, DOM} from 'aurelia-framework';
 
 @customAttribute('model-selector')
 @inject(DOM.Element)
-export class Selectable {
+export class ModelSelector {
     @bindable datasource;
     @bindable model;
     @bindable selectedId;
@@ -12,12 +12,10 @@ export class Selectable {
     }
 
     attached() {
-
+        console.log("model selector activated")
     }
 
     selectedIdChanged(newValue) {
-        console.log(this.datasource);
-        console.log(this.model);
-        console.log(newValue);
+        this.model = this.datasource.find(item => item.id == newValue);
     }
 }
