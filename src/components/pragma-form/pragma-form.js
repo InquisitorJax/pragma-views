@@ -37,10 +37,10 @@ export class PragmaForm {
         this.dynamicViewLoader = dynamicViewLoader;
         this.templateConstructor = templateConstructor;
         this.eventAggregator = eventAggregator;
-        this.templates = new Map();
     }
 
     attached() {
+        this.templates = new Map();
         this.templateParser = new TemplateParser("model", this.eventAggregator);
         this.detailsElement = this.element.querySelector(".form-container");
 
