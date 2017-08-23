@@ -71,6 +71,13 @@ export const dynamicHtml = `
 <__tagname__ __classes__ __attributes__>__content__</__tagname__>
 `;
 
+export const masterDetailHtml = `
+<master-detail is-master-visible="true">
+    <div slot="master">__master__</div>
+    <div slot="detail">__detail__</div>
+</master-detail>
+`;
+
 export const listTemplate1 = `
 <template>
     <div class="no-mouse">
@@ -131,6 +138,14 @@ export const radioOption = `
     <input type="radio" name="__groupname__" model.bind="__option-id__" checked.bind="__prefix__.__field__">
     <span>__content__</span>
 </label>
+`;
+
+export const listTemplate = `
+<ul selectable="selected-id.two-way: __selectedId__" model-selector="datasource.bind: __datasource__; model.two-way: model; selected-id.bind: __selectedId__;">
+    <li class="card default-padding" repeat.for="item of __datasource__" data-id.bind="item.id">
+        __template__    
+    </li>
+</ul>
 `;
 
 export function populateTemplate(template, map) {

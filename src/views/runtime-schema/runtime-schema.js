@@ -125,4 +125,9 @@ export class RuntimeSchema {
         const form = this.element.querySelector("pragma-form").au["pragma-form"].viewModel;
         form.showSchemaTemplate(this.templateId);
     }
+
+    save() {
+        const form = this.element.querySelector("pragma-form").au["pragma-form"].viewModel;
+        form.export();
+    }
 }

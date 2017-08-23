@@ -37,10 +37,10 @@ export class PragmaForm {
         this.dynamicViewLoader = dynamicViewLoader;
         this.templateConstructor = templateConstructor;
         this.eventAggregator = eventAggregator;
-        this.templates = new Map();
     }
 
     attached() {
+        this.templates = new Map();
         this.templateParser = new TemplateParser("model", this.eventAggregator);
         this.detailsElement = this.element.querySelector(".form-container");
 
@@ -121,8 +121,7 @@ export class PragmaForm {
             fileName = `${fileName}.json`;
         }
 
-        const json = this.templateConstructor.domToJson(this.detailsElement);
-        const blob = new Blob([JSON.stringify(json, null, 4)], {type : 'application/json'});
+        const blob = new Blob([JSON.stringify(this.schema, null, 4)], {type : 'application/json'});
         const url = window.URL.createObjectURL(blob);
 
         const a = document.createElement("a");

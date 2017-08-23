@@ -94,6 +94,7 @@ class ConfigBuilder {
 
     useCollections() {
         this.globalResources.push(PLATFORM.moduleName('./custom-attributes/selectable'));
+        this.globalResources.push(PLATFORM.moduleName('./custom-attributes/model-selector'));
         this.globalResources.push(PLATFORM.moduleName('./components/sortable-list/sortable-list'));
         return this;
     }
