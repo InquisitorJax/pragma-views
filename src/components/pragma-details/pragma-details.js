@@ -101,7 +101,11 @@ export class PragmaDetails {
         }
 
         instance["id"] = this.items.length + 1;
-        this.items.push(instance);
+
+        if (this.items.indexOf(instance) == -1) {
+            this.items.push(instance);
+        }
+
         this.addItem(instance);
     }
 }

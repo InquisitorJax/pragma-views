@@ -75,12 +75,12 @@ const schema = {
                 {
                     "name": "contacts",
                     "collection": true,
-                    "dataset": 4
+                    "dataset": 1
                 }
             ]
         }
     ]
-}
+};
 
 describe('DynamicFactory Tests', function() {
     let instance;
@@ -124,6 +124,18 @@ describe('DynamicFactory Tests', function() {
         expect(contact.email).to.equal("mail@somehere.com");
     });
 
+    it("create dataset with collection field", function() {
+        // Arrange
+        const model = instance.createDataSet(3);
+        const keys = Object.keys(model);
+
+        // Assert
+        assert(keys.includes("firstName"), "firstName should be part of model");
+        assert(keys.includes("lastName"), "lastName should be part of model");
+        assert(keys.includes("age"), "age should be part of model");
+        assert(keys.includes("addContacts"), "addContacts should part of the model");
+        assert(keys.includes("removeContacts", "removeContacts should be part of the model"));
+    });
 
 });
 

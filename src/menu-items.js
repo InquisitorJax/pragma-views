@@ -62,6 +62,10 @@ export const menuItems = [
     {
         text: "Schema Master Detail",
         screen: "schema-master-detail"
+    },
+    {
+        text: "Dyanmic Form Test",
+        screen: "dataset-factory"
     }
 ];
 
