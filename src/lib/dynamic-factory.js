@@ -14,31 +14,58 @@ export class DynamicFactory {
         return result;
     }
 
-    __createCollectionField(model, datasetId) {
-        const definition = this.schema.datasets.find(item => item.id == datasetId);
-        const fnNameComposite = definition.name.charAt(0).toUpperCase() + definition.name.slice(1);
-        model[definition.name] = [];
+    _getResourceDatasourceItems(datasourceId) {
+        const datasource = this.schema.datasources.find(item => item.id == datasourceId);
+        if (!datasource) {
+            console.error(`datasource with id: ${datasourceId} not found`);
+            return [];
+        }
 
-        const context = {
-            createDataSet: this.__createDataSetFromDefinition,
-            definition: definition,
-            collection: model[definition.name]
-        };
+        if (!datasource.resources) {
+            console.error(`datasource ${datasourceId} should have a resource id`);
+            return[];
+        }
 
-        model[`add${fnNameComposite}`] = function() {
-            const newModel = this.createDataSet(this.definition);
-            this.collection.push(newModel);
-            return newModel;
-        }.bind(context);
+        return datasource.resources.slice(0);
+    }
 
-        model[`remove${fnNameComposite}`] = function(id) {
-            const model = this.find(item => item.id == id);
-            const index = this.indexOf(model);
+    __createCollectionField(model, field) {
+        let collection = [];
 
-            if (index > -1) {
-                this.slice(index, 1);
-            }
-        }.bind(model[definition.name]);
+        if (field.default) {
+            collection = this._getResourceDatasourceItems(field.default);
+        }
+
+        model[field.name] = collection;
+
+        const datasetId = field.dataset;
+
+        if (datasetId != undefined) {
+            const definition = this.schema.datasets.find(item => item.id == datasetId);
+            const fnNameComposite = definition.name.charAt(0).toUpperCase() + definition.name.slice(1);
+
+
+            const context = {
+                createDataSet: this.__createDataSetFromDefinition,
+                definition: definition,
+                collection: collection
+            };
+
+            model[`add${fnNameComposite}`] = function() {
+                const newModel = this.createDataSet(this.definition);
+                this.collection.push(newModel);
+                return newModel;
+            }.bind(context);
+
+            model[`remove${fnNameComposite}`] = function(id) {
+                const model = this.find(item => item.id == id);
+                const index = this.indexOf(model);
+
+                if (index > -1) {
+                    this.slice(index, 1);
+                }
+            }.bind(model[definition.name]);
+        }
     }
 
     __createDataSetFromDefinition(definition) {
@@ -46,7 +73,7 @@ export class DynamicFactory {
 
         for(let field of definition.fields) {
             if (field.collection == true) {
-                this.__createCollectionField(result, field.dataset);
+                this.__createCollectionField(result, field);
             }
             else if (field.dataset != undefined) {
                 result[field.name] = this.createDataSet(field.dataset);

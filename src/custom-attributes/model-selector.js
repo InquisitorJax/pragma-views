@@ -11,11 +11,9 @@ export class ModelSelector {
         this.element = element;
     }
 
-    attached() {
-        console.log("model selector activated")
-    }
-
     selectedIdChanged(newValue) {
-        this.model = this.datasource.find(item => item.id == newValue);
+        if (newValue != undefined) {
+            this.model = this.datasource.find(item => item.id == newValue);
+        }
     }
 }

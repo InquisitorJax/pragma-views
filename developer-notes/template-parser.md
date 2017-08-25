@@ -42,6 +42,7 @@ Recognised shorthands for screen generation are:
 1. select
 1. radio
 1. template
+1. list
 
 ## General structure
 
@@ -418,3 +419,21 @@ You can also define a template being conditional using the condition property.
 If you define a condition it will map to the Aurelia if.bind attribute and any Aurelia condition can be used here.
 Note that in the case of condition you will need to define the full path.  
 If you want to check values on the model then you need to provide that in the binding and if you want to do checks on the context then you need to define that path as `context.property == true`;
+
+## List
+List is a shorthand to display a list of selectable items.
+The list requries that you pass it a datasource to use and a template.
+
+```json
+{
+    "element": "list",
+    "datasource": 0,
+    "template": 1
+}
+```
+
+There are additional properties you can define.
+
+1. selection-field: defaults to 'selectedId', set this property if you want to change the selection property name
+1. change-model: defaults to true, if you set it to false "model-selector" custom attribute will be excluded from the composite.
+1. multi-select: defaults to false, set to true if you want list to enable multi selection. if multi-select is true, change-model will be set to false.

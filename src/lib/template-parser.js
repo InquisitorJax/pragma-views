@@ -12,6 +12,7 @@ import {
     selectHtmlForDefinedOptions,
     detailsHtmlTemplate,
     listTemplate,
+    listPlainTemplate,
     masterDetailHtml,
     selectRepeatOption,
     selectOption,
@@ -769,16 +770,21 @@ export class TemplateParser {
         const datasourceId = list.datasource;
         const templateId = list.template;
         const selectedId = list["selection-field"] || "selectedId";
+        const changeModel = list["change-model"] || false;
+        const useMulti = list["multi-select"] || false;
 
         const datasource = this.getDatasource(datasourceId);
         const template = this.getTemplate(templateId);
         const content = this.parseElements(template.elements);
 
-        const result = populateTemplate(listTemplate, {
+        const useSimple = useMulti == true || changeModel == false;
+
+        const result = populateTemplate(useSimple ? listPlainTemplate : listTemplate, {
             "__datasource__": datasource.field,
             "__selectedId__": selectedId,
             "__template__": content,
-            "__id-binding__": "${item.id}"
+            "__id-binding__": "${item.id}",
+            "__use-multi--": String(useMulti)
         });
 
         console.log(result);

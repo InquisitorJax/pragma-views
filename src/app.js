@@ -28,7 +28,10 @@ export class App {
             {route: ['binding-test'], name: 'binding-test', moduleId: 'views/binding-test/binding-test', nav: true, title: 'Binding Tests'},
             {route: ['runtime-schema'], name: 'runtime-schema', moduleId: 'views/runtime-schema/runtime-schema', nav: true, title: 'Runtime Schema'},
             {route: ['schema-master-detail'], name: 'schema-master-detail', moduleId: 'views/schema-master-detail/schema-master-detail', nav: true, title: 'Schema Master Detail'},
-            {route: ['dataset-factory'], name: 'dataset-factory', moduleId: 'views/dataset-factory/dataset-factory', nav: true, title: 'Dataset Factory'}
+            {route: ['dataset-factory'], name: 'dataset-factory', moduleId: 'views/dataset-factory/dataset-factory', nav: true, title: 'Dataset Factory'},
+            {route: ['templates-and-dataset'], name: 'templates-and-dataset', moduleId: 'views/templates-and-dataset/templates-and-dataset', nav: true, title: 'templates-and-dataset'}
+
+
         ]);
 
         this.router = router;

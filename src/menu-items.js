@@ -66,6 +66,10 @@ export const menuItems = [
     {
         text: "Dyanmic Form Test",
         screen: "dataset-factory"
+    },
+    {
+        text: "Templates and dataset",
+        screen: "templates-and-dataset"
     }
 ];
 
