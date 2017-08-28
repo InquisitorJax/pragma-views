@@ -1,5 +1,28 @@
+// Make sure you can set the group to collapsed in schema
+
 export const template =
 {
+    "sections": [
+        {
+            "id": 1,
+            "name": "Section A",
+            "sequance": 1,
+            "template": 2,
+            "dataset": 1
+        },
+        {
+            "id": 2,
+            "name": "Section B",
+            "sequance": 2,
+            "template": 3
+        },
+        {
+            "id": 3,
+            "name": "Section C",
+            "sequance": 3,
+            "template": 4
+        },
+    ],
     "datasources": [
         {
             "id": 0,
@@ -8,14 +31,17 @@ export const template =
         },
         {
             "id": 1,
+            "name": "menu items",
             "resources": [
                 {
                     "id": 1,
-                    "title": "Section A"
+                    "name": "Section A",
+                    "description": "Description for section A"
                 },
                 {
-                    "id": 2,
-                    "title": "Section B"
+                    "id": 3,
+                    "name": "Section C",
+                    "description": "Description for section C"
                 }
             ]
         }
@@ -23,17 +49,33 @@ export const template =
     "datasets": [
         {
             "id": 0,
-            "name": "Model",
+            "name": "model",
             "fields": [
-                {
-                    "name": "name",
-                    "default": "Johan Rabie"
-                },
                 {
                     "name": "menuCollection",
                     "collection": true,
                     "default": 1,
                     "notes": "If the field is a collection and default is defined, populate the list with the objects defined in default. Default points to resource datasource"
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "SectionAModel",
+            "fields": [
+                {
+                    "name": "field1",
+                    "default": "Pragma Products"
+                },
+                {
+                    "name": "field2",
+                    "default": "R00100"
+                },
+                {
+                    "name": "field3"
+                },
+                {
+                    "name": "field4"
                 }
             ]
         }
@@ -43,14 +85,6 @@ export const template =
             "id": 0,
             "name": "Menu View",
             "elements": [
-                {
-                    "element": "input",
-                    "field": "name",
-                    "title": "Name",
-                    "attributes": {
-                        "type": "text"
-                    }
-                },
                 {
                     "element": "list",
                     "multi-select": true,
@@ -66,8 +100,68 @@ export const template =
             "elements": [
                 {
                     "element": "div",
-                    "content": "${item.title}"
+                    "elements": [
+                        {
+                            "element": "div",
+                            "content": "${item.name}"
+                        },
+                        {
+                            "element": "div",
+                            "content": "${item.description}",
+                            "styles": ["suppressed"]
+                        }
+                    ]
                 }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Section A",
+            "elements": [
+                {
+                    "element": "h3",
+                    "content": "Section A"
+                },
+                {
+                    "element": "input",
+                    "field": "field1",
+                    "attributes": {
+                        "type": "text"
+                    }
+                },
+                {
+                    "element": "input",
+                    "field": "field2",
+                    "attributes": {
+                        "type": "text"
+                    }
+                },
+                {
+                    "element": "input",
+                    "field": "field3",
+                    "attributes": {
+                        "type": "text"
+                    }
+                },
+                {
+                    "element": "input",
+                    "field": "field4",
+                    "attributes": {
+                        "type": "text"
+                    }
+                },
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Section B",
+            "elements": [
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Section C",
+            "elements": [
             ]
         }
     ],
