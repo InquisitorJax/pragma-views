@@ -7,6 +7,7 @@ export * from './dialogs/dynamic-dialog/dynamic-dialog';
 export * from './lib/array-helpers';
 export * from './lib/canvas-helpers';
 export * from './lib/device-helper';
+export * from './lib/dynamic-factory';
 export * from './lib/dynamic-schema';
 export * from './lib/dynamic-view-factory'
 export * from './lib/dynamic-view-loader';

@@ -787,8 +787,6 @@ export class TemplateParser {
             "__use-multi--": String(useMulti)
         });
 
-        console.log(result);
-
         return result;
     }
 }

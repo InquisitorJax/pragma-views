@@ -27,6 +27,12 @@ export class PragmaForm {
     @bindable context;
 
     /**
+     * When the form contains a list we need a way to pass back the selectedId.
+     * This provides the form using pragma form a handle to two way bind and be notified if the selectedId changed.
+     */
+    @bindable selectedId;
+
+    /**
      * When processing the schema if a template is bound to a detail the template, the template needs to be accessable.
      * This map contains the html version of the template. The key is the template id.
      */
