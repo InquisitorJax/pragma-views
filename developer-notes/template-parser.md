@@ -50,6 +50,7 @@ Recognised shorthands for screen generation are:
 {
     "type": "",         what type of schema is this -- own use
     "fields": [],       field mappings between schema and model
+    "datasets": [],     models that define structure and validation
     "datasource": [],   datasource definitions
     "body": {},         body of schema and what needs to be generated
     "templates": []     templates that are referenced in the body section
@@ -369,6 +370,11 @@ Context is the object that is defined as context on the pragma-views control and
 The model structure expected here is the same id / title pair as above.
 
 Id is processed as a string so you can use strings in the id field if you so want.
+
+## Dataset
+The schema allows you to define datasets. These structures are translated into models that you can use for bindinging against.
+Please note though that this is not an automatic process but you need to request the models from DatasetFactory.
+For more details on the dataset please see the DatasetFactory.
 
 ## Template
 As can be seen in the general structure the schema allows for templates. Templates are normal UI parts as you would have defined in the body.

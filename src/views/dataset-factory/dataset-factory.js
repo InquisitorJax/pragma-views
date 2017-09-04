@@ -5,6 +5,7 @@ import {Model} from './model';
 import {toolbarItems} from './toolbar-items';
 import {DynamicFactory} from './../../lib/dynamic-factory';
 
+
 @inject(EventAggregator)
 export class DatasetFactory {
     @bindable toolbarItems;
@@ -15,7 +16,7 @@ export class DatasetFactory {
     constructor(eventAggregator) {
         this.eventAggregator = eventAggregator;
         this.schema = template;
-        this.factory = new DynamicFactory(template);
+        this.factory = new DynamicFactory(template, this.modelCreated);
     }
 
     attached() {
@@ -25,8 +26,9 @@ export class DatasetFactory {
 
     detached() {
         this.schema = null;
-        this.model = null;
         this.toolbarItems = null;
+        this.model.dispose();
+        this.model = null;
     }
 
 
@@ -36,5 +38,20 @@ export class DatasetFactory {
 
     fetch(id) {
         this.model = this.factory.createDataSet(0);
+
+        // Listen to property change - option 1
+        // this.model.header.listenFor("firstName", this.headerChanged.bind(this));
+
+        // Listen to property change - option 2
+        // this.model.header.firstNameChanged = newValue => console.log(newValue);
+        // this.model.header.listenFor("firstName");
+    }
+
+    headerChanged(model, property) {
+        console.log(model[property]);
+    }
+
+    modelCreated(model) {
+        console.log(model);
     }
 }
