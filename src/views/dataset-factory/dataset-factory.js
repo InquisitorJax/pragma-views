@@ -40,7 +40,7 @@ export class DatasetFactory {
         this.model = this.factory.createDataSet(0);
 
         // Listen to property change - option 1
-        // this.model.header.listenFor("firstName", this.headerChanged.bind(this));
+        this.model.header.listenFor("firstName", this.headerChanged.bind(this));
 
         // Listen to property change - option 2
         // this.model.header.firstNameChanged = newValue => console.log(newValue);
