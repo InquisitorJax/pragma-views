@@ -10,4 +10,10 @@ export class Group {
         this.element = element;
         this.expanded = true;
     }
+
+    expandedChanged(newValue) {
+        if (typeof newValue == "string") {
+            this.expanded = newValue === "true";
+        }
+    }
 }

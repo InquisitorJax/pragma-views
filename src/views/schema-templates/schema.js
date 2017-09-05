@@ -31,6 +31,29 @@ export const template =
                 {
                     "element": "h3",
                     "content": "Screen Template 1"
+                },
+                {
+                    "element": "group",
+                    "title": "Group 1",
+                    "attributes": {
+                        "expanded": false
+                    },
+                    "elements": [
+                        {
+                            "element": "div",
+                            "content": "content"
+                        }
+                    ]
+                },
+                {
+                    "element": "group",
+                    "title": "Group 2",
+                    "elements": [
+                        {
+                            "element": "div",
+                            "content": "content"
+                        }
+                    ]
                 }
             ]
         },

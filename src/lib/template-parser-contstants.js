@@ -8,7 +8,7 @@ export const tabHtml = `
 <div id="__id__" data-tab="__title__">__content__</div>
 `;
 
-export const groupHtml = `<group title="__title__">__content__</group>`;
+export const groupHtml = `<group title="__title__" __attributes__ __classes__>__content__</group>`;
 
 export const inputHtml = `
 <input-composite id="__field__" label="__title__" required.bind="__required__" __description__>

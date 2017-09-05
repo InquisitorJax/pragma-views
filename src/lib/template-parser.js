@@ -347,10 +347,14 @@ export class TemplateParser {
      * @returns {*}
      */
     parseGroup(element) {
+        const classes = this.processClasses(element);
+        const attributes = this.processAttributes(element);
         const fieldsHtml = this.parseElements(element.elements);
         return populateTemplate(groupHtml, {
             "__title__": element.title,
-            "__content__": fieldsHtml
+            "__content__": fieldsHtml,
+            "__attributes__": attributes,
+            "__classes__": classes
         });
     }
 
