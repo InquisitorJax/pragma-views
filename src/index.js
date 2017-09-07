@@ -7,16 +7,20 @@ export * from './dialogs/dynamic-dialog/dynamic-dialog';
 export * from './lib/array-helpers';
 export * from './lib/canvas-helpers';
 export * from './lib/device-helper';
+export * from './lib/dom-helper';
+export * from './lib/drag-manager';
 export * from './lib/dynamic-factory';
 export * from './lib/dynamic-schema';
 export * from './lib/dynamic-view-factory'
 export * from './lib/dynamic-view-loader';
 export * from './lib/group-worker';
 export * from './lib/input-listener';
+export * from './lib/schema';
+export * from './lib/search-filter';
+export * from './lib/template-constructor';
 export * from './lib/template-parser';
 export * from './lib/template-parser-contstants';
-export * from './lib/template-constructor';
-export * from './lib/schema';
+
 
 export function configure(aurelia, configCallback) {
     const builder = aurelia.container.get(ConfigBuilder);
