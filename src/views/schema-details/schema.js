@@ -1,24 +1,6 @@
 export const template =
 {
   "type": "view",
-  "fields": [
-        {
-            "field": "id",
-            "map": "id"
-        },
-        {
-            "field": "code",
-            "map": "code"
-        },
-        {
-            "field": "description",
-            "map": "description"
-        },
-        {
-            "field": "status",
-            "map": "status"
-        }
-  ],
   "datasources": [
       {
           "id": 0,
@@ -56,29 +38,29 @@ export const template =
                 {
                     "element": "input",
                     "title": "Id",
-                    "field": "id"
+                    "field": "model.id"
                 },
                 {
                     "element": "input",
                     "title": "Code",
-                    "field": "code"
+                    "field": "model.code"
                 },
                 {
                     "element": "input",
                     "title": "Description",
-                    "field": "description"
+                    "field": "model.description"
                 },
                 {
                     "element": "select",
                     "datasource": 0,
                     "title": "Status",
-                    "field": "status"
+                    "field": "model.status"
                 },
                 {
                     "element": "select",
                     "datasource": 1,
                     "title": "Options",
-                    "field": "option"
+                    "field": "model.option"
                 },
                 {
                     "element": "card",
@@ -90,7 +72,7 @@ export const template =
                         {
                             "element": "radio",
                             "datasource": 0,
-                            "field": "status"
+                            "field": "model.status"
                         }
                     ]
                 },
@@ -104,7 +86,7 @@ export const template =
                         {
                             "element": "radio",
                             "datasource": 1,
-                            "field": "option"
+                            "field": "model.option"
                         }
                     ]
                 },
@@ -149,7 +131,7 @@ export const template =
                       {
                           "element": "input",
                           "title": "value",
-                          "field": "description",
+                          "field": "model.description",
                           "attributes": {
                               "type": "text"
                           }
@@ -164,7 +146,7 @@ export const template =
               {
                   "element": "input",
                   "title": "Id",
-                  "field": "id",
+                  "field": "model.id",
                   "as-detail": true,
                   "attributes": {
                       "type": "text"

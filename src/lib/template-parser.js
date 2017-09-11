@@ -26,14 +26,11 @@ export class TemplateParser {
 
     /**
      * The model that you bind to may by hidden by some object layers.
-     * The property prefix allows you what must be injected before the property so that the biding path will work.
      * This allows simple field definition on the template but complex binding paths.
      * @param propertyPrefix
      */
-    constructor(propertyPrefix, eventAggregator) {
-        this.propertyPrefix = propertyPrefix;
+    constructor(eventAggregator) {
         this.eventAggregator = eventAggregator;
-        this.propertyPrefixStack = this.propertyPrefix.split(".");
 
         this.parseTabSheetHandler = this.parseTabSheet.bind(this);
         this.parseGroupsHandler = this.parseGroups.bind(this);
@@ -298,34 +295,6 @@ export class TemplateParser {
     }
 
     /**
-     * determine the prefix based on relative path on field defined as definition
-     * @param definition
-     * @returns {*}
-     */
-    getPrefix(definition) {
-        if (definition.indexOf("context.") > -1) {
-            return definition
-        }
-
-        if (!definition || definition.indexOf("../") == -1) {
-            return this.propertyPrefix;
-        }
-
-        const backCount = definition.split("../").length - 1;
-        const prefixStack = this.propertyPrefixStack.length;
-        const offset = prefixStack - backCount;
-
-        if (offset < 0) {
-            return ""
-        }
-        else
-        {
-            const result = this.propertyPrefixStack.splice(0, prefixStack - backCount).join(".");
-            return result;
-        }
-    }
-
-    /**
      * Parse a object as a group.
      * The object is expected to be an array of groups.
      * Each group must have the following fields:
@@ -391,7 +360,6 @@ export class TemplateParser {
         const attributes = this.processAttributes(element);
 
         return populateTemplate(checkboxHtml, {
-            "__prefix__": this.getPrefix(field),
             "__field__": field,
             "__title__": title,
             "__description__": description,
@@ -490,12 +458,9 @@ export class TemplateParser {
         const classes = this.processClasses(input);
         const attributes = this.processAttributes(input);
         const field = this.getField(input.field);
-        const prefix = this.getPrefix(field);
-        const descriptor = this.getDescriptor(input, prefix);
-        const asDetail = input["as-detail"] || false;
+        const descriptor = this.getDescriptor(input);
 
         let result = populateTemplate(inputHtml, {
-            "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
             "__description__": descriptor,
@@ -504,20 +469,15 @@ export class TemplateParser {
             "__required__": required
         });
 
-        if (asDetail == true) {
-            result = result.replace("model.", "");
-        }
-
         return result;
     }
 
     /**
      * Parse a given schema element and determine if the descriptor should use binding or string constant values
      * @param element: element to process
-     * @param prefix: what model prefix should be used in case of a binding
      * @returns : string value for descriptor
      */
-    getDescriptor(element, prefix) {
+    getDescriptor(element) {
         const description = element.description || "";
         let descriptor = element.descriptor || "";
 
@@ -528,7 +488,7 @@ export class TemplateParser {
 
         // description set so return binding expression
         if (description.length > 0) {
-            return `descriptor.bind="${prefix}.${description}"`;
+            return `descriptor.bind="${description}"`;
         }
 
         // descriptor used so send back descriptor text with out binding
@@ -555,19 +515,17 @@ export class TemplateParser {
         const required = memo.required || false;
         const classes = this.processClasses(memo);
         const attributes = this.processAttributes(memo);
-        const prefix = this.getPrefix(field);
 
         let descriptor = memo.descriptor || "";
 
         if (description.length > 0) {
-            descriptor = `descriptor.bind="${prefix}.${description}"`
+            descriptor = `descriptor.bind="${description}"`
         }
         else {
             descriptor = `descriptor="${descriptor}"`
         }
 
         return populateTemplate(textareaHtml, {
-            "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
             "__description__": descriptor,
@@ -607,11 +565,10 @@ export class TemplateParser {
         const title = select.title;
         const datasource = select.datasource;
         const field = select.field;
-        const prefix = this.getPrefix(field);
         const classes = this.processClasses(select);
         const attributes = this.processAttributes(select);
         const required = select.required || false;
-        const descriptor = this.getDescriptor(input, prefix);
+        const descriptor = this.getDescriptor(input);
         let content = "";
 
         const ds = this.getDatasource(datasource);
@@ -623,7 +580,7 @@ export class TemplateParser {
 
         if (ds.field != undefined) {
             content = populateTemplate(selectRepeatOption, {
-                "__datasource__": this.getPrefix(ds.field),
+                "__datasource__": ds.field,
                 "__content__": "${o.title}"
             })
         }
@@ -645,7 +602,6 @@ export class TemplateParser {
         }
 
         let result = populateTemplate(selectHtmlForDefinedOptions, {
-            "__prefix__": prefix,
             "__field__": field,
             "__title__": title,
             "__classes__": classes,
@@ -655,10 +611,6 @@ export class TemplateParser {
             "__content__": content,
             "__datasource__": datasource
         });
-
-        if (select["as-detail"] == true) {
-            result = result.split("model.").join("");
-        }
 
         return result;
     }
@@ -683,7 +635,6 @@ export class TemplateParser {
     parseRadio(radio) {
         const datasource = radio.datasource;
         const field = radio.field;
-        const prefix = this.getPrefix(field);
         let content = "";
 
         const ds = this.getDatasource(datasource);
@@ -695,11 +646,10 @@ export class TemplateParser {
 
         if (ds.field != undefined) {
             content = populateTemplate(radioRepeatOptions, {
-                "__datasource__": this.getPrefix(ds.field),
+                "__datasource__": ds.field,
                 "__content__": "${o.title}",
                 "__groupname__": ds.id,
-                "__field__": field,
-                "__prefix__": prefix
+                "__field__": field
             })
         }
         else {
@@ -716,8 +666,7 @@ export class TemplateParser {
                         "__option-id__": id,
                         "__content__": title,
                         "__groupname__": ds.id,
-                        "__field__": field,
-                        "__prefix__": prefix
+                        "__field__": field
                     })
             }
         }

@@ -95,8 +95,7 @@ export const template =
                     "field": "phone",
                     "attributes": {
                         "type": "text"
-                    },
-                    "as-detail": true
+                    }
                 },
                 {
                     "element": "input",
@@ -104,8 +103,7 @@ export const template =
                     "field": "email",
                     "attributes": {
                         "type": "text"
-                    },
-                    "as-detail": true
+                    }
                 }
             ]
         }
@@ -119,17 +117,17 @@ export const template =
                     {
                         "element": "input",
                         "title": "First Name",
-                        "field": "header.firstName"
+                        "field": "model.header.firstName"
                     },
                     {
                         "element": "input",
                         "title": "Last Name",
-                        "field": "header.lastName"
+                        "field": "model.header.lastName"
                     },
                     {
                         "element": "input",
                         "title": "Age",
-                        "field": "header.age"
+                        "field": "model.header.age"
                     },
                     {
                         "element": "details",

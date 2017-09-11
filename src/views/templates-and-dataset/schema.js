@@ -124,28 +124,28 @@ export const template =
                 },
                 {
                     "element": "input",
-                    "field": "field1",
+                    "field": "model.field1",
                     "attributes": {
                         "type": "text"
                     }
                 },
                 {
                     "element": "input",
-                    "field": "field2",
+                    "field": "model.field2",
                     "attributes": {
                         "type": "text"
                     }
                 },
                 {
                     "element": "input",
-                    "field": "field3",
+                    "field": "model.field3",
                     "attributes": {
                         "type": "text"
                     }
                 },
                 {
                     "element": "input",
-                    "field": "field4",
+                    "field": "model.field4",
                     "attributes": {
                         "type": "text"
                     }

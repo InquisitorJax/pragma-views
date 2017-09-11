@@ -1,15 +1,5 @@
 export const staffTemplate =
 {
-    "fields": [
-        {
-            "field": "code",
-            "map": "code"
-        },
-        {
-            "field": "description",
-            "map": "description"
-        }
-    ],
     "body": {
         "tabsheet": [
             {
@@ -31,7 +21,7 @@ export const staffTemplate =
                                 "attributes": {
                                     "type": "text"
                                 },
-                                "field": "code"
+                                "field": "model.code"
                             },
                             {
                                 "title": "Description",
@@ -39,7 +29,7 @@ export const staffTemplate =
                                 "attributes": {
                                     "type": "text"
                                 },
-                                "field": "description"
+                                "field": "model.description"
                             }
                         ]
                     }

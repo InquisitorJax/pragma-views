@@ -10,7 +10,7 @@ describe('TemplateParser Tests', function() {
     let templateParser;
 
     beforeEach(function() {
-        templateParser = new TemplateParser ("model");
+        templateParser = new TemplateParser ();
     });
     
     it('constructor', function() {

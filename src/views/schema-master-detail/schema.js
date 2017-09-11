@@ -1,20 +1,6 @@
 export const template =
 {
     "type": "view",
-    "fields": [
-      {
-            "field": "id",
-            "map": "id"
-      },
-      {
-            "field": "code",
-            "map": "code"
-      },
-      {
-            "field": "description",
-            "map": "description"
-      }
-    ],
     "datasources": [
         {
             "id": 1,
@@ -30,6 +16,7 @@ export const template =
                         "element": "list",
                         "datasource": 1,
                         "template": 1,
+                        "change-model": true,
                         "selection-field": "selectedId"
                     }
                 ],
@@ -37,17 +24,17 @@ export const template =
                     {
                         "element": "input",
                         "title": "Id",
-                        "field": "id"
+                        "field": "model.id"
                     },
                     {
                         "element": "input",
                         "title": "Code",
-                        "field": "code"
+                        "field": "model.code"
                     },
                     {
                         "element": "input",
                         "title": "Description",
-                        "field": "description"
+                        "field": "model.description"
                     },
                     {
                         "element": "button",

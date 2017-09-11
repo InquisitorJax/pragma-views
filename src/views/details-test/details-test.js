@@ -1,6 +1,5 @@
 import {bindable, inject} from "aurelia-framework";
 import {EventAggregator} from 'aurelia-event-aggregator';
-import {removePrefixExpectations, populateTemplate, inputHtml} from './../../lib/template-parser-contstants';
 
 @inject(EventAggregator)
 export class DetailsTest {

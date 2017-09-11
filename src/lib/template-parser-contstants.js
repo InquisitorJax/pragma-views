@@ -12,26 +12,26 @@ export const groupHtml = `<group title="__title__" __attributes__ __classes__>__
 
 export const inputHtml = `
 <input-composite id="__field__" label="__title__" required.bind="__required__" __description__>
-    <input value.bind="__prefix__.__field__" __classes__ __attributes__></input>
+    <input value.bind="__field__" __classes__ __attributes__></input>
 </input-composite>
 `;
 
 export const checkboxHtml = `
     <div class="checkbox-composite">
-        <input id="__field__" type="checkbox" checked.bind="__prefix__.__field__" __classes__ __attributes__/>
+        <input id="__field__" type="checkbox" checked.bind="__field__" __classes__ __attributes__/>
         <label for="__field__">__title__</label>
     </div>
 `;
 
 export const textareaHtml = `
 <input-composite id="__field__" label="__title__" __description__>
-    <textarea value.bind="__prefix__.__field__" __classes__ __attributes__></textarea>
+    <textarea value.bind="__field__" __classes__ __attributes__></textarea>
 </input-composite>
 `;
 
 export const selectHtmlForProperty = `
 <input-composite id="__field__" label="__title__" required="__required__" __description__>
-    <select value.bind="__prefix__.__field__">
+    <select value.bind="__field__">
         <option repeat.for="option of __datasource__" model.bind="option.id">__content__</option>
     </select>
 </input-composite>
@@ -39,7 +39,7 @@ export const selectHtmlForProperty = `
 
 export const selectHtmlForDefinedOptions = `
 <input-composite id="__field__" label="__title__" required="__required__" __description__>
-    <select value.bind="__prefix__.__field__" __classes__ __attributes__ data-datasource="__datasource__">
+    <select value.bind="__field__" __classes__ __attributes__ data-datasource="__datasource__">
         __content__
     </select>
 </input-composite>
@@ -128,14 +128,14 @@ export const cardHtmlTemplate = `
 
 export const radioRepeatOptions = `
 <label repeat.for="o of __datasource__">
-    <input type="radio" name="__groupname__" model.bind="o.id" checked.bind="__prefix__.__field__">
+    <input type="radio" name="__groupname__" model.bind="o.id" checked.bind="__field__">
     <span>__content__</span>
 </label>
 `;
 
 export const radioOption = `
 <label>
-    <input type="radio" name="__groupname__" model.bind="__option-id__" checked.bind="__prefix__.__field__">
+    <input type="radio" name="__groupname__" model.bind="__option-id__" checked.bind="__field__">
     <span>__content__</span>
 </label>
 `;
@@ -167,8 +167,4 @@ export function populateTemplate(template, map) {
     }
 
     return result;
-}
-
-export function removePrefixExpectations(template) {
-    return template.split("__prefix__.").join("");
 }
