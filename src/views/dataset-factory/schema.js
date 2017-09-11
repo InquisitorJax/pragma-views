@@ -72,7 +72,7 @@ export const template =
                     "default": 21
                 },
                 {
-                    "name": "contacts",
+                    "name": "contract",
                     "collection": true,
                     "dataset": 1
                 }
@@ -82,7 +82,7 @@ export const template =
     "datasources": [
         {
             "id": 1,
-            "field": "model.header.contact"
+            "field": "model.header.contract"
         }
     ],
     "templates": [
