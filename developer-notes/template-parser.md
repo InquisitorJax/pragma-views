@@ -43,6 +43,7 @@ Recognised shorthands for screen generation are:
 1. radio
 1. template
 1. list
+1. details
 
 ## General structure
 
@@ -444,3 +445,21 @@ There are additional properties you can define.
 1. selection-field: defaults to 'selectedId', set this property if you want to change the selection property name
 1. change-model: defaults to true, if you set it to false "model-selector" custom attribute will be excluded from the composite.
 1. multi-select: defaults to false, set to true if you want list to enable multi selection. if multi-select is true, change-model will be set to false.
+
+## Details
+Details is a control that allows you to display a collection of input items.
+This will add a add and delete button at the bottom so that you can add new detail items ore delete existing ones.
+
+```json
+{
+    "element": "details",
+    "datasource": "model.header.contract",
+    "template": 1,
+    "action": "model.header.addContract"
+}
+```
+
+The datasource property defined where to get the data from and this can either be a id of the datasource of the fieldname path.
+Template defines the template id to use to render each item and functions in much the same way as the list does.
+If the property you are using is a collection property on the dataset it will create a method for you. This method name should be defined in the action property.
+If you want to take charge of this process you can point the action property to your custom function.
