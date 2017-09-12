@@ -150,11 +150,15 @@ export class TemplateParser {
      * @returns {null}
      */
     getDatasource(id) {
+        if (isNaN(id)) {
+            return id;
+        }
+
         if (this.datasources == undefined || id == undefined) {
             return null;
         }
 
-        return this.datasources.find(ds => ds.id.toString() == id.toString());
+        return this.datasources.find(ds => ds.id.toString() == id.toString()).field;
     }
 
     /**
@@ -276,7 +280,7 @@ export class TemplateParser {
         const content = this.parseElements(template.elements);
 
         const result = populateTemplate(detailsHtmlTemplate, {
-            "__datasource__": datasource.field,
+            "__datasource__": datasource,
             "__content__": content,
             "__create-instance__": createInstance,
             "__template__": '${templates.get(' + template.id + ')}'
@@ -733,7 +737,7 @@ export class TemplateParser {
         const useSimple = useMulti == true || changeModel == false;
 
         const result = populateTemplate(useSimple ? listPlainTemplate : listTemplate, {
-            "__datasource__": datasource.field,
+            "__datasource__": datasource,
             "__selectedId__": selectedId,
             "__template__": content,
             "__id-binding__": "${item.id}",

@@ -95,7 +95,7 @@ export class DynamicFactory {
 
         if (datasetId != undefined) {
             const definition = this.schema.datasets.find(item => item.id == datasetId);
-            const fnNameComposite = definition.name.charAt(0).toUpperCase() + definition.name.slice(1);
+            const fnNameComposite = field.name.charAt(0).toUpperCase() + field.name.slice(1);
 
 
             const context = {

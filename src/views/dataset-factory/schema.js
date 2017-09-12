@@ -131,9 +131,9 @@ export const template =
                     },
                     {
                         "element": "details",
-                        "datasource": 1,
+                        "datasource": "model.header.contract",
                         "template": 1,
-                        "action": "model.header.addContact"
+                        "action": "model.header.addContract"
                     }
                 ]
             }
