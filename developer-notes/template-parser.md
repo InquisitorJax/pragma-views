@@ -429,6 +429,7 @@ If you want to check values on the model then you need to provide that in the bi
 ## List
 List is a shorthand to display a list of selectable items.
 The list requries that you pass it a datasource to use and a template.
+Datasource can either be the id of a datasource to use or the field path `e.g. "model.collection1"`
 
 ```json
 {
