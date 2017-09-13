@@ -104,5 +104,7 @@ export class DynamicViewLoader {
 
         viewSource.viewSlot.add(view);
         viewSource.viewSlot.attached();
+
+        return viewSource;
     }
 }

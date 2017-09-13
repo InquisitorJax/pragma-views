@@ -122,7 +122,7 @@ export class DynamicFactory {
     }
 
     __createDataSetFromDefinition(definition) {
-        const result = {};
+        const result = new DataSet();
 
         for(let field of definition.fields) {
             if (field.collection == true) {
@@ -136,6 +136,16 @@ export class DynamicFactory {
             }
         }
 
+        result["__definition"] = definition;
+
         return result;
+    }
+}
+
+class DataSet {
+    validate() {
+        const fields = this["__definition"].fields;
+        console.log(fields);
+        console.log(this);
     }
 }

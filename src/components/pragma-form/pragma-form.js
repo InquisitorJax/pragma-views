@@ -10,6 +10,7 @@ export class PragmaForm {
     dynamicViewLoader;
     templateParser;
     detailsElement;
+    viewSource;
 
     /**
      * What schema must be displayed
@@ -62,6 +63,8 @@ export class PragmaForm {
         this.templates.clear();
         this.templates = null;
 
+        this.viewSource = null;
+
         this.disposeFileInput();
     }
 
@@ -86,8 +89,8 @@ export class PragmaForm {
     }
 
     loadHtml(html) {
-        this.dynamicViewLoader.load(html, this.detailsElement, this);
-        this.eventAggregator.publish("form-updated");
+        this.viewSource = this.dynamicViewLoader.load(html, this.detailsElement, this);
+        this.eventAggregator.publish("form-updated", this);
     }
 
     import() {

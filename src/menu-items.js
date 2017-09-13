@@ -66,6 +66,10 @@ export const menuItems = [
     {
         text: "Templates and dataset",
         screen: "templates-and-dataset"
+    },
+    {
+        text: "Validation",
+        screen: "validation"
     }
 ];
 
