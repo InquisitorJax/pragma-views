@@ -1,4 +1,5 @@
 import {expect, assert} from 'chai';
+import 'aurelia-polyfills';
 import {DynamicFactory, Rules} from './../../src/lib/dynamic-factory.js';
 
 const schema = {
@@ -111,31 +112,33 @@ describe('DynamicFactory Tests', function() {
 
     });
 
-    it.skip("create contacts model", function() {
-        // Act
-        const contact = instance.createDataSet(1);
-
-        const keys = Object.keys(contact);
-
-        // Assert
-        expect(contact).to.not.be.null;
-        assert(keys.includes("phone"), "contacts should have property phone");
-        assert(keys.includes("email"), "contacts should have property email");
-        expect(contact.email).to.equal("mail@somehere.com");
-    });
-
-    it.skip("create dataset with collection field", function() {
-        // Arrange
-        const model = instance.createDataSet(3);
-        const keys = Object.keys(model);
-
-        // Assert
-        assert(keys.includes("firstName"), "firstName should be part of model");
-        assert(keys.includes("lastName"), "lastName should be part of model");
-        assert(keys.includes("age"), "age should be part of model");
-        assert(keys.includes("addContacts"), "addContacts should part of the model");
-        assert(keys.includes("removeContacts", "removeContacts should be part of the model"));
-    });
+    // it("create contacts model", function() {
+    //     // Act
+    //     global.Container = null;
+    //     const contact = instance.createDataSet(1);
+    //
+    //     const keys = Object.keys(contact);
+    //
+    //     // Assert
+    //     expect(contact).to.not.be.null;
+    //     assert(keys.includes("phone"), "contacts should have property phone");
+    //     assert(keys.includes("email"), "contacts should have property email");
+    //     expect(contact.email).to.equal("mail@somehere.com");
+    // });
+    //
+    // it("create dataset with collection field", function() {
+    //     // Arrange
+    //     global.Container = null;
+    //     const model = instance.createDataSet(3);
+    //     const keys = Object.keys(model);
+    //
+    //     // Assert
+    //     assert(keys.includes("firstName"), "firstName should be part of model");
+    //     assert(keys.includes("lastName"), "lastName should be part of model");
+    //     assert(keys.includes("age"), "age should be part of model");
+    //     assert(keys.includes("addContacts"), "addContacts should part of the model");
+    //     assert(keys.includes("removeContacts", "removeContacts should be part of the model"));
+    // });
 
 });
 
@@ -237,5 +240,49 @@ describe('Rules', function() {
 
         expect(result.isValid).to.be.false;
         expect(result.message).to.equal("The length of code may not exceed 5");
+    });
+
+    it("minLength, null", function() {
+        const model = {
+            code: null
+        };
+
+        const result = Rules.minLength(model, "code", 5);
+
+        expect(result.isValid).to.be.false;
+        expect(result.message).to.equal("The length of code may not be less than 5");
+    });
+
+    it("minLength, undefined", function() {
+        const model = {
+            code: undefined
+        };
+
+        const result = Rules.minLength(model, "code", 5);
+
+        expect(result.isValid).to.be.false;
+        expect(result.message).to.equal("The length of code may not be less than 5");
+    });
+
+    it("minLength, empty", function() {
+        const model = {
+            code: ""
+        };
+
+        const result = Rules.minLength(model, "code", 5);
+
+        expect(result.isValid).to.be.false;
+        expect(result.message).to.equal("The length of code may not be less than 5");
+    });
+
+    it("minLength, too long", function() {
+        const model = {
+            code: "Hello World"
+        };
+
+        const result = Rules.minLength(model, "code", 5);
+
+        expect(result.isValid).to.be.true;
+        expect(result.message).to.equal("");
     });
 });
