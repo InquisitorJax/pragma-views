@@ -1,6 +1,7 @@
 import {expect, assert} from 'chai';
 import 'aurelia-polyfills';
-import {DynamicFactory, Rules} from './../../src/lib/dynamic-factory.js';
+import {DynamicFactory} from './../../src/lib/dynamic-factory.js';
+import {Rules} from "../../src/lib/dynamic-factory";
 
 const schema = {
     "datasets": [
@@ -285,4 +286,92 @@ describe('Rules', function() {
         expect(result.isValid).to.be.true;
         expect(result.message).to.equal("");
     });
+
+    it("max, null", function() {
+        const model = {
+            value: null
+        };
+
+        const result = Rules.max(model, "value", 5);
+
+        expect(result.isValid).to.be.true;
+        expect(result.message).to.equal("");
+    });
+
+    it("max, undefined", function() {
+        const model = {
+            value: undefined
+        };
+
+        const result = Rules.max(model, "value", 5);
+
+        expect(result.isValid).to.be.true;
+        expect(result.message).to.equal("");
+    });
+
+    it("max, 0", function() {
+        const model = {
+            value: 0
+        };
+
+        const result = Rules.max(model, "value", 5);
+
+        expect(result.isValid).to.be.true;
+        expect(result.message).to.equal("");
+    });
+
+    it("max, 10", function() {
+        const model = {
+            value: 10
+        };
+
+        const result = Rules.max(model, "value", 5);
+
+        expect(result.isValid).to.be.false;
+        expect(result.message).to.equal("The value of value must be less or equal to 5");
+    });
+
+    it("min, null", function() {
+        const model = {
+            value: null
+        };
+
+        const result = Rules.min(model, "value", 5);
+
+        expect(result.isValid).to.be.false;
+        expect(result.message).to.equal("The value of value must be greater or equal to 5");
+    });
+
+    it("min, undefined", function() {
+        const model = {
+            value: undefined
+        };
+
+        const result = Rules.min(model, "value", 5);
+
+        expect(result.isValid).to.be.false;
+        expect(result.message).to.equal("The value of value must be greater or equal to 5");
+    });
+
+    it("min, 0", function() {
+        const model = {
+            value: 0
+        };
+
+        const result = Rules.min(model, "value", 5);
+
+        expect(result.isValid).to.be.false;
+        expect(result.message).to.equal("The value of value must be greater or equal to 5");
+    });
+
+    it("min, 10", function() {
+        const model = {
+            value: 10
+        };
+
+        const result = Rules.min(model, "value", 5);
+
+        expect(result.isValid).to.be.true;
+        expect(result.message).to.equal("");
+    })
 });
