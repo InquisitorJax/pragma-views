@@ -30,6 +30,8 @@ export class App {
             {route: ['dataset-factory'], name: 'dataset-factory', moduleId: 'views/dataset-factory/dataset-factory', nav: true, title: 'Dataset Factory'},
             {route: ['templates-and-dataset'], name: 'templates-and-dataset', moduleId: 'views/templates-and-dataset/templates-and-dataset', nav: true, title: 'templates-and-dataset'},
             {route: ['validation'], name: 'validation', moduleId: 'views/validation/validation', nav: true, title: 'Validation'},
+            {route: ['template-reuse'], name: 'template-reuse', moduleId: 'views/template-reuse/template-reuse', nav: true, title: 'Template Re-Use'}
+
         ]);
 
         this.router = router;

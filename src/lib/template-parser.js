@@ -136,9 +136,13 @@ export class TemplateParser {
      * @param field
      * @returns {*}
      */
-    getField(field){
-        if(this.fieldMap != undefined && this.fieldMap.has(field)){
-            return this.fieldMap.get(field);
+    getField(field, context){
+        // if(this.fieldMap != undefined && this.fieldMap.has(field)){
+        //     return this.fieldMap.get(field);
+        // }
+
+        if (context != undefined) {
+            return `${context}.${field}`;
         }
 
         return field;
@@ -337,7 +341,7 @@ export class TemplateParser {
      * 1. element: used to determine how to process the input type
      * @param obj
      */
-    parseElements(elements) {
+    parseElements(elements, context) {
         if (!elements) {
             return "";
         }
@@ -345,7 +349,7 @@ export class TemplateParser {
         const result = [];
 
         for (let element of elements) {
-            result.push(this.parseElement(element));
+            result.push(this.parseElement(element, context));
         }
 
         return result.join("");
@@ -356,9 +360,9 @@ export class TemplateParser {
      * @param element
      * @returns {*}
      */
-    parseCheckbox(element) {
+    parseCheckbox(element, context) {
         const title = element.title;
-        const field = this.getField(element.field);
+        const field = this.getField(element.field, context);
         const description = element.description || "";
         const classes = this.processClasses(element);
         const attributes = this.processAttributes(element);
@@ -379,13 +383,13 @@ export class TemplateParser {
      * 1. element
      * @param element: object to parse
      */
-    parseElement(element) {
+    parseElement(element, context) {
         const elementType = element.element;
         if (this.isKnownType(elementType)) {
-            return this.parseMap.get(elementType)(element);
+            return this.parseMap.get(elementType)(element, context);
         }
         else {
-            return this.parseUnknown(element);
+            return this.parseUnknown(element, context);
         }
     }
 
@@ -456,12 +460,12 @@ export class TemplateParser {
      * Items that are lookup items must have the attribute "data-lookup" defined
      * @param input
      */
-    parseInput(input) {
+    parseInput(input, context) {
         const title = input.title;
         const required = input.required || false;
         const classes = this.processClasses(input);
         const attributes = this.processAttributes(input);
-        const field = this.getField(input.field);
+        const field = this.getField(input.field, context);
         const descriptor = this.getDescriptor(input);
 
         let result = populateTemplate(inputHtml, {
@@ -512,9 +516,9 @@ export class TemplateParser {
      *
      * @param textaria
      */
-    parseTextArea(memo) {
+    parseTextArea(memo, context) {
         const title = memo.title;
-        const field = this.getField(memo.field);
+        const field = this.getField(memo.field, context);
         const description = memo.descriptor || "";
         const required = memo.required || false;
         const classes = this.processClasses(memo);
@@ -687,13 +691,14 @@ export class TemplateParser {
         const id = tmpl.template;
         const condition = tmpl.condition || "";
         const template = this.getTemplate(id);
+        const context = tmpl.context;
 
         if (template == null) {
             console.error(`template with id ${id} was not found`);
             return ""
         }
 
-        const content = this.parseElements(template.elements);
+        const content = this.parseElements(template.elements, context);
 
         let startTag = `<div if.bind="__condition__" data-template="${id}">`;
         const endTag = "</div>";

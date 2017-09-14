@@ -70,6 +70,10 @@ export const menuItems = [
     {
         text: "Validation",
         screen: "validation"
+    },
+    {
+        text: "Template Re-Use",
+        screen: "template-reuse"
     }
 ];
 
