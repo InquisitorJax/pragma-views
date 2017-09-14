@@ -142,6 +142,83 @@ export class DynamicFactory {
     }
 }
 
+export class Rules {
+    static required(model, field) {
+        const result = {
+            isValid: true,
+            message: ""
+        };
+
+        const fieldValue = model[field] == null || model[field] == undefined ? "" : String(model[field]);
+        if (fieldValue.trim().length == 0) {
+            result.isValid = false;
+            result.message = `${field} is required`;
+        }
+
+        return result;
+    }
+
+    static maxLength(model, field, length) {
+        const result = {
+            isValid: true,
+            message: ""
+        };
+
+        const fieldValue = model[field] == null || model[field] == undefined ? "" : String(model[field]);
+        if (fieldValue.trim().length > length) {
+            result.isValid = false;
+            result.message = `The length of ${field} may not exceed ${length}`;
+        }
+
+        return result;
+    }
+
+    static minLength(model, field, length) {
+        const result = {
+            isValid: true,
+            message: ""
+        };
+
+        const fieldValue = model[field] == null || model[field] == undefined ? "" : String(model[field]);
+        if (fieldValue.trim().length < length) {
+            result.isValid = false;
+            result.message = `The length of ${field} may not be less than ${length}`;
+        }
+
+        return result;
+    }
+
+    static max(model, field, value) {
+        const result = {
+            isValid: true,
+            message: ""
+        };
+
+        const fieldValue = model[field] == null || model[field] == undefined ? 0 : model[field];
+        if (fieldValue > value) {
+            result.isValid = false;
+            result.message = `The value of ${field} must be less or equal to ${value}`;
+        }
+
+        return result;
+    }
+
+    static min(model, field, value) {
+        const result = {
+            isValid: true,
+            message: ""
+        };
+
+        const fieldValue = model[field] == null || model[field] == undefined ? 0 : model[field];
+        if (fieldValue < value) {
+            result.isValid = false;
+            result.message = `The value of ${field} must be greater or equal to ${value}`;
+        }
+
+        return result;
+    }
+}
+
 class DataSet {
     validate() {
         const fields = this["__definition"].fields;
