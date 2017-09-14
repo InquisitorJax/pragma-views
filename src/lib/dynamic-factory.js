@@ -222,7 +222,29 @@ export class Rules {
 class DataSet {
     validate() {
         const fields = this["__definition"].fields;
-        console.log(fields);
+    }
+
+    updateUI() {
         console.log(this);
+        const fields = this["__definition"].fields;
+
+        for(let field of fields) {
+            if (field.collection != undefined) {
+                for (let item of this[field.name]) {
+                    if (typeof item.updateUI != "undefined") {
+                        item.updateUI();
+                    }
+                }
+            }
+            else if (field.dataset != undefined) {
+                if (typeof this[field.name].updateUI != "undefined") {
+                    this[field.name].updateUI();
+                }
+            }
+            else if (field.validations != undefined) {
+                const observer = this["__observers__"][field.name];
+                console.log(observer);
+            }
+        }
     }
 }

@@ -16,18 +16,24 @@ export class Validation {
         this.eventAggregator = eventAggregator;
         this.schema = template;
         this.factory = new DynamicFactory(template);
+
+        this.formUpdatedHandler = this.formUpdated.bind(this);
+        this.formUpdatedSubscription = this.eventAggregator.subscribe("form-updated", this.formUpdatedHandler);
     }
 
     attached() {
         this.toolbarItems = toolbarItems;
-
-        this.fetch(1);
+        this.fetch();
     }
 
     detached() {
         this.schema = null;
         this.model = null;
         this.toolbarItems = null;
+
+        this.formUpdatedSubscription.dispose();
+        this.formUpdatedSubscription = null;
+        this.formUpdatedHandler = null;
     }
 
 
@@ -37,6 +43,10 @@ export class Validation {
 
     fetch(id) {
         this.model = this.factory.createDataSet(0);
+    }
+
+    formUpdated() {
+        this.model.updateUI();
     }
 
     print() {
