@@ -8,12 +8,6 @@
 /.nyc_output/
 /dist/
 service-worker.js
-.idea/build-utilities.iml
-.idea/inspectionProfiles/
-.idea/jsLibraryMappings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/workspace.xml
-.idea/*.*
+/.idea/
 service-worker.js
 chromedriver.*
